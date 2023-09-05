@@ -1,0 +1,23 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#3F2917",
+    "titleBar.activeBackground": "#593920",
+    "titleBar.activeForeground": "#FCFAF8"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "css.lint.unknownAtRules": "ignore",
+  "better-comments.multilineComments": true,
+  "editor.formatOnSave": true,
+  "editor.wordWrapColumn": 120,
+  "files.exclude": {
+    "**/.git": true
+  }
+}
