@@ -1,16 +1,16 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 
-import { ItemTypes } from './item-types';
+import { ItemTypes } from '@/constants';
 
 interface DropAreaProps {
-  dropZone: string;
+  name: string;
 }
 
-const DropArea: React.FC<DropAreaProps> = ({ dropZone }) => {
+const DropArea: React.FC<DropAreaProps> = ({ name }) => {
   const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.HEADING,
-    drop: () => ({ dropZone }),
+    drop: () => ({ name }),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
     }),
@@ -28,7 +28,7 @@ const DropArea: React.FC<DropAreaProps> = ({ dropZone }) => {
         backgroundColor,
       }}
     >
-      Drop here
+      Drop Here
     </div>
   );
 };

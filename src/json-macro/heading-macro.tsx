@@ -19,10 +19,10 @@ export default function HeadingMacro({
     <div>
       <h1>{name}</h1>
       <div>
-        <span>{phone}</span>
-        <span>{email}</span>
-        <span>{github}</span>
-        <span>{linkedin}</span>
+        {phone && <span>{phone}</span>}
+        {email && <span>{email}</span>}
+        {github && <span>{github}</span>}
+        {linkedin && <span>{linkedin}</span>}
       </div>
     </div>
   );

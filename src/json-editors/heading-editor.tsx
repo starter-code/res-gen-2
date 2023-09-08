@@ -1,28 +1,47 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  object,
+  string,
+  union,
+  undefined as _undefined,
+  null as _null,
+} from 'zod';
 
 import type { ChangeEvent } from 'react';
 
 import ExampleHeading from '@/__example-json/heading.json';
-import { ItemTypes } from '@/drag-and-drop/item-types';
+import { ItemTypes } from '@/constants';
 
-import type { Item } from '@/drag-and-drop/item-types';
+import type { DropResult, Item } from '@/types/item-types';
 
 type HeadingEditorProps = {
   onDrop: (item: Item) => void;
 };
 
+const schema = object({
+  name: string(),
+  email: string(),
+  title: union([string(), _undefined(), _null()]),
+  phone: union([string(), _undefined()]),
+  location: union([string(), _undefined()]),
+  github: union([string(), _undefined()]),
+  linkedin: union([string(), _undefined()]),
+});
+
 export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
   const [text, setText] = useState(JSON.stringify(ExampleHeading, null, 2));
+  const [errorMessage, setErrorMessage] = useState('');
+  const [id, setId] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const id = useMemo(() => uuidv4(), []);
   const style = useMemo(
     () => ({
       color: 'black',
-      width: '120ch',
       height: '20ch',
       fontFamily: 'monospace',
+      maxWidth: '100%',
+      width: '120ch',
     }),
     [],
   );
@@ -34,27 +53,49 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
       isDragging: !!monitor.isDragging(),
     }),
     end: (item, monitor) => {
-      onDrop({ id, name: ItemTypes.HEADING, content: text, style });
+      const dropResult = monitor.getDropResult<DropResult>();
+      if (dropResult) {
+        onDrop({ id, name: ItemTypes.HEADING, content: text, style });
+      }
     },
   });
 
-  const onHandleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
-  };
-
   useEffect(() => {
     adjustTextareaHeight();
+    setId(uuidv4());
   }, [text]);
+
+  const validateJsonSchema = useCallback((jsonString: string) => {
+    try {
+      const jsonData = JSON.parse(jsonString);
+      schema.parse(jsonData);
+      setErrorMessage('');
+    } catch (error) {
+      const e = error as Error;
+      console.error(e.message);
+      setErrorMessage(e.message);
+    }
+  }, []);
+
+  const onHandleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setText(event.target.value);
+    validateJsonSchema(event.target.value);
+  };
 
   const adjustTextareaHeight = () => {
     if (textAreaRef.current) {
-      textAreaRef.current.style.height = 'auto';
       textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
     }
   };
 
   return (
-    <div style={{ opacity: isDragging ? 0.5 : 1 }}>
+    <div
+      style={{
+        opacity: isDragging ? 0.5 : 1,
+        padding: '10px',
+      }}
+    >
+      <h1 ref={ref}>☰</h1>
       <form>
         <textarea
           spellCheck="false"
@@ -64,7 +105,7 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
           style={style}
         ></textarea>
       </form>
-      <p ref={ref}>DRAG HERE</p>
+      {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
 }

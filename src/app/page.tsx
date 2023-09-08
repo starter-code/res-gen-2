@@ -9,7 +9,7 @@ import DropArea from '@/drag-and-drop/drop-area';
 import MacroManager from '@/managers/macro-manager';
 import HeadingEditor from '@/json-editors/heading-editor';
 
-import type { Item } from '../drag-and-drop/item-types';
+import type { Item } from '../types/item-types';
 
 const App: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
@@ -25,7 +25,7 @@ const App: React.FC = () => {
     <DndProvider backend={HTML5Backend}>
       <div>
         <h1>React DnD Example</h1>
-        <DropArea dropZone="DropArea" />
+        <DropArea name="drop-area" />
         <div>
           <h2>Draggable Items</h2>
           <HeadingEditor onDrop={handleDrop} />
