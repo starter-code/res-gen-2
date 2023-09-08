@@ -2,15 +2,14 @@ import React from 'react';
 import { useDrop } from 'react-dnd';
 
 import { ItemTypes } from './item-types';
-import type { Item } from './item-types';
 
-interface DroppableAreaProps {
+interface DropAreaProps {
   dropZone: string;
 }
 
-const DroppableArea: React.FC<DroppableAreaProps> = ({ dropZone }) => {
+const DropArea: React.FC<DropAreaProps> = ({ dropZone }) => {
   const [{ isOver }, drop] = useDrop({
-    accept: ItemTypes.BOX,
+    accept: ItemTypes.HEADING,
     drop: () => ({ dropZone }),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
@@ -24,6 +23,7 @@ const DroppableArea: React.FC<DroppableAreaProps> = ({ dropZone }) => {
       ref={drop}
       style={{
         border: '2px dashed #ccc',
+        borderRadius: '5px',
         padding: '16px',
         backgroundColor,
       }}
@@ -33,4 +33,4 @@ const DroppableArea: React.FC<DroppableAreaProps> = ({ dropZone }) => {
   );
 };
 
-export default DroppableArea;
+export default DropArea;

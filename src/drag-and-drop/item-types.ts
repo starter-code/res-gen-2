@@ -1,14 +1,18 @@
-// src/ItemTypes.ts
+import type { CSSProperties } from 'react';
+
+type Name = string;
+
 export const ItemTypes = {
-  BOX: 'box',
+  HEADING: 'heading',
 } as const;
 
 export type Item = {
   id: string;
   content: string;
-  name: string;
+  name: Name;
+  style: CSSProperties;
 };
 
 export type DropResult = {
-  name: string;
+  name: Name;
 };
