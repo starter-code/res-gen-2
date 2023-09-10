@@ -28,7 +28,7 @@ const DropArea: React.FC<DropAreaProps> = ({ name }) => {
         backgroundColor,
       }}
     >
-      Drop Here
+      Single Column Layout
     </div>
   );
 };

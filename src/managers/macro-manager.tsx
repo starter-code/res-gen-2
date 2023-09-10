@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { ItemTypes } from '@/constants';
-import HeadingMacro from '@/json-macro/heading-macro';
+import HeadingMacro from '@/json-macros/heading-macro';
 
 import type { Item } from '@/types/item-types';
 

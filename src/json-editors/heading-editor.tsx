@@ -95,7 +95,7 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
         padding: '10px',
       }}
     >
-      <h1 ref={ref}>☰</h1>
+      <h1 ref={ref}>☰ Heading</h1>
       <form>
         <textarea
           spellCheck="false"

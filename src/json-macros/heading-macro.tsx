@@ -1,15 +1,10 @@
-type HeadingMacroProps = {
-  name: string;
-  title: string;
-  phone: string;
-  location: string;
-  email: string;
-  github: string;
-  linkedin: string;
-};
+import { HeadingJson } from '@/types/item-types';
+
+type HeadingMacroProps = HeadingJson;
 
 export default function HeadingMacro({
   name,
+  title,
   phone,
   email,
   github,
@@ -18,6 +13,7 @@ export default function HeadingMacro({
   return (
     <div>
       <h1>{name}</h1>
+      {title && <h2>{title}</h2>}
       <div>
         {phone && <span>{phone}</span>}
         {email && <span>{email}</span>}

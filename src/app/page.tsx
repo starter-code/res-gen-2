@@ -1,42 +1,24 @@
 'use client';
 
-import React, { useCallback, useMemo, useState } from 'react';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-import { v4 as uuidv4 } from 'uuid';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import DropArea from '@/drag-and-drop/drop-area';
-import MacroManager from '@/managers/macro-manager';
-import HeadingEditor from '@/json-editors/heading-editor';
+import { AppProvider } from '@/context/app-context';
 
-import type { Item } from '../types/item-types';
+import App from './app';
 
-const App: React.FC = () => {
-  const [items, setItems] = useState<Item[]>([]);
+import type { ReactNode } from 'react';
 
-  const handleDrop = useCallback(
-    (item: Item) => {
-      setItems([...items, { ...item, id: uuidv4() }]);
-    },
-    [items],
-  );
-
-  return (
-    <DndProvider backend={HTML5Backend}>
-      <div>
-        <h1>React DnD Example</h1>
-        <DropArea name="drop-area" />
-        <div>
-          <h2>Draggable Items</h2>
-          <HeadingEditor onDrop={handleDrop} />
-        </div>
-        <div>
-          <h2>Dropped Items</h2>
-          <MacroManager items={items} />
-        </div>
-      </div>
-    </DndProvider>
-  );
+type PageProps = {
+  children: ReactNode;
 };
 
-export default App;
+export default function Page() {
+  return (
+    <AppProvider>
+      <DndProvider backend={HTML5Backend}>
+        <App />
+      </DndProvider>
+    </AppProvider>
+  );
+}
