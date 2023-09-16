@@ -1,16 +1,18 @@
 import React from 'react';
 
 import { useAppContext } from '@/context/app-context';
-import DropArea from '@/drag-and-drop/drop-area';
-import HeadingEditor from '@/json-editors/heading-editor';
+import ControlPanel from '@/components/control-panel/control-panel';
+import HeadingEditor from '@/components/json-editors/heading-editor';
 import MacroManager from '@/managers/macro-manager';
+import DropAreaManager from '@/managers/drop-area-manager';
 
 export default function App() {
   const { handleDrop, items } = useAppContext();
 
   return (
     <>
-      <DropArea name="drop-area" />
+      <ControlPanel />
+      <DropAreaManager />
       <HeadingEditor onDrop={handleDrop} />
       <MacroManager items={items} />
     </>

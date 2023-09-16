@@ -1,11 +1,11 @@
 import type { CSSProperties } from 'react';
 
 /**
- * {@type} This 'Name' has a specific meaning to Drag and drop
+ * {@type} This 'Name' has a specific meaning to Drag and Drop
  */
 export type Name = string;
 
-export type Item = {
+export type ContentItem = {
   id: string;
   content: string;
   name: Name;

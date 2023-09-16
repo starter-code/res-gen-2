@@ -7,17 +7,23 @@ import React, {
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Item } from '@/types/item-types';
+import { ContentItem } from '@/types/item-types';
+
+export type LayoutItem = {
+  id: string;
+  name: string;
+  props?: any[];
+};
 
 export type AppContextType = {
-  layout: null;
-  items: Item[];
-  handleDrop: (item: Item) => void;
-  addLayout: () => void;
+  layouts: LayoutItem[];
+  items: ContentItem[];
+  handleDrop: (item: ContentItem) => void;
+  addLayout: (newLayout: LayoutItem) => void;
 };
 
 const initialState: AppContextType = {
-  layout: null,
+  layouts: [],
   items: [],
   handleDrop: () => {},
   addLayout: () => {},
@@ -30,22 +36,22 @@ type AppProviderProps = {
 };
 
 export function AppProvider({ children }: AppProviderProps) {
-  const [layout, setLayout] = useState(null);
-  const [items, setItems] = useState<Item[]>([]);
+  const [layouts, setLayouts] = useState<LayoutItem[]>([]);
+  const [items, setItems] = useState<ContentItem[]>([]);
 
   const handleDrop = useCallback(
-    (item: Item) => {
+    (item: ContentItem) => {
       setItems([...items, { ...item, id: uuidv4() }]);
     },
     [items],
   );
 
-  const addLayout = () => {
-    setLayout(null);
+  const addLayout = (newLayout: LayoutItem) => {
+    setLayouts(prevLayout => [...prevLayout, newLayout]);
   };
 
   return (
-    <AppContext.Provider value={{ layout, addLayout, handleDrop, items }}>
+    <AppContext.Provider value={{ addLayout, handleDrop, layouts, items }}>
       {children}
     </AppContext.Provider>
   );

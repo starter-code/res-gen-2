@@ -14,10 +14,10 @@ import type { ChangeEvent } from 'react';
 import ExampleHeading from '@/__example-json/heading.json';
 import { ItemTypes } from '@/constants';
 
-import type { DropResult, Item } from '@/types/item-types';
+import type { DropResult, ContentItem } from '@/types/item-types';
 
 type HeadingEditorProps = {
-  onDrop: (item: Item) => void;
+  onDrop: (item: ContentItem) => void;
 };
 
 const schema = object({
@@ -95,7 +95,7 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
         padding: '10px',
       }}
     >
-      <h1 ref={ref}>☰ Heading</h1>
+      <h3 ref={ref}>Heading ☰</h3>
       <form>
         <textarea
           spellCheck="false"

@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 
 import { ItemTypes } from '@/constants';
-import HeadingMacro from '@/json-macros/heading-macro';
+import HeadingMacro from '@/components/json-macros/heading-macro';
 
-import type { Item } from '@/types/item-types';
+import type { ContentItem } from '@/types/item-types';
 
 type MacroManagerProps = {
-  items: Item[];
+  items: ContentItem[];
 };
 
 export default function MacroManager({ items }: MacroManagerProps) {

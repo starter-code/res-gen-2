@@ -9,10 +9,6 @@ import App from './app';
 
 import type { ReactNode } from 'react';
 
-type PageProps = {
-  children: ReactNode;
-};
-
 export default function Page() {
   return (
     <AppProvider>
