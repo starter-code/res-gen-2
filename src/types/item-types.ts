@@ -11,29 +11,38 @@ export type ContentItem = {
   style: CSSProperties;
 };
 
-export type DropResult = {
+export type DropResultSingle = {
   dropEffect: string;
-  layoutType: keyof typeof LAYOUTS;
+  layoutType: (typeof LAYOUTS)['SINGLE'];
+  layoutId: string;
+  layoutLeftId?: never;
+  layoutRightId?: never;
+};
+
+export type DropResultDouble = {
+  dropEffect: string;
+  layoutType: (typeof LAYOUTS)['DOUBLE'];
+  layoutLeftId: string;
+  layoutRightId: string;
   layoutId: string;
 };
 
-export type LayoutItem = {
+export type DropResult = DropResultSingle | DropResultDouble;
+
+export type LayoutSingle = {
   layoutId: string;
+  layoutLeftId?: never;
+  layoutRightId?: never;
   layoutType: ContentItem['layoutType'];
   props?: any[];
 };
 
-type HeadingJsonRequired = {
-  name: string;
-  email: string;
+export type LayoutDouble = {
+  layoutId: string;
+  layoutLeftId: string;
+  layoutRightId: string;
+  layoutType: ContentItem['layoutType'];
+  props?: any[];
 };
 
-type HeadingJsonOptional = {
-  title: string;
-  phone: string;
-  location: string;
-  github: string;
-  linkedin: string;
-};
-
-export type HeadingJson = HeadingJsonRequired & Partial<HeadingJsonOptional>;
+export type LayoutItem = LayoutSingle | LayoutDouble;

@@ -10,16 +10,21 @@ export default function LayoutManager() {
     <>
       {layouts.map(layout => {
         switch (layout.layoutType) {
-          case LAYOUTS.SINGLE:
+          case LAYOUTS.SINGLE: {
+            return <LayoutSingle key={layout.layoutId} layoutId={layout.layoutId} layoutType={layout.layoutType} />;
+          }
+          case LAYOUTS.DOUBLE: {
+            if (!layout.layoutLeftId) throw new Error(`layout missing property 'layoutLeftId`);
+            if (!layout.layoutRightId) throw new Error(`layout missing property 'layoutRightId`);
+
             return (
-              <LayoutSingle
+              <LayoutDouble
                 key={layout.layoutId}
-                layoutId={layout.layoutId}
-                layoutType={layout.layoutType}
+                layoutLeftId={layout.layoutLeftId}
+                layoutRightId={layout.layoutRightId}
               />
             );
-          case LAYOUTS.DOUBLE:
-            return <LayoutDouble key={layout.layoutId} />;
+          }
           default:
             throw new Error(`Unsupported layout ${layout}`);
         }

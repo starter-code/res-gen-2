@@ -1,13 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
-import {
-  object,
-  string,
-  union,
-  undefined as _undefined,
-  null as _null,
-} from 'zod';
+import { object, string, union, undefined as _undefined, null as _null } from 'zod';
 
 import type { ChangeEvent } from 'react';
 
@@ -48,7 +42,7 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
 
   const [{ isDragging }, ref] = useDrag({
     type: ITEM_TYPES.HEADING,
-    item: { name: ITEM_TYPES.HEADING },
+    item: { contentType: ITEM_TYPES.HEADING },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -59,7 +53,7 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
         onDrop({
           contentId: id,
           content: text,
-          contentType: ITEM_TYPES.HEADING,
+          contentType: item.contentType,
           layoutId: dropResult.layoutId,
           layoutType: dropResult.layoutType,
           style,
@@ -91,9 +85,8 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
   };
 
   const adjustTextareaHeight = () => {
-    if (textAreaRef.current) {
-      textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
-    }
+    if (!textAreaRef.current) return;
+    textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
   };
 
   return (
@@ -105,13 +98,7 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
     >
       <h3 ref={ref}>Heading ☰</h3>
       <form>
-        <textarea
-          spellCheck="false"
-          onChange={onHandleChange}
-          value={text}
-          ref={textAreaRef}
-          style={style}
-        ></textarea>
+        <textarea spellCheck="false" onChange={onHandleChange} value={text} ref={textAreaRef} style={style}></textarea>
       </form>
       {errorMessage && <p>{errorMessage}</p>}
     </div>

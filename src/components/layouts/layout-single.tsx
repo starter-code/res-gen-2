@@ -14,11 +14,7 @@ interface LayoutSingleProps {
   layoutId?: string;
 }
 
-const LayoutSingle: React.FC<LayoutSingleProps> = ({
-  className,
-  layoutType,
-  layoutId = uuidv4(),
-}) => {
+const LayoutSingle: React.FC<LayoutSingleProps> = ({ className, layoutType, layoutId }) => {
   const { items: allItems } = useAppContext();
   const [{ isOver }, drop] = useDrop({
     accept: ITEM_TYPES.HEADING,
@@ -29,9 +25,7 @@ const LayoutSingle: React.FC<LayoutSingleProps> = ({
   });
 
   const items = useMemo(() => {
-    const filteredItems = allItems.filter(
-      item => item.layoutType === layoutType && item.layoutId === layoutId,
-    );
+    const filteredItems = allItems.filter(item => item.layoutType === layoutType && item.layoutId === layoutId);
 
     return filteredItems;
   }, [allItems, layoutType, layoutId]);

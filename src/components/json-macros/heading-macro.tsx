@@ -1,4 +1,4 @@
-import { HeadingJson } from '@/types/item-types';
+import { HeadingJson } from '@/types/heading-macro-types';
 
 type HeadingMacroProps = HeadingJson;
 

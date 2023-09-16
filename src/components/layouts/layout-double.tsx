@@ -5,14 +5,26 @@ import LayoutSingle from './layout-single';
 import { LAYOUTS } from '@/constants';
 
 interface LayoutDoubleProps {
-  // empty for now
+  layoutLeftId: string;
+  layoutRightId: string;
 }
 
-const LayoutDouble: React.FC<LayoutDoubleProps> = () => {
+const LayoutDouble: React.FC<LayoutDoubleProps> = ({
+  layoutLeftId,
+  layoutRightId,
+}) => {
   return (
     <div className="flex">
-      <LayoutSingle className="w-max grow" layoutType={LAYOUTS.DOUBLE_LEFT} />
-      <LayoutSingle className="w-max grow" layoutType={LAYOUTS.DOUBLE_RIGHT} />
+      <LayoutSingle
+        className="w-max grow"
+        layoutType={LAYOUTS.DOUBLE_LEFT}
+        layoutId={layoutLeftId}
+      />
+      <LayoutSingle
+        className="w-max grow"
+        layoutType={LAYOUTS.DOUBLE_RIGHT}
+        layoutId={layoutRightId}
+      />
     </div>
   );
 };
