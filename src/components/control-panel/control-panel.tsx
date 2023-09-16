@@ -1,10 +1,12 @@
-import AddLayoutButton from './add-layout-button';
+import AddLayoutSingleButton from './add-layout-single-button';
+import AddLayoutDoubleButton from './add-layout-double-button';
 
 export default function ControlPanel() {
   return (
     <div>
       <span>Control Panel</span>
-      <AddLayoutButton />
+      <AddLayoutSingleButton />
+      <AddLayoutDoubleButton />
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { useAppContext } from '@/context/app-context';
+import { LAYOUTS } from '@/constants';
 
-export default function AddLayoutButton() {
+export default function AddLayoutSingleButton() {
   const { addLayout } = useAppContext();
 
   const handleClick = () => {
-    addLayout({ id: uuidv4(), name: uuidv4() });
+    addLayout({ id: uuidv4(), name: LAYOUTS.SINGLE });
   };
 
   return (
@@ -15,7 +16,7 @@ export default function AddLayoutButton() {
       type="button"
       onClick={handleClick}
     >
-      Add Single Column Layout
+      + Single Column
     </button>
   );
 }

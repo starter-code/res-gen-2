@@ -1,15 +1,15 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 
-import { ItemTypes } from '@/constants';
+import { ITEM_TYPES } from '@/constants';
 
 interface DropAreaProps {
   name: string;
 }
 
-const DropArea: React.FC<DropAreaProps> = ({ name }) => {
+const DropAreaSingle: React.FC<DropAreaProps> = ({ name }) => {
   const [{ isOver }, drop] = useDrop({
-    accept: ItemTypes.HEADING,
+    accept: ITEM_TYPES.HEADING,
     drop: () => ({ name }),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
@@ -28,9 +28,9 @@ const DropArea: React.FC<DropAreaProps> = ({ name }) => {
         backgroundColor,
       }}
     >
-      Single Column Layout
+      Drop Here
     </div>
   );
 };
 
-export default DropArea;
+export default DropAreaSingle;

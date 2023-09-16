@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { ItemTypes } from '@/constants';
+import { ITEM_TYPES } from '@/constants';
 import HeadingMacro from '@/components/json-macros/heading-macro';
 
 import type { ContentItem } from '@/types/item-types';
@@ -13,7 +13,7 @@ export default function MacroManager({ items }: MacroManagerProps) {
   const elements = useMemo(() => {
     const components = items.map(item => {
       switch (item.name) {
-        case ItemTypes.HEADING: {
+        case ITEM_TYPES.HEADING: {
           return <HeadingMacro key={item.id} {...JSON.parse(item.content)} />;
         }
         default:

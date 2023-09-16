@@ -1,5 +1,7 @@
 import { useAppContext } from '@/context/app-context';
-import DropArea from '@/components/drag-and-drop/drop-area-single';
+import DropAreaSingle from '@/components/layouts/layout-single';
+import DropAreaDouble from '@/components/layouts/layout-double';
+import { LAYOUTS } from '@/constants';
 
 export default function DropAreaManager() {
   const { layouts } = useAppContext();
@@ -7,7 +9,14 @@ export default function DropAreaManager() {
   return (
     <>
       {layouts.map(layout => {
-        return <DropArea key={layout.id} name={layout.name} />;
+        switch (layout.name) {
+          case LAYOUTS.SINGLE:
+            return <DropAreaSingle key={layout.id} name={layout.name} />;
+          case LAYOUTS.DOUBLE:
+            return <DropAreaDouble key={layout.id} name={layout.name} />;
+          default:
+            throw new Error(`Unsupported layout ${layout}`);
+        }
       })}
     </>
   );

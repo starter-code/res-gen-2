@@ -12,7 +12,7 @@ import {
 import type { ChangeEvent } from 'react';
 
 import ExampleHeading from '@/__example-json/heading.json';
-import { ItemTypes } from '@/constants';
+import { ITEM_TYPES } from '@/constants';
 
 import type { DropResult, ContentItem } from '@/types/item-types';
 
@@ -47,15 +47,15 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
   );
 
   const [{ isDragging }, ref] = useDrag({
-    type: ItemTypes.HEADING,
-    item: { name: ItemTypes.HEADING },
+    type: ITEM_TYPES.HEADING,
+    item: { name: ITEM_TYPES.HEADING },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult<DropResult>();
       if (dropResult) {
-        onDrop({ id, name: ItemTypes.HEADING, content: text, style });
+        onDrop({ id, name: ITEM_TYPES.HEADING, content: text, style });
       }
     },
   });
