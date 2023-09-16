@@ -11,8 +11,8 @@ export default function App() {
   return (
     <>
       <ControlPanel />
-      <LayoutManager />
       <HeadingEditor onDrop={handleDrop} />
+      <LayoutManager />
     </>
   );
 }

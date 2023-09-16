@@ -9,6 +9,7 @@ type HeadingJsonOptional = {
   location: string;
   github: string;
   linkedin: string;
+  website: string;
 };
 
 export type HeadingJson = HeadingJsonRequired & Partial<HeadingJsonOptional>;
