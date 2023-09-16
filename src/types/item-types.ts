@@ -1,19 +1,26 @@
 import type { CSSProperties } from 'react';
 
-/**
- * {@type} This 'Name' has a specific meaning to Drag and Drop
- */
-export type Name = string;
+import type { LAYOUTS, ITEM_TYPES } from '@/constants';
 
 export type ContentItem = {
-  id: string;
   content: string;
-  name: Name;
+  contentId: string;
+  contentType: keyof typeof ITEM_TYPES;
+  layoutId: string;
+  layoutType: keyof typeof LAYOUTS;
   style: CSSProperties;
 };
 
 export type DropResult = {
-  name: Name;
+  dropEffect: string;
+  layoutType: keyof typeof LAYOUTS;
+  layoutId: string;
+};
+
+export type LayoutItem = {
+  layoutId: string;
+  layoutType: ContentItem['layoutType'];
+  props?: any[];
 };
 
 type HeadingJsonRequired = {

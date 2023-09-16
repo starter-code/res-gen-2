@@ -7,13 +7,7 @@ import React, {
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ContentItem } from '@/types/item-types';
-
-export type LayoutItem = {
-  id: string;
-  name: string;
-  props?: any[];
-};
+import { ContentItem, LayoutItem } from '@/types/item-types';
 
 export type AppContextType = {
   layouts: LayoutItem[];
@@ -41,7 +35,7 @@ export function AppProvider({ children }: AppProviderProps) {
 
   const handleDrop = useCallback(
     (item: ContentItem) => {
-      setItems([...items, { ...item, id: uuidv4() }]);
+      setItems([...items, { ...item, contentId: uuidv4() }]);
     },
     [items],
   );

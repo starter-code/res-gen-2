@@ -1,8 +1,10 @@
 export const ITEM_TYPES = {
-  HEADING: 'heading',
+  HEADING: 'HEADING',
 } as const;
 
 export const LAYOUTS = {
-  SINGLE: 'single',
-  DOUBLE: 'double',
-};
+  SINGLE: 'SINGLE',
+  DOUBLE: 'DOUBLE',
+  DOUBLE_LEFT: 'DOUBLE_LEFT',
+  DOUBLE_RIGHT: 'DOUBLE_RIGHT',
+} as const;

@@ -7,7 +7,7 @@ export default function AddLayoutSingleButton() {
   const { addLayout } = useAppContext();
 
   const handleClick = () => {
-    addLayout({ id: uuidv4(), name: LAYOUTS.DOUBLE });
+    addLayout({ layoutId: uuidv4(), layoutType: LAYOUTS.DOUBLE });
   };
 
   return (

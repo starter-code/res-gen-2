@@ -54,8 +54,16 @@ export default function HeadingEditor({ onDrop }: HeadingEditorProps) {
     }),
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult<DropResult>();
+
       if (dropResult) {
-        onDrop({ id, name: ITEM_TYPES.HEADING, content: text, style });
+        onDrop({
+          contentId: id,
+          content: text,
+          contentType: ITEM_TYPES.HEADING,
+          layoutId: dropResult.layoutId,
+          layoutType: dropResult.layoutType,
+          style,
+        });
       }
     },
   });

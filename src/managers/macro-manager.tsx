@@ -12,9 +12,11 @@ type MacroManagerProps = {
 export default function MacroManager({ items }: MacroManagerProps) {
   const elements = useMemo(() => {
     const components = items.map(item => {
-      switch (item.name) {
+      switch (item.contentType) {
         case ITEM_TYPES.HEADING: {
-          return <HeadingMacro key={item.id} {...JSON.parse(item.content)} />;
+          return (
+            <HeadingMacro key={item.contentId} {...JSON.parse(item.content)} />
+          );
         }
         default:
           throw new Error(`Invalid item. ${JSON.stringify(item)}`);
