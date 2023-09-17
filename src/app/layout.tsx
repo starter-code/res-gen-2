@@ -17,7 +17,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {/* This div is for classNames that will be converted to PDF */}
+        <div id="pdf-tailwind-bootstrapper" className="ml-1 ml-2 ml-3 ml-4 ml-5" style={{ display: 'none' }} />
+        {children}
+      </body>
     </html>
   );
 }
