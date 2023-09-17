@@ -1,4 +1,4 @@
-import { HeadingJson } from '@/types/heading-macro-types';
+import { HeadingJson } from '@/types/json-heading';
 
 import { GmailSvg } from '@/icons/gmail-svg';
 import { GithubSvg } from '@/icons/github-svg';

@@ -5,6 +5,7 @@ import HeadingMacro from '@/components/json-macros/heading-macro';
 
 import type { ContentItem } from '@/types/content-item';
 import SummaryMacro from '@/components/json-macros/summary-macro';
+import ExperienceMacro from '@/components/json-macros/experience-macro';
 
 type MacroManagerProps = {
   items: ContentItem[];
@@ -19,6 +20,9 @@ export default function MacroManager({ items }: MacroManagerProps) {
         }
         case ITEM_TYPES.SUMMARY: {
           return <SummaryMacro key={item.contentId} {...JSON.parse(item.content)} />;
+        }
+        case ITEM_TYPES.EXPERIENCE: {
+          return <ExperienceMacro key={item.contentId} {...JSON.parse(item.content)} />;
         }
         default:
           throw new Error(`Invalid item. ${JSON.stringify(item)}`);

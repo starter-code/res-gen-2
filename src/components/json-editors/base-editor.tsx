@@ -7,7 +7,7 @@ import type { ChangeEvent, CSSProperties } from 'react';
 
 import { ITEM_TYPES } from '@/constants';
 
-import type { DropResult } from '@/types/drop-result-types';
+import type { DropResult } from '@/types/drop-result';
 import { useAppContext } from '@/context/app-context';
 
 type BaseEditorProps = {
@@ -42,7 +42,7 @@ export default function BaseEditor({ type, json, style, macro, schema }: BaseEdi
           contentType: item.contentType,
           layoutId: dropResult.layoutId,
           layoutType: dropResult.layoutType,
-          style,
+          style: editorStyle,
         });
       }
     },

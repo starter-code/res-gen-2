@@ -1,6 +1,7 @@
 export const ITEM_TYPES = {
   HEADING: 'HEADING',
   SUMMARY: 'SUMMARY',
+  EXPERIENCE: 'EXPERIENCE',
 } as const;
 
 export const LAYOUTS = {

@@ -1,4 +1,4 @@
-import { SummaryJson } from '@/types/summary-types';
+import { SummaryJson } from '@/types/json-summary';
 
 type SummaryMacroProps = SummaryJson;
 

@@ -7,8 +7,6 @@ import { AppProvider } from '@/context/app-context';
 
 import App from './app';
 
-import type { ReactNode } from 'react';
-
 export default function Page() {
   return (
     <AppProvider>
