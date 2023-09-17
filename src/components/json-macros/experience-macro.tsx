@@ -22,11 +22,7 @@ export default function ExperienceMacro(props: ExperienceMacroProps) {
     <div>
       <div className="flex">
         <p className="mr-1 font-bold">{company}</p>
-        {location && (
-          <p className="grow">
-            | <span>{location}</span>
-          </p>
-        )}
+        {location && <p className="grow">| {location}</p>}
         <p>{dates}</p>
       </div>
       <p className="italic">{title}</p>

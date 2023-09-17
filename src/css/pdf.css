@@ -51,3 +51,15 @@
   color: black;
   /* Add your styles for <span> elements here */
 }
+
+.ul {
+  list-style-type: disc; /* Default bullet point style */
+  margin: 0; /* Remove default margin */
+  padding-left: 20px; /* Add some left padding for indentation */
+}
+
+/* Default styles for list items */
+.li {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
