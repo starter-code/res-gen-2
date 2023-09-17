@@ -9,22 +9,11 @@ interface LayoutDoubleProps {
   layoutRightId: string;
 }
 
-const LayoutDouble: React.FC<LayoutDoubleProps> = ({
-  layoutLeftId,
-  layoutRightId,
-}) => {
+const LayoutDouble: React.FC<LayoutDoubleProps> = ({ layoutLeftId, layoutRightId }) => {
   return (
     <div className="flex">
-      <LayoutSingle
-        className="w-max grow"
-        layoutType={LAYOUTS.DOUBLE_LEFT}
-        layoutId={layoutLeftId}
-      />
-      <LayoutSingle
-        className="w-max grow"
-        layoutType={LAYOUTS.DOUBLE_RIGHT}
-        layoutId={layoutRightId}
-      />
+      <LayoutSingle className="w-max grow max-w-[50%]" layoutType={LAYOUTS.DOUBLE_LEFT} layoutId={layoutLeftId} />
+      <LayoutSingle className="w-max grow max-w-[50%]" layoutType={LAYOUTS.DOUBLE_RIGHT} layoutId={layoutRightId} />
     </div>
   );
 };

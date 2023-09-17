@@ -1,5 +1,6 @@
 export const ITEM_TYPES = {
   HEADING: 'HEADING',
+  SUMMARY: 'SUMMARY',
 } as const;
 
 export const LAYOUTS = {

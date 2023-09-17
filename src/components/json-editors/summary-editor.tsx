@@ -1,33 +1,28 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
-import { object, string, union, undefined as _undefined, null as _null } from 'zod';
+import { object, string } from 'zod';
 
 import type { ChangeEvent } from 'react';
 
-import EXAMPLE_HEADING from '@/__example-json/heading.json';
+import EXAMPLE_SUMMARY from '@/__example-json/summary.json';
 import { ITEM_TYPES } from '@/constants';
 
 import type { DropResult } from '@/types/drop-result-types';
 import { useAppContext } from '@/context/app-context';
 
-type HeadingEditorProps = {
-  // onDrop: (item: ContentItem) => void;
+type SummaryEditorProps = {
+  //   onDrop: (item: ContentItem) => void;
 };
 
 const schema = object({
-  name: string(),
-  email: string(),
-  title: union([string(), _undefined(), _null()]),
-  phone: union([string(), _undefined()]),
-  location: union([string(), _undefined()]),
-  github: union([string(), _undefined()]),
-  linkedin: union([string(), _undefined()]),
+  heading: string(),
+  summary: string(),
 });
 
-export default function HeadingEditor({}: HeadingEditorProps) {
+export default function SummaryEditor({}: SummaryEditorProps) {
   const { onDrop } = useAppContext();
-  const [text, setText] = useState(JSON.stringify(EXAMPLE_HEADING, null, 2));
+  const [text, setText] = useState(JSON.stringify(EXAMPLE_SUMMARY, null, 2));
   const [errorMessage, setErrorMessage] = useState('');
   const [id, setId] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -44,8 +39,8 @@ export default function HeadingEditor({}: HeadingEditorProps) {
   );
 
   const [{ isDragging }, ref] = useDrag({
-    type: ITEM_TYPES.HEADING,
-    item: { contentType: ITEM_TYPES.HEADING },
+    type: ITEM_TYPES.SUMMARY,
+    item: { contentType: ITEM_TYPES.SUMMARY },
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -99,7 +94,7 @@ export default function HeadingEditor({}: HeadingEditorProps) {
         padding: '10px',
       }}
     >
-      <h3 ref={ref}>Heading ☰</h3>
+      <h3 ref={ref}>Summary ☰</h3>
       <form>
         <textarea spellCheck="false" onChange={onHandleChange} value={text} ref={textAreaRef} style={style}></textarea>
       </form>

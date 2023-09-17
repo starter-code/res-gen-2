@@ -6,7 +6,7 @@ import MacroManager from '@/managers/macro-manager';
 import { ITEM_TYPES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
 
-import type { ContentItem } from '@/types/item-types';
+import type { ContentItem } from '@/types/content-item-types';
 
 interface LayoutSingleProps {
   layoutType: ContentItem['layoutType'];
@@ -17,7 +17,7 @@ interface LayoutSingleProps {
 const LayoutSingle: React.FC<LayoutSingleProps> = ({ className, layoutType, layoutId }) => {
   const { items: allItems } = useAppContext();
   const [{ isOver }, drop] = useDrop({
-    accept: ITEM_TYPES.HEADING,
+    accept: [ITEM_TYPES.HEADING, ITEM_TYPES.SUMMARY],
     drop: () => ({ layoutType, layoutId }),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
