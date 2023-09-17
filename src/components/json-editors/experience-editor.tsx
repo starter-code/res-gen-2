@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { object, string, array, undefined as _undefined, null as _null } from 'zod';
 
 import EXAMPLE_EXPERIENCE from '@/__example-json/experience.json';
-import { ITEM_TYPES } from '@/constants';
+import { CONTENT_TYPES } from '@/constants';
 
 import BaseEditor from './base-editor';
 
@@ -34,7 +34,7 @@ export default function ExperienceEditor({}: ExperienceEditorProps) {
 
   return (
     <BaseEditor //
-      type={ITEM_TYPES.EXPERIENCE}
+      type={CONTENT_TYPES.EXPERIENCE}
       macro="Experience"
       style={style}
       json={EXAMPLE_EXPERIENCE}

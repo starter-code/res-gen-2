@@ -5,14 +5,14 @@ import { ZodObject } from 'zod';
 
 import type { ChangeEvent, CSSProperties } from 'react';
 
-import { ITEM_TYPES } from '@/constants';
+import { CONTENT_TYPES } from '@/constants';
 
 import type { DropResult } from '@/types/drop-result';
 import { useAppContext } from '@/context/app-context';
 
 type BaseEditorProps = {
   macro: string;
-  type: (typeof ITEM_TYPES)[keyof typeof ITEM_TYPES];
+  type: (typeof CONTENT_TYPES)[keyof typeof CONTENT_TYPES];
   json: {};
   style: CSSProperties;
   schema: ZodObject<any>;

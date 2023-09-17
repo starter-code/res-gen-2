@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useDrop } from 'react-dnd';
 
 import MacroManager from '@/managers/macro-manager';
-import { ITEM_TYPES } from '@/constants';
+import { CONTENT_TYPES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
 
 import type { ContentItem } from '@/types/content-item';
@@ -19,7 +19,7 @@ export default function LayoutSingle(props: LayoutSingleProps) {
 
   const { items: allItems } = useAppContext();
   const [{ isOver }, drop] = useDrop({
-    accept: [...Object.values(ITEM_TYPES)],
+    accept: [...Object.values(CONTENT_TYPES)],
     drop: () => ({ layoutType, layoutId, layoutParentId }),
     collect: monitor => ({
       isOver: !!monitor.isOver(),

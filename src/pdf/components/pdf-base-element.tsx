@@ -1,14 +1,14 @@
-import { View } from '@react-pdf/renderer';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useMemo, ElementType } from 'react';
 
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
 
-type DivProps = {
+type BaseElementProps = {
   children: ReactNode;
+  Element: ElementType;
   className?: string;
 };
 
-export default function Div({ children, className }: DivProps) {
+export default function BaseElement({ children, className, Element }: BaseElementProps) {
   const { styles } = usePdfDocumentContext();
 
   const style = useMemo(() => {
@@ -23,5 +23,10 @@ export default function Div({ children, className }: DivProps) {
     return selectors;
   }, [className, styles]);
 
-  return <View style={style}>{children}</View>;
+  const props = useMemo(() => {
+    if (!className) return {};
+    return { style };
+  }, [className, style]);
+
+  return <Element {...props}>{children}</Element>;
 }

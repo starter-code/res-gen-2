@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import '../globals.css';
+import '@/css/globals.css';
+import '@/css/editor.css';
+import '@/css/pdf.css';
 
 type RootLayoutProps = {
   children: React.ReactNode;

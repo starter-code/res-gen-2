@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { object, string } from 'zod';
 
 import EXAMPLE_SUMMARY from '@/__example-json/summary.json';
-import { ITEM_TYPES } from '@/constants';
+import { CONTENT_TYPES } from '@/constants';
 
 import BaseEditor from './base-editor';
 
@@ -30,7 +30,7 @@ export default function SummaryEditor({}: SummaryEditorProps) {
 
   return (
     <BaseEditor //
-      type={ITEM_TYPES.SUMMARY}
+      type={CONTENT_TYPES.SUMMARY}
       macro="Summary"
       style={style}
       json={EXAMPLE_SUMMARY}

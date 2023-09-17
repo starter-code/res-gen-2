@@ -39,8 +39,6 @@ export function AppProvider({ children }: AppProviderProps) {
     setLayouts(prevLayout => [...prevLayout, newLayout]);
   };
 
-  console.log('!!! AppProvider', items, layouts);
-
   return <AppContext.Provider value={{ items, layouts, addLayout, onDrop }}>{children}</AppContext.Provider>;
 }
 

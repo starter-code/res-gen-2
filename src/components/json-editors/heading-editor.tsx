@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { object, string, union, undefined as _undefined, null as _null } from 'zod';
 
 import EXAMPLE_HEADING from '@/__example-json/heading.json';
-import { ITEM_TYPES } from '@/constants';
+import { CONTENT_TYPES } from '@/constants';
 
 import BaseEditor from './base-editor';
 
@@ -35,7 +35,7 @@ export default function HeadingEditor({}: HeadingEditorProps) {
 
   return (
     <BaseEditor //
-      type={ITEM_TYPES.HEADING}
+      type={CONTENT_TYPES.HEADING}
       macro="Heading"
       style={style}
       json={EXAMPLE_HEADING}

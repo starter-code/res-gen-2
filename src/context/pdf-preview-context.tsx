@@ -46,8 +46,7 @@ export function PdfPreviewProvider({ children }: PdfPreviewProps) {
     const styleSheet = StyleSheet.create({
       ...styleRules,
       page: {
-        flexDirection: 'row',
-        backgroundColor: '#E4E4E4',
+        padding: '24px',
         width: '100vw',
       },
       placeholder: {

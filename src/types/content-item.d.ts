@@ -1,11 +1,11 @@
 import type { CSSProperties } from 'react';
 
-import type { LAYOUTS, ITEM_TYPES } from '@/constants';
+import type { LAYOUTS, CONTENT_TYPES } from '@/constants';
 
 export type ContentItem = {
   content: string;
   contentId: string;
-  contentType: keyof typeof ITEM_TYPES;
+  contentType: keyof typeof CONTENT_TYPES;
   layoutId: string;
   layoutParentId: string | null;
   layoutType: keyof typeof LAYOUTS;

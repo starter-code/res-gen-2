@@ -1,4 +1,4 @@
-export const ITEM_TYPES = {
+export const CONTENT_TYPES = {
   HEADING: 'HEADING',
   SUMMARY: 'SUMMARY',
   EXPERIENCE: 'EXPERIENCE',

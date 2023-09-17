@@ -118,18 +118,22 @@ export function getComputedRemFontSize() {
   return computedFontSize;
 }
 
-function toPx(remValue: string, baseFontSizeInPixels = '16px'): string {
-  if (!remValue.endsWith('rem')) {
-    return remValue;
+function toPx(value: string, replacement: 'em' | 'rem', baseFontSizeInPixels = '16px'): string {
+  if (!value.endsWith(replacement)) {
+    return value;
   }
 
-  const pxValue = Number(remValue.replace('rem', '')) * Number(baseFontSizeInPixels.replace('px', ''));
+  const pxValue = Number(value.replace(replacement, '')) * Number(baseFontSizeInPixels.replace('px', ''));
   return pxValue.toString() + 'px';
 }
 
 export function toPdfCssFormat(string: string): string {
   string = toHex(string);
-  string = toPx(string);
+  string = string
+    .split(' ')
+    .map(str => toPx(str, 'rem'))
+    .map(str => toPx(str, 'em'))
+    .join(' ');
 
   return string;
 }
