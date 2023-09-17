@@ -5,7 +5,7 @@ import MacroManager from '@/managers/macro-manager';
 import { ITEM_TYPES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
 
-import type { ContentItem } from '@/types/content-item-types';
+import type { ContentItem } from '@/types/content-item';
 
 interface LayoutSingleProps {
   layoutType: ContentItem['layoutType'];

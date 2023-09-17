@@ -1,4 +1,4 @@
-import type { ContentItem } from './content-item-types';
+import type { ContentItem } from './content-item';
 
 export type LayoutSingle = {
   layoutId: string;

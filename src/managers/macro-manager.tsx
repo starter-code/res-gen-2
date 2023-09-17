@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { ITEM_TYPES } from '@/constants';
 import HeadingMacro from '@/components/json-macros/heading-macro';
 
-import type { ContentItem } from '@/types/content-item-types';
+import type { ContentItem } from '@/types/content-item';
 import SummaryMacro from '@/components/json-macros/summary-macro';
 
 type MacroManagerProps = {

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import type { ContentItem } from '@/types/content-item-types';
+import type { ContentItem } from '@/types/content-item';
 import type { LayoutItem } from '@/types/layout-types';
 
 export type AppContextType = {
