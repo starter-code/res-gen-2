@@ -1,6 +1,5 @@
-import React, { useId, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useDrop } from 'react-dnd';
-import { v4 as uuidv4 } from 'uuid';
 
 import MacroManager from '@/managers/macro-manager';
 import { ITEM_TYPES } from '@/constants';
@@ -17,7 +16,7 @@ interface LayoutSingleProps {
 const LayoutSingle: React.FC<LayoutSingleProps> = ({ className, layoutType, layoutId }) => {
   const { items: allItems } = useAppContext();
   const [{ isOver }, drop] = useDrop({
-    accept: [ITEM_TYPES.HEADING, ITEM_TYPES.SUMMARY],
+    accept: [...Object.values(ITEM_TYPES)],
     drop: () => ({ layoutType, layoutId }),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
