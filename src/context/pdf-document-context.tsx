@@ -1,11 +1,17 @@
+import { ContentItem } from '@/types/content-item';
+import { LayoutItem } from '@/types/layout-types';
 import ReactPDF from '@react-pdf/renderer';
 import React, { createContext, useContext, useState, ReactNode, useMemo, useCallback, useEffect } from 'react';
 
 type PdfDocumentContextType = {
+  items: ContentItem[];
+  layouts: LayoutItem[];
   styles: ReactPDF.Styles;
 };
 
 const initialState: PdfDocumentContextType = {
+  items: [],
+  layouts: [],
   styles: {},
 };
 
@@ -13,11 +19,21 @@ const PdfDocumentContext = createContext<PdfDocumentContextType>(initialState);
 
 type PdfDocumentProviderProps = {
   children: ReactNode;
+  items: ContentItem[];
+  layouts: LayoutItem[];
   styles: ReactPDF.Styles;
 };
 
-export function PdfDocumentProvider({ children, styles }: PdfDocumentProviderProps) {
-  return <PdfDocumentContext.Provider value={{ styles }}>{children}</PdfDocumentContext.Provider>;
+/**
+ * This is layer is inside of an iFrame and cannot access upper level contexts
+ *
+ * @param {PdfDocumentProviderProps} param0 params
+ * @returns
+ */
+export function PdfDocumentProvider(props: PdfDocumentProviderProps) {
+  const { children, styles, items, layouts } = props;
+
+  return <PdfDocumentContext.Provider value={{ styles, items, layouts }}>{children}</PdfDocumentContext.Provider>;
 }
 
 export function usePdfDocumentContext() {

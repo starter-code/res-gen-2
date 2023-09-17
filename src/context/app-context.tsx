@@ -5,17 +5,17 @@ import type { ContentItem } from '@/types/content-item';
 import type { LayoutItem } from '@/types/layout-types';
 
 export type AppContextType = {
-  layouts: LayoutItem[];
   items: ContentItem[];
-  onDrop: (item: ContentItem) => void;
+  layouts: LayoutItem[];
   addLayout: (newLayout: LayoutItem) => void;
+  onDrop: (item: ContentItem) => void;
 };
 
 const initialState: AppContextType = {
-  layouts: [],
   items: [],
-  onDrop: () => {},
+  layouts: [],
   addLayout: () => {},
+  onDrop: () => {},
 };
 
 const AppContext = createContext<AppContextType>(initialState);
@@ -39,7 +39,9 @@ export function AppProvider({ children }: AppProviderProps) {
     setLayouts(prevLayout => [...prevLayout, newLayout]);
   };
 
-  return <AppContext.Provider value={{ addLayout, onDrop, layouts, items }}>{children}</AppContext.Provider>;
+  console.log('!!! AppProvider', items, layouts);
+
+  return <AppContext.Provider value={{ items, layouts, addLayout, onDrop }}>{children}</AppContext.Provider>;
 }
 
 export function useAppContext() {

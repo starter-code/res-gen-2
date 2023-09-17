@@ -11,7 +11,13 @@ export default function LayoutManager() {
       {layouts.map(layout => {
         switch (layout.layoutType) {
           case LAYOUTS.SINGLE: {
-            return <LayoutSingle key={layout.layoutId} layoutId={layout.layoutId} layoutType={layout.layoutType} />;
+            return (
+              <LayoutSingle //
+                key={layout.layoutId}
+                layoutId={layout.layoutId}
+                layoutType={layout.layoutType}
+              />
+            );
           }
           case LAYOUTS.DOUBLE: {
             if (!layout.layoutLeftId) throw new Error(`layout missing property 'layoutLeftId`);
@@ -20,6 +26,7 @@ export default function LayoutManager() {
             return (
               <LayoutDouble
                 key={layout.layoutId}
+                layoutId={layout.layoutId}
                 layoutLeftId={layout.layoutLeftId}
                 layoutRightId={layout.layoutRightId}
               />

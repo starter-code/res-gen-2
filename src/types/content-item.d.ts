@@ -7,6 +7,6 @@ export type ContentItem = {
   contentId: string;
   contentType: keyof typeof ITEM_TYPES;
   layoutId: string;
+  layoutParentId: string | null;
   layoutType: keyof typeof LAYOUTS;
-  style: CSSProperties;
 };

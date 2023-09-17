@@ -1,7 +1,7 @@
 import ReactPDF, { StyleSheet } from '@react-pdf/renderer';
 import React, { createContext, useContext, ReactNode, useMemo } from 'react';
 
-import { toJsObject, toCamel, replaceCSSVariables, toPdfCssFormat } from '@/utils/css-transformation-util';
+import { toJsObject } from '@/utils/css-transformation-util';
 
 type PdfPreviewContextType = {
   styles: ReactPDF.Styles;
@@ -17,6 +17,12 @@ type PdfPreviewProps = {
   children: ReactNode;
 };
 
+/**
+ * This is the last layer before the iFrame
+ *
+ * @param {PdfPreviewProps} param0 params
+ * @returns
+ */
 export function PdfPreviewProvider({ children }: PdfPreviewProps) {
   const styleSheets = useMemo(() => window.document.styleSheets, []);
 

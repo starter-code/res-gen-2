@@ -11,13 +11,16 @@ interface LayoutSingleProps {
   layoutType: ContentItem['layoutType'];
   className?: string;
   layoutId?: string;
+  layoutParentId?: string;
 }
 
-const LayoutSingle: React.FC<LayoutSingleProps> = ({ className, layoutType, layoutId }) => {
+export default function LayoutSingle(props: LayoutSingleProps) {
+  const { className, layoutType, layoutId, layoutParentId = null } = props;
+
   const { items: allItems } = useAppContext();
   const [{ isOver }, drop] = useDrop({
     accept: [...Object.values(ITEM_TYPES)],
-    drop: () => ({ layoutType, layoutId }),
+    drop: () => ({ layoutType, layoutId, layoutParentId }),
     collect: monitor => ({
       isOver: !!monitor.isOver(),
     }),
@@ -45,6 +48,4 @@ const LayoutSingle: React.FC<LayoutSingleProps> = ({ className, layoutType, layo
       <MacroManager items={items} />
     </div>
   );
-};
-
-export default LayoutSingle;
+}

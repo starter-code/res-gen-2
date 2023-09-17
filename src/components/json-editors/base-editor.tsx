@@ -42,7 +42,7 @@ export default function BaseEditor({ type, json, style, macro, schema }: BaseEdi
           contentType: item.contentType,
           layoutId: dropResult.layoutId,
           layoutType: dropResult.layoutType,
-          style: editorStyle,
+          layoutParentId: dropResult.layoutParentId,
         });
       }
     },

@@ -11,12 +11,8 @@ export default function App() {
     <>
       <ControlPanel />
       <EditorManager />
-      <div id="pdf-layout">
-        <LayoutManager />
-      </div>
-      <div id="pdf-preview">
-        <PdfPreview />
-      </div>
+      <LayoutManager />
+      <PdfPreview />
     </>
   );
 }
