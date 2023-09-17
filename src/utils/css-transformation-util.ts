@@ -2,10 +2,11 @@ export type CssProperties = {
   [key: string]: string;
 };
 
-export function toJsObject(cssText: string) {
-  const styles: { [key: string]: string } = {};
+export function toJsObject(cssText: string, selector: string) {
+  let styles: { [key: string]: string } = {};
 
   cssText
+    .replace(selector, '')
     .replaceAll('{', '')
     .replaceAll('}', '')
     .split(';')
@@ -18,7 +19,17 @@ export function toJsObject(cssText: string) {
       }
     });
 
-  return styles;
+  styles = replaceCSSVariables(styles);
+
+  Object.entries(styles).forEach(([key, value]) => {
+    delete styles[key];
+
+    Object.assign(styles, { [toCamel(key)]: toPdfCssFormat(value) });
+  });
+
+  return {
+    [selector.replace('.', '')]: styles,
+  };
 }
 
 export function toCamel(str: string): string {

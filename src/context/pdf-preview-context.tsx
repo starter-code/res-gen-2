@@ -1,7 +1,7 @@
 import ReactPDF, { StyleSheet } from '@react-pdf/renderer';
 import React, { createContext, useContext, ReactNode, useMemo } from 'react';
 
-import { toJsObject, toCamel, replaceCSSVariables, toPdfCssFormat } from '@/utils/css-util';
+import { toJsObject, toCamel, replaceCSSVariables, toPdfCssFormat } from '@/utils/css-transformation-util';
 
 type PdfPreviewContextType = {
   styles: ReactPDF.Styles;
@@ -32,17 +32,9 @@ export function PdfPreviewProvider({ children }: PdfPreviewProps) {
       .flat() as CSSStyleRule[];
 
     const styleRules = rules.reduce((previousValue, currentValue) => {
-      const selector = currentValue.selectorText.replace('.', '');
-      const cssRule = toJsObject(currentValue.cssText.replace(currentValue.selectorText, ''));
-      const cssObject = replaceCSSVariables(cssRule);
+      const { cssText, selectorText } = currentValue;
 
-      Object.entries(cssObject).forEach(([key, value]: [value: string, key: string]) => {
-        delete cssObject[key];
-
-        Object.assign(cssObject, { [toCamel(key)]: toPdfCssFormat(value) });
-      });
-
-      return { ...previousValue, [selector]: cssObject };
+      return { ...previousValue, ...toJsObject(cssText, selectorText) };
     }, {});
 
     const styleSheet = StyleSheet.create({
