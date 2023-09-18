@@ -8,9 +8,10 @@ import H3 from '@/pdf/components/pdf-h3';
 import H4 from '@/pdf/components/pdf-h4';
 import H5 from '@/pdf/components/pdf-h5';
 import P from '@/pdf/components/pdf-p';
+import Img from '@/pdf/components/pdf-img';
+import LI from '@/pdf/components/pdf-li';
 import Span from '@/pdf/components/pdf-span';
 import UL from '@/pdf/components/pdf-ul';
-import LI from '@/pdf/components/pdf-li';
 
 const COMPONENTS = {
   div: Div,
@@ -23,6 +24,7 @@ const COMPONENTS = {
   span: Span,
   ul: UL,
   li: LI,
+  img: Img,
 } as const;
 
 /**
@@ -57,6 +59,7 @@ export function toPdfComponents(htmlString: string): ReactNode {
 
       if (Component) {
         jsxElements.push(
+          // @ts-ignore
           <Component key={uuidv4()} {...props}>
             {toPdfComponents((childNode as Element).innerHTML)}
           </Component>,

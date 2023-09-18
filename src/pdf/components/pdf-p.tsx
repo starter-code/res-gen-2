@@ -1,12 +1,9 @@
 import { Text } from '@react-pdf/renderer';
-import { ReactNode } from 'react';
 
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
+import { PdfComponentProps } from '@/types/pdf';
 
-type ParagraphProps = {
-  children: ReactNode;
-  className?: string;
-};
+type ParagraphProps = PdfComponentProps;
 
 export default function P({ children, className }: ParagraphProps) {
   const { computeStyle } = usePdfDocumentContext();

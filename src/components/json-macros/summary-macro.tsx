@@ -7,7 +7,7 @@ export default function SummaryMacro(props: SummaryMacroProps) {
 
   return (
     <div className="div">
-      <h3 className="text-xl bg-gray-400 text-center border-b border-black">{heading}</h3>
+      <h3 className="text-xl text-center border-b border-black">{heading}</h3>
       <p className="mt-1">{summary}</p>
     </div>
   );

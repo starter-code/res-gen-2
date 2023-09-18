@@ -1,12 +1,9 @@
 import { Text } from '@react-pdf/renderer';
-import { ReactNode } from 'react';
 
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
+import { PdfComponentProps } from '@/types/pdf';
 
-type ListItemProps = {
-  children: ReactNode;
-  className?: string;
-};
+type ListItemProps = PdfComponentProps;
 
 export default function LI({ children, className }: ListItemProps) {
   const { computeStyle } = usePdfDocumentContext();

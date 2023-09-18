@@ -37,15 +37,20 @@ export function PdfDocumentProvider(props: PdfDocumentProviderProps) {
   const { children, styles, items, layouts } = props;
 
   const computeStyle = useCallback(
-    (className: string, ...elements: string[]) => {
-      const classesList = [...className?.split(' '), ...elements];
+    (className: string, ...elements: Array<string | {}>) => {
+      const classNames = className ? className.split(' ') : [];
+      const classesList = [...classNames, ...elements];
 
       const compiledStyle = classesList.reduce((previousValue, currentValue) => {
-        if (!styles[currentValue]) {
-          throw new Error(`Unsupported Selector ${currentValue}`);
+        if (typeof currentValue === 'object') {
+          return { ...previousValue, ...currentValue };
         }
 
-        return { ...previousValue, ...styles[currentValue] };
+        if (typeof currentValue === 'string' && styles[currentValue]) {
+          return { ...previousValue, ...styles[currentValue] };
+        }
+
+        return { ...previousValue };
       }, {});
 
       // this property causes spacing issues in pdf
