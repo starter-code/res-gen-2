@@ -1,4 +1,4 @@
-import { Text } from '@react-pdf/renderer';
+import { View } from '@react-pdf/renderer';
 import { ReactNode } from 'react';
 
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
@@ -11,5 +11,5 @@ type UnorderedListProps = {
 export default function UL({ children, className }: UnorderedListProps) {
   const { computeStyle } = usePdfDocumentContext();
 
-  return <Text style={computeStyle(className, 'ul')}>{children}</Text>;
+  return <View style={computeStyle(className, 'ul')}>{children}</View>;
 }

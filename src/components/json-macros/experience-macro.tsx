@@ -20,21 +20,24 @@ export default function ExperienceMacro(props: ExperienceMacroProps) {
 
   return (
     <div>
-      <div className="flex">
-        <p className="mr-1 font-bold">{company}</p>
-        {location && <p className="grow">| {location}</p>}
+      <div className="flex flex-row">
+        <p className="font-bold">{company}</p>
+        <span className="px-1">|</span>
+        {location && <p className="grow">{location}</p>}
         <p>{dates}</p>
       </div>
       <p className="italic">{title}</p>
-      <div>
-        {tags?.map(tag => {
-          return (
-            <span key={tag.id} className="bg-black text-white font-bold py-1 px-1 mr-1 rounded text-xs">
-              {tag.text}
-            </span>
-          );
-        })}
-      </div>
+      {tags && (
+        <div className="flex flex-row">
+          {tags.map(tag => {
+            return (
+              <span key={tag.id} className="bg-black text-white font-bold py-1 px-1 mr-1 rounded text-xs">
+                {tag.text}
+              </span>
+            );
+          })}
+        </div>
+      )}
       {descriptions && (
         <ul>
           {descriptions?.map(description => {

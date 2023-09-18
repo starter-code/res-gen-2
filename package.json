@@ -30,6 +30,7 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "file-loader": "^6.2.0",
     "prettier": "3.0.3"
   }
 }

@@ -11,5 +11,5 @@ type ListItemProps = {
 export default function LI({ children, className }: ListItemProps) {
   const { computeStyle } = usePdfDocumentContext();
 
-  return <Text style={computeStyle(className, 'li')}>{children}</Text>;
+  return <Text style={computeStyle(className, 'li')}>&#8226; {children}</Text>;
 }

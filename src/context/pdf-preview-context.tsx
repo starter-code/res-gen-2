@@ -46,11 +46,12 @@ export function PdfPreviewProvider({ children }: PdfPreviewProps) {
     const styleSheet = StyleSheet.create({
       ...styleRules,
       page: {
-        fontSize: '16px',
+        fontSize: '12px',
         padding: '24px',
+        fontFamily: 'Roboto',
       },
-      placeholder: {
-        width: '100%',
+      text: {
+        fontFamily: 'Roboto',
       },
       '': {},
     });

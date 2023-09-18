@@ -1,16 +1,8 @@
-import { ContentItem } from '@/types/content-item';
-import { LayoutItem } from '@/types/layout-types';
 import ReactPDF from '@react-pdf/renderer';
-import React, {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  useMemo,
-  useCallback,
-  useEffect,
-  CSSProperties,
-} from 'react';
+import React, { createContext, useContext, ReactNode, useCallback } from 'react';
+
+import type { ContentItem } from '@/types/content-item';
+import type { LayoutItem } from '@/types/layout-types';
 
 type PdfDocumentContextType = {
   items: ContentItem[];
@@ -45,8 +37,10 @@ export function PdfDocumentProvider(props: PdfDocumentProviderProps) {
   const { children, styles, items, layouts } = props;
 
   const computeStyle = useCallback(
-    (className: string, element: string) => {
-      const compiledStyle = [...className?.split(' '), element].reduce((previousValue, currentValue) => {
+    (className: string, ...elements: string[]) => {
+      const classesList = [...className?.split(' '), ...elements];
+
+      const compiledStyle = classesList.reduce((previousValue, currentValue) => {
         if (!styles[currentValue]) {
           throw new Error(`Unsupported Selector ${currentValue}`);
         }

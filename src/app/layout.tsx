@@ -1,16 +1,14 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import classNames from 'classnames';
 
 import '@/css/globals.css';
 import '@/css/editor.css';
 import '@/css/pdf.css';
-import classNames from 'classnames';
+
+import type { Metadata } from 'next';
 
 type RootLayoutProps = {
   children: React.ReactNode;
 };
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'ResGenie 2.0',
@@ -31,7 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         {/* This div is for classNames that will be converted to PDF */}
         <div id="pdf-tailwind-bootstrapper" className={className} style={{ display: 'none' }} />
         {children}

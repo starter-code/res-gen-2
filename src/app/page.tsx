@@ -6,6 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { AppProvider } from '@/context/app-context';
 import { PdfPreviewProvider } from '@/context/pdf-preview-context';
+import loadFonts from '@/utils/pdf-font-loader';
 
 import App from './app';
 
@@ -16,6 +17,8 @@ export default function Page() {
   }, [stylesLoaded]);
 
   useEffect(() => {
+    loadFonts();
+
     const interval = setInterval(() => {
       if (window.document.styleSheets.length) {
         setStylesLoaded(true);
