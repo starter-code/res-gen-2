@@ -1,3 +1,8 @@
+.div {
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
 .p {
   display: block;
   margin-top: 1em;
@@ -5,8 +10,6 @@
   margin-left: 0;
   margin-right: 0;
 }
-
-/* Styles for headings */
 
 .h1 {
   display: block;
@@ -46,7 +49,6 @@
   margin-bottom: 0.5rem; /* Adjust the bottom margin as needed */
 }
 
-/* Styles for spans */
 .span {
   color: black;
   /* Add your styles for <span> elements here */

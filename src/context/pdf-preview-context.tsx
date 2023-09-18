@@ -46,8 +46,8 @@ export function PdfPreviewProvider({ children }: PdfPreviewProps) {
     const styleSheet = StyleSheet.create({
       ...styleRules,
       page: {
+        fontSize: '16px',
         padding: '24px',
-        width: '100vw',
       },
       placeholder: {
         width: '100%',

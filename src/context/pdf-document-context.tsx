@@ -1,18 +1,29 @@
 import { ContentItem } from '@/types/content-item';
 import { LayoutItem } from '@/types/layout-types';
 import ReactPDF from '@react-pdf/renderer';
-import React, { createContext, useContext, useState, ReactNode, useMemo, useCallback, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useMemo,
+  useCallback,
+  useEffect,
+  CSSProperties,
+} from 'react';
 
 type PdfDocumentContextType = {
   items: ContentItem[];
   layouts: LayoutItem[];
   styles: ReactPDF.Styles;
+  computeStyle: Function;
 };
 
 const initialState: PdfDocumentContextType = {
   items: [],
   layouts: [],
   styles: {},
+  computeStyle: () => {},
 };
 
 const PdfDocumentContext = createContext<PdfDocumentContextType>(initialState);
@@ -33,7 +44,30 @@ type PdfDocumentProviderProps = {
 export function PdfDocumentProvider(props: PdfDocumentProviderProps) {
   const { children, styles, items, layouts } = props;
 
-  return <PdfDocumentContext.Provider value={{ styles, items, layouts }}>{children}</PdfDocumentContext.Provider>;
+  const computeStyle = useCallback(
+    (className: string, element: string) => {
+      const compiledStyle = [...className?.split(' '), element].reduce((previousValue, currentValue) => {
+        if (!styles[currentValue]) {
+          throw new Error(`Unsupported Selector ${currentValue}`);
+        }
+
+        return { ...previousValue, ...styles[currentValue] };
+      }, {});
+
+      // this property causes spacing issues in pdf
+      // @ts-ignore
+      delete compiledStyle['lineHeight'];
+
+      return compiledStyle;
+    },
+    [styles],
+  );
+
+  return (
+    <PdfDocumentContext.Provider value={{ styles, items, layouts, computeStyle }}>
+      {children}
+    </PdfDocumentContext.Provider>
+  );
 }
 
 export function usePdfDocumentContext() {

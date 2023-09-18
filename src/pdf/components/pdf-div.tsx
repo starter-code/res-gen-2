@@ -1,7 +1,7 @@
 import { View } from '@react-pdf/renderer';
 import { ReactNode } from 'react';
 
-import BaseElement from './pdf-base-element';
+import { usePdfDocumentContext } from '@/context/pdf-document-context';
 
 type DivProps = {
   children: ReactNode;
@@ -9,9 +9,7 @@ type DivProps = {
 };
 
 export default function Div({ children, className }: DivProps) {
-  return (
-    <BaseElement Element={View} className={className}>
-      {children}
-    </BaseElement>
-  );
+  const { computeStyle } = usePdfDocumentContext();
+
+  return <View style={computeStyle(className, 'div')}>{children}</View>;
 }

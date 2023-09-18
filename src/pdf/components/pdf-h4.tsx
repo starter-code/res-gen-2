@@ -1,20 +1,15 @@
 import { Text } from '@react-pdf/renderer';
 import { ReactNode } from 'react';
 
-import BaseElement from './pdf-base-element';
-import classNames from 'classnames';
+import { usePdfDocumentContext } from '@/context/pdf-document-context';
 
 type Header4Props = {
   children: ReactNode;
   className?: string;
 };
 
-export default function H4({ children, className: classes }: Header4Props) {
-  const className = classNames('h4', classes);
+export default function H4({ children, className }: Header4Props) {
+  const { computeStyle } = usePdfDocumentContext();
 
-  return (
-    <BaseElement Element={Text} className={className}>
-      {children}
-    </BaseElement>
-  );
+  return <Text style={computeStyle(className, 'h4')}>{children}</Text>;
 }

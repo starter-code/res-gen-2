@@ -1,20 +1,15 @@
 import { Text } from '@react-pdf/renderer';
 import { ReactNode } from 'react';
 
-import BaseElement from './pdf-base-element';
-import classNames from 'classnames';
+import { usePdfDocumentContext } from '@/context/pdf-document-context';
 
 type SpanProps = {
   children: ReactNode;
   className?: string;
 };
 
-export default function Span({ children, className: classes }: SpanProps) {
-  const className = classNames('span', classes);
+export default function Span({ children, className }: SpanProps) {
+  const { computeStyle } = usePdfDocumentContext();
 
-  return (
-    <BaseElement Element={Text} className={className}>
-      {children}
-    </BaseElement>
-  );
+  return <Text style={computeStyle(className, 'span')}>{children}</Text>;
 }

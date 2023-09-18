@@ -1,20 +1,15 @@
 import { Text } from '@react-pdf/renderer';
 import { ReactNode } from 'react';
 
-import BaseElement from './pdf-base-element';
-import classNames from 'classnames';
+import { usePdfDocumentContext } from '@/context/pdf-document-context';
 
 type Header5Props = {
   children: ReactNode;
   className?: string;
 };
 
-export default function H5({ children, className: classes }: Header5Props) {
-  const className = classNames('h5', classes);
+export default function H5({ children, className }: Header5Props) {
+  const { computeStyle } = usePdfDocumentContext();
 
-  return (
-    <BaseElement Element={Text} className={className}>
-      {children}
-    </BaseElement>
-  );
+  return <Text style={computeStyle(className, 'h5')}>{children}</Text>;
 }
