@@ -11,55 +11,68 @@ export default function HeadingMacro(props: HeadingMacroProps) {
     <div>
       <h1 className="text-3xl font-bold text-center">{name}</h1>
       {title && <h4 className="text-center">{title}</h4>}
-      <div className="flex flex-row justify-center text-center">
-        {phone && <span className="mr-1">📞 {phone}</span>}
+      <div className="flex flex-row justify-center text-center mr-2">
+        {phone && (
+          <div className="flex flex-row items-center mr-2">
+            <Image //
+              src="./phone.svg"
+              className="phone-icon icon inline mr-1"
+              height="16"
+              width="16"
+              alt="phone icon"
+            />
+            <span className="whitespace-nowrap">{phone}</span>
+          </div>
+        )}
         {email && (
-          <span className="mr-2">
+          <div className="flex flex-row items-center mr-2">
             <Image //
               src="./gmail.svg"
-              className="gmail-icon inline mr-1"
+              className="gmail-icon pdf-debug icon inline mr-1"
               height="16"
               width="16"
               alt="gmail icon"
             />
-            {email}
-          </span>
-        )}
-        {github && (
-          <span className="mr-2">
-            <Image //
-              src="./github.svg"
-              className="github-icon inline mr-1"
-              height="16"
-              width="16"
-              alt="github icon"
-            />
-            {github}
-          </span>
+            <span className="">{email}</span>
+          </div>
         )}
         {linkedin && (
-          <span className="mr-2">
+          <div className="flex flex-row items-center mr-2">
             <Image
               src="./linkedin.svg"
-              className="linkedin-icon inline mr-1"
+              className="linkedin-icon icon inline mr-1"
               height="16"
               width="16"
               alt="linkedin icon"
             />
-            {linkedin}
-          </span>
+            <span className="">{linkedin}</span>
+          </div>
+        )}
+      </div>
+      <div className="flex flex-row justify-center text-center mr-2">
+        {github && (
+          <div className="flex flex-row items-center mr-2">
+            <Image //
+              src="./github.svg"
+              className="github-icon icon inline mr-1"
+              height="16"
+              width="16"
+              alt="github icon"
+            />
+            <span className="">{github}</span>
+          </div>
         )}
         {website && (
-          <span className="mr-2">
+          <div className="flex flex-row items-center mr-2">
             <Image //
               src="./website.svg"
-              className="website-icon inline mr-1"
+              className="website-icon icon inline mr-1"
               height="16"
               width="16"
               alt="website icon"
             />
-            {website}
-          </span>
+            <span className="">{website}</span>
+          </div>
         )}
       </div>
     </div>

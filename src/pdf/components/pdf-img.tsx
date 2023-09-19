@@ -1,4 +1,4 @@
-import { Image } from '@react-pdf/renderer';
+import { Image, Svg, Path } from '@react-pdf/renderer';
 
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
 
@@ -10,31 +10,12 @@ import WebsiteSvg from '../icons/pdf-website';
 type ImgProps = {
   className: string;
   src: string;
-  height: string;
-  width: string;
   alt: string;
 };
 
-const ICONS = {
-  github: GithubSvg,
-  gmail: GmailSvg,
-  linkedin: LinkedinSvg,
-  website: WebsiteSvg,
-} as const;
-
-export default function Img({ className, src, height, width }: ImgProps) {
+export default function Img({ className, src }: ImgProps) {
   const { computeStyle } = usePdfDocumentContext();
 
-  const regex = /(\S+)-icon/g;
-  const match = regex.exec(className);
-
-  if (match && match[1]) {
-    const [, matcher] = match;
-
-    // @ts-ignore
-    const Component = ICONS[matcher];
-
-    // Hmm not working at the moment
-    return <Component />;
-  }
+  // eslint-disable-next-line jsx-a11y/alt-text
+  return <Image src={src} style={computeStyle(className, 'div')} />;
 }

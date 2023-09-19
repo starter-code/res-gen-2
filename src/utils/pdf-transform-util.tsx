@@ -1,4 +1,4 @@
-import React, { ReactNode, ReactElement } from 'react';
+import React, { ReactNode } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import Div from '../pdf/components/pdf-div';
@@ -13,6 +13,12 @@ import LI from '@/pdf/components/pdf-li';
 import Span from '@/pdf/components/pdf-span';
 import UL from '@/pdf/components/pdf-ul';
 
+import GithubSvg from '@/pdf/icons/pdf-github';
+import GmailSvg from '@/pdf/icons/pdf-gmail';
+import PhoneSvg from '@/pdf/icons/pdf-phone';
+import LinkedinSvg from '@/pdf/icons/pdf-linkedin';
+import WebsiteSvg from '@/pdf/icons/pdf-website';
+
 const COMPONENTS = {
   div: Div,
   h1: H1,
@@ -25,6 +31,14 @@ const COMPONENTS = {
   ul: UL,
   li: LI,
   img: Img,
+} as const;
+
+const ICONS = {
+  github: GithubSvg,
+  gmail: GmailSvg,
+  linkedin: LinkedinSvg,
+  website: WebsiteSvg,
+  phone: PhoneSvg,
 } as const;
 
 /**
@@ -55,9 +69,22 @@ export function toPdfComponents(htmlString: string): ReactNode {
 
       const tag = tagName.toLowerCase() as keyof typeof COMPONENTS;
 
-      const Component = COMPONENTS[tag];
+      let Component = COMPONENTS[tag];
 
-      if (Component) {
+      const regex = /\.\/(.*?)\.svg/;
+      const match = regex.exec(props.src);
+
+      if (match && match[1]) {
+        const [, matcher] = match;
+
+        // @ts-ignore
+        Component = ICONS[matcher];
+
+        jsxElements.push(
+          // @ts-ignore
+          <Component key={uuidv4()} {...props} />,
+        );
+      } else if (Component) {
         jsxElements.push(
           // @ts-ignore
           <Component key={uuidv4()} {...props}>

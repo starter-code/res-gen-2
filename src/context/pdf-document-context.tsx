@@ -8,14 +8,19 @@ type PdfDocumentContextType = {
   items: ContentItem[];
   layouts: LayoutItem[];
   styles: ReactPDF.Styles;
-  computeStyle: Function;
+  /**
+   * @example ```ts
+   * computeStyle(className, 'div')
+   * ```
+   */
+  computeStyle: (className?: string, ...elements: Array<string | {}>) => Record<string, string>;
 };
 
 const initialState: PdfDocumentContextType = {
   items: [],
   layouts: [],
   styles: {},
-  computeStyle: () => {},
+  computeStyle: () => ({}),
 };
 
 const PdfDocumentContext = createContext<PdfDocumentContextType>(initialState);
@@ -37,7 +42,7 @@ export function PdfDocumentProvider(props: PdfDocumentProviderProps) {
   const { children, styles, items, layouts } = props;
 
   const computeStyle = useCallback(
-    (className: string, ...elements: Array<string | {}>) => {
+    (className?: string, ...elements: Array<string | {}>) => {
       const classNames = className ? className.split(' ') : [];
       const classesList = [...classNames, ...elements];
 

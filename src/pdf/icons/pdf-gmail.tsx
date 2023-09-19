@@ -1,14 +1,26 @@
 import { Path, Svg } from '@react-pdf/renderer';
 
+import { usePdfDocumentContext } from '@/context/pdf-document-context';
+import type { PdfComponentProps } from '@/types/pdf';
+import { useMemo } from 'react';
+
 const svgStyle = {
   width: 12,
   height: 12,
-  marginRight: 5,
 };
 
-export default function GmailSvg() {
+type GmailSvgProps = PdfComponentProps;
+
+export default function GmailSvg({ className }: GmailSvgProps) {
+  const { computeStyle } = usePdfDocumentContext();
+
+  const style = useMemo(
+    () => computeStyle(className, 'svg', svgStyle),
+    [className, computeStyle], //
+  );
+
   return (
-    <Svg viewBox="52 42 88 66" style={svgStyle}>
+    <Svg viewBox="52 42 88 66" style={style}>
       <Path fill="#4285f4" d="M58 108h14V74L52 59v43c0 3.32 2.69 6 6 6" />
       <Path fill="#34a853" d="M120 108h14c3.32 0 6-2.69 6-6V59l-20 15" />
       <Path fill="#fbbc04" d="M120 48v26l20-15v-8c0-7.42-8.47-11.65-14.4-7.2" />
