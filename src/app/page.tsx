@@ -12,6 +12,7 @@ import App from './app';
 
 export default function Page() {
   const [stylesLoaded, setStylesLoaded] = useState(false);
+
   const styleSheets = useMemo(() => {
     return stylesLoaded && window.document.styleSheets;
   }, [stylesLoaded]);
@@ -32,12 +33,14 @@ export default function Page() {
   }
 
   return (
-    <AppProvider>
-      <PdfPreviewProvider>
-        <DndProvider backend={HTML5Backend}>
-          <App />
-        </DndProvider>
-      </PdfPreviewProvider>
-    </AppProvider>
+    <div id="#res-gen">
+      <AppProvider>
+        <PdfPreviewProvider>
+          <DndProvider backend={HTML5Backend}>
+            <App />
+          </DndProvider>
+        </PdfPreviewProvider>
+      </AppProvider>
+    </div>
   );
 }

@@ -15,7 +15,7 @@ export default function PdfPreview() {
   const { items, layouts } = useAppContext();
 
   return (
-    <PDFViewer style={{ height: '100vh', width: '100vw' }}>
+    <PDFViewer style={{ height: '100%', width: '100%' }}>
       <PdfDocumentProvider styles={styles} items={items} layouts={layouts}>
         <PdfDocument />
       </PdfDocumentProvider>

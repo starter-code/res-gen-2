@@ -5,16 +5,20 @@ import type { ContentItem } from '@/types/content-item';
 import type { LayoutItem } from '@/types/layout-types';
 
 export type AppContextType = {
+  isModalOpen: boolean;
   items: ContentItem[];
   layouts: LayoutItem[];
   addLayout: (newLayout: LayoutItem) => void;
   onDrop: (item: ContentItem) => void;
+  setIsModalOpen: (value: boolean) => void;
 };
 
 const initialState: AppContextType = {
+  isModalOpen: false,
   items: [],
   layouts: [],
   addLayout: () => {},
+  setIsModalOpen: () => {},
   onDrop: () => {},
 };
 
@@ -27,6 +31,7 @@ type AppProviderProps = {
 export function AppProvider({ children }: AppProviderProps) {
   const [layouts, setLayouts] = useState<LayoutItem[]>([]);
   const [items, setItems] = useState<ContentItem[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onDrop = useCallback(
     (item: ContentItem) => {
@@ -39,7 +44,20 @@ export function AppProvider({ children }: AppProviderProps) {
     setLayouts(prevLayout => [...prevLayout, newLayout]);
   };
 
-  return <AppContext.Provider value={{ items, layouts, addLayout, onDrop }}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider
+      value={{
+        addLayout, //
+        isModalOpen,
+        items,
+        layouts,
+        setIsModalOpen,
+        onDrop,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 }
 
 export function useAppContext() {
