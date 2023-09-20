@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useMemo } from 'react';
 import { useDrop } from 'react-dnd';
 
@@ -36,7 +37,7 @@ export default function LayoutSingle(props: LayoutSingleProps) {
 
   return (
     <div
-      className={className}
+      className={classNames('grow', className)}
       ref={drop}
       style={{
         border: '2px dashed #ccc',

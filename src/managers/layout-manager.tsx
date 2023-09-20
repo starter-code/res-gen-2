@@ -7,7 +7,7 @@ export default function LayoutManager() {
   const { layouts } = useAppContext();
 
   return (
-    <>
+    <div id="layout-manager" className="flex grow">
       {layouts.map(layout => {
         switch (layout.layoutType) {
           case LAYOUTS.SINGLE: {
@@ -36,6 +36,6 @@ export default function LayoutManager() {
             throw new Error(`Unsupported layout ${layout}`);
         }
       })}
-    </>
+    </div>
   );
 }

@@ -4,7 +4,7 @@ import SummaryEditor from '@/components/json-editors/summary-editor';
 
 export default function EditorManager() {
   return (
-    <div id="editor-manager" className="flex flex-wrap">
+    <div id="editor-manager" className="">
       <HeadingEditor />
       <SummaryEditor />
       <ExperienceEditor />

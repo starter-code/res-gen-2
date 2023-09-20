@@ -14,8 +14,10 @@ export default function App() {
         <PdfPreview />
       </ResumeModal>
       <ControlPanel />
-      <EditorManager />
-      <LayoutManager />
+      <div className="flex flew-column">
+        <EditorManager />
+        <LayoutManager />
+      </div>
     </>
   );
 }

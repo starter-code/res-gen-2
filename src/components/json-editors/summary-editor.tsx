@@ -23,7 +23,7 @@ export default function SummaryEditor({}: SummaryEditorProps) {
       height: '20ch',
       fontFamily: 'monospace',
       maxWidth: '100%',
-      width: '40ch',
+      width: '60ch',
     }),
     [],
   );

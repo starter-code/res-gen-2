@@ -27,7 +27,7 @@ export default function ExperienceEditor({}: ExperienceEditorProps) {
       height: '20ch',
       fontFamily: 'monospace',
       maxWidth: '100%',
-      width: '80ch',
+      width: '60ch',
     }),
     [],
   );

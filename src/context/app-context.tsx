@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import type { ContentItem } from '@/types/content-item';
 import type { LayoutItem } from '@/types/layout-types';
+import { LAYOUTS } from '@/constants';
 
 export type AppContextType = {
   isModalOpen: boolean;
@@ -16,7 +17,7 @@ export type AppContextType = {
 const initialState: AppContextType = {
   isModalOpen: false,
   items: [],
-  layouts: [],
+  layouts: [{ layoutId: uuidv4(), layoutType: LAYOUTS.SINGLE }],
   addLayout: () => {},
   setIsModalOpen: () => {},
   onDrop: () => {},
@@ -29,7 +30,7 @@ type AppProviderProps = {
 };
 
 export function AppProvider({ children }: AppProviderProps) {
-  const [layouts, setLayouts] = useState<LayoutItem[]>([]);
+  const [layouts, setLayouts] = useState<LayoutItem[]>(initialState.layouts);
   const [items, setItems] = useState<ContentItem[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -39,6 +40,8 @@ export function AppProvider({ children }: AppProviderProps) {
     },
     [items],
   );
+
+  console.log('!!! items', items);
 
   const addLayout = (newLayout: LayoutItem) => {
     setLayouts(prevLayout => [...prevLayout, newLayout]);
