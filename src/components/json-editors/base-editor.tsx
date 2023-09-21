@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import { ZodObject } from 'zod';
+import { Collapse } from 'react-collapse';
 
 import type { ChangeEvent, CSSProperties } from 'react';
 
@@ -21,6 +22,7 @@ type BaseEditorProps = {
 export default function BaseEditor({ type, json, style, macro, schema }: BaseEditorProps) {
   const { onDrop } = useAppContext();
   const [text, setText] = useState(JSON.stringify(json, null, 2));
+  const [isOpen, setIsOpen] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [id, setId] = useState('');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -80,16 +82,33 @@ export default function BaseEditor({ type, json, style, macro, schema }: BaseEdi
 
   return (
     <div className="p-1" style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <h3 ref={ref}>{macro} ☰</h3>
-      <form>
-        <textarea
-          spellCheck="false"
-          onChange={onHandleChange}
-          value={text}
-          ref={textAreaRef}
-          style={editorStyle}
-        ></textarea>
-      </form>
+      <div className="flex justify-between px-2">
+        <h3 ref={ref}>{macro} ☰</h3>
+        <button onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+              <path d="M1 6.25l1.5-1.5 7.5 7.5 7.5-7.5 1.5 1.5-9 9-9-9z" />
+              <path d="M1 1.75l1.5-1.5 7.5 7.5 7.5-7.5 1.5 1.5-9 9-9-9z" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+              <path d="M1 13.75l1.5 1.5 7.5-7.5 7.5 7.5 1.5-1.5-9-9-9 9z" />
+              <path d="M1 19.25l1.5 1.5 7.5-7.5 7.5 7.5 1.5-1.5-9-9-9 9z" />
+            </svg>
+          )}
+        </button>
+      </div>
+      <Collapse isOpened={isOpen}>
+        <form>
+          <textarea
+            spellCheck="false"
+            onChange={onHandleChange}
+            value={text}
+            ref={textAreaRef}
+            style={editorStyle}
+          ></textarea>
+        </form>
+      </Collapse>
       {errorMessage && <p>{errorMessage}</p>}
     </div>
   );

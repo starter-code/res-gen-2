@@ -13,13 +13,13 @@ export default function LayoutDouble({ layoutLeftId, layoutRightId, layoutId }: 
   return (
     <div className="flex" data-layout-id={layoutId}>
       <LayoutSingle
-        className="w-max grow max-w-[50%]"
+        className="w-max grow w-[50%]"
         layoutParentId={layoutId}
         layoutType={LAYOUTS.DOUBLE_LEFT}
         layoutId={layoutLeftId}
       />
       <LayoutSingle
-        className="w-max grow max-w-[50%]"
+        className="w-max grow w-[50%]"
         layoutParentId={layoutId}
         layoutType={LAYOUTS.DOUBLE_RIGHT}
         layoutId={layoutRightId}

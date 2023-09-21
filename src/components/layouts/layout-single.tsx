@@ -37,7 +37,7 @@ export default function LayoutSingle(props: LayoutSingleProps) {
 
   return (
     <div
-      className={classNames('grow', className)}
+      className={classNames('min-h-3', className)}
       ref={drop}
       style={{
         border: '2px dashed #ccc',

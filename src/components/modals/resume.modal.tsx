@@ -45,7 +45,8 @@ export default function ResumeModal({ children }: ResumeModalProps) {
       //   onAfterOpen={afterOpenModal}
       onRequestClose={onClose}
       style={customStyles}
-      contentLabel="Example Modal"
+      contentLabel="Resume PDF Preview Modal"
+      ariaHideApp={false}
     >
       <TopBar />
       {children}

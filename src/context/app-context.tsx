@@ -41,8 +41,6 @@ export function AppProvider({ children }: AppProviderProps) {
     [items],
   );
 
-  console.log('!!! items', items);
-
   const addLayout = (newLayout: LayoutItem) => {
     setLayouts(prevLayout => [...prevLayout, newLayout]);
   };
