@@ -1,4 +1,4 @@
-import { View } from '@react-pdf/renderer';
+import Div from '@/pdf/components/pdf-div';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 
@@ -48,20 +48,33 @@ export default function PdfComponentManager() {
         switch (layout.layoutType) {
           case LAYOUTS.SINGLE: {
             return (
-              <View key={layout.layoutId}>
+              <Div key={layout.layoutId}>
                 {items.map(item => {
-                  return <Item key={item.contentId} {...item} />;
+                  if (item.layoutId === layout.layoutId) {
+                    return <Item key={item.contentId} {...item} />;
+                  }
                 })}
-              </View>
+              </Div>
             );
           }
           case LAYOUTS.DOUBLE: {
             return (
-              <View key={layout.layoutId}>
-                {items.map(item => {
-                  return <Item key={item.contentId} {...item} />;
-                })}
-              </View>
+              <Div key={layout.layoutId} className="flex flex-row">
+                <Div key={layout.layoutLeftId} style={{ maxWidth: '50%', padding: '5px' }}>
+                  {items.map(item => {
+                    if (item.layoutId === layout.layoutLeftId) {
+                      return <Item key={item.contentId} {...item} />;
+                    }
+                  })}
+                </Div>
+                <Div key={layout.layoutLeftId} style={{ maxWidth: '50%', padding: '5px' }}>
+                  {items.map(item => {
+                    if (item.layoutId === layout.layoutRightId) {
+                      return <Item key={item.contentId} {...item} />;
+                    }
+                  })}
+                </Div>
+              </Div>
             );
           }
           default: {

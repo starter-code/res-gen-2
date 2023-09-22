@@ -1,21 +1,23 @@
-import { Image, Svg, Path } from '@react-pdf/renderer';
+import { Image } from '@react-pdf/renderer';
 
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
-
-import GithubSvg from '../icons/pdf-github';
-import GmailSvg from '../icons/pdf-gmail';
-import LinkedinSvg from '../icons/pdf-linkedin';
-import WebsiteSvg from '../icons/pdf-website';
+import { useMemo } from 'react';
 
 type ImgProps = {
   className: string;
   src: string;
   alt: string;
+  style: {};
 };
 
-export default function Img({ className, src }: ImgProps) {
+export default function Img({ className, src, style = {} }: ImgProps) {
   const { computeStyle } = usePdfDocumentContext();
 
+  const styles = useMemo(
+    () => computeStyle(className, 'img', style),
+    [computeStyle, className, style], //
+  );
+
   // eslint-disable-next-line jsx-a11y/alt-text
-  return <Image src={src} style={computeStyle(className, 'div')} />;
+  return <Image src={src} style={styles} />;
 }

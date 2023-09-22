@@ -1,18 +1,14 @@
 import { Text } from '@react-pdf/renderer';
 
-import { usePdfDocumentContext } from '@/context/pdf-document-context';
 import { PdfComponentProps } from '@/types/pdf';
-import { useMemo } from 'react';
+import BaseElement from './pdf-base-element';
 
-type Header5Props = PdfComponentProps;
+type H5Props = PdfComponentProps;
 
-export default function H5({ children, className }: Header5Props) {
-  const { computeStyle } = usePdfDocumentContext();
-
-  const style = useMemo(
-    () => computeStyle(className, 'h5'),
-    [className, computeStyle], //
+export default function H5({ children, className, style = {} }: H5Props) {
+  return (
+    <BaseElement element="h5" Element={Text} style={style} className={className}>
+      {children}
+    </BaseElement>
   );
-
-  return <Text style={style}>{children}</Text>;
 }

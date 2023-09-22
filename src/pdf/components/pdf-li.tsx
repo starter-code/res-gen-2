@@ -1,18 +1,14 @@
 import { Text } from '@react-pdf/renderer';
 
-import { usePdfDocumentContext } from '@/context/pdf-document-context';
 import { PdfComponentProps } from '@/types/pdf';
-import { useMemo } from 'react';
+import BaseElement from './pdf-base-element';
 
 type ListItemProps = PdfComponentProps;
 
-export default function LI({ children, className }: ListItemProps) {
-  const { computeStyle } = usePdfDocumentContext();
-
-  const style = useMemo(
-    () => computeStyle(className, 'li'),
-    [className, computeStyle], //
+export default function ListItem({ children, className, style = {} }: ListItemProps) {
+  return (
+    <BaseElement element="li" Element={Text} style={style} className={className}>
+      &#8226; {children}
+    </BaseElement>
   );
-
-  return <Text style={style}>&#8226; {children}</Text>;
 }

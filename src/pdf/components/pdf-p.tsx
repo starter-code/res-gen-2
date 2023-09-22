@@ -1,18 +1,14 @@
 import { Text } from '@react-pdf/renderer';
 
-import { usePdfDocumentContext } from '@/context/pdf-document-context';
 import { PdfComponentProps } from '@/types/pdf';
-import { useMemo } from 'react';
+import BaseElement from './pdf-base-element';
 
 type ParagraphProps = PdfComponentProps;
 
-export default function P({ children, className }: ParagraphProps) {
-  const { computeStyle } = usePdfDocumentContext();
-
-  const style = useMemo(
-    () => computeStyle(className, 'p'),
-    [className, computeStyle], //
+export default function Paragraph({ children, className, style = {} }: ParagraphProps) {
+  return (
+    <BaseElement element="p" Element={Text} style={style} className={className}>
+      {children}
+    </BaseElement>
   );
-
-  return <Text style={style}>{children}</Text>;
 }

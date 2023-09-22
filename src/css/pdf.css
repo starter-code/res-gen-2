@@ -53,7 +53,6 @@
 .ul {
   list-style-type: disc; /* Default bullet point style */
   margin: 0; /* Remove default margin */
-  padding-left: 20px; /* Add some left padding for indentation */
 }
 
 .li {

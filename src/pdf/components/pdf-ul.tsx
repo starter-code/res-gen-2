@@ -1,18 +1,14 @@
 import { View } from '@react-pdf/renderer';
 
-import { usePdfDocumentContext } from '@/context/pdf-document-context';
 import { PdfComponentProps } from '@/types/pdf';
-import { useMemo } from 'react';
+import BaseElement from './pdf-base-element';
 
 type UnorderedListProps = PdfComponentProps;
 
-export default function UL({ children, className }: UnorderedListProps) {
-  const { computeStyle } = usePdfDocumentContext();
-
-  const style = useMemo(
-    () => computeStyle(className, 'ul'),
-    [className, computeStyle], //
+export default function UnorderedList({ children, className, style = {} }: UnorderedListProps) {
+  return (
+    <BaseElement element="ul" Element={View} style={style} className={className}>
+      {children}
+    </BaseElement>
   );
-
-  return <View style={style}>{children}</View>;
 }
