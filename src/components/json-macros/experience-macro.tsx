@@ -42,7 +42,7 @@ export default function ExperienceMacro(props: ExperienceMacroProps) {
         <ul>
           {descriptions?.map(description => {
             return (
-              <li key={description.id} className="list-disc ml-4">
+              <li key={description.id} className="list-disc ml-3">
                 {description.text}
               </li>
             );

@@ -1,7 +1,7 @@
 import ReactPDF, { StyleSheet } from '@react-pdf/renderer';
 import React, { createContext, useContext, ReactNode, useMemo } from 'react';
 
-import { toJsObject } from '@/utils/css-transformation-util';
+import { toJsObject } from '@/utils/pdf-css-transformation-util';
 
 type PdfPreviewContextType = {
   styles: ReactPDF.Styles;
@@ -46,7 +46,7 @@ export function PdfPreviewProvider({ children }: PdfPreviewProps) {
     const styleSheet = StyleSheet.create({
       ...styleRules,
       page: {
-        fontSize: '12px',
+        fontSize: '12px', // rem
         padding: '24px',
         fontFamily: 'Roboto',
       },

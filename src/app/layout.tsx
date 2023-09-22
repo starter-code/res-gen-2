@@ -1,8 +1,6 @@
 import classNames from 'classnames';
 
-import '@/css/globals.css';
-import '@/css/editor.css';
-import '@/css/pdf.css';
+import '@/css/index.css';
 
 import type { Metadata } from 'next';
 

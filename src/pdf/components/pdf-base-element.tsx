@@ -11,12 +11,24 @@ type BaseElementRequiredProps = {
 type BaseElementProps = PdfComponentProps & BaseElementRequiredProps;
 
 export default function BaseElement({ children, className, element, Element, style = {} }: BaseElementProps) {
-  const { computeStyle } = usePdfDocumentContext();
+  const { computeStyle, styles: styleSheet } = usePdfDocumentContext();
 
   const styles = useMemo(
     () => computeStyle(className, element, style),
     [computeStyle, className, element, style], //
   );
 
-  return <Element style={styles}>{children}</Element>;
+  const debug = useMemo(() => className?.includes('debug'), [className]);
+
+  if (debug) {
+    console.info('^^^ styleSheet', styleSheet);
+    console.info('^^^ styles', styles);
+    console.info('^^^ className', className);
+  }
+
+  return (
+    <Element style={styles} debug={debug}>
+      {children}
+    </Element>
+  );
 }

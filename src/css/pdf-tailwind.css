@@ -1,5 +1,6 @@
 /* Styles that only appear for pdf */
 
-.pdf-w-50 {
-  width: 50%;
+/* Add this class to an element to see the element in debug mode in PDF view */
+.debug {
+  width: auto;
 }

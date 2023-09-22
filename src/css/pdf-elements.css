@@ -1,49 +1,35 @@
 .div {
   display: initial;
-  margin: 0;
-  padding: 0;
 }
 
 .p {
   display: block;
-  margin: 0;
-  padding: 0;
 }
 
 .h1 {
   display: block;
   font-size: 2em;
-  margin: 0;
-  padding: 0;
   font-weight: bold;
 }
 
 .h2 {
   font-size: 1.5rem; /* Adjust the font size as needed */
   font-weight: bold;
-  margin: 0;
-  padding: 0;
 }
 
 .h3 {
   font-size: 1.25rem; /* Adjust the font size as needed */
   font-weight: bold;
-  margin: 0;
-  padding: 0;
 }
 
 .h4 {
   font-size: 1rem; /* Adjust the font size as needed */
   font-weight: bold;
-  margin: 0;
-  padding: 0;
 }
 
 .h5 {
   font-size: 0.875rem; /* Adjust the font size as needed */
   font-weight: bold;
-  margin: 0;
-  padding: 0;
 }
 
 .span {
@@ -51,8 +37,7 @@
 }
 
 .ul {
-  list-style-type: disc; /* Default bullet point style */
-  margin: 0; /* Remove default margin */
+  list-style-type: disc; /* Default bullet point style */ /* Remove default margin */
 }
 
 .li {

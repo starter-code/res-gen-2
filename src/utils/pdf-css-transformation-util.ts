@@ -118,12 +118,17 @@ export function getComputedRemFontSize() {
   return computedFontSize;
 }
 
-function toPx(value: string, replacement: 'em' | 'rem', baseFontSizeInPixels = '16px'): string {
+function toPx(
+  value: string,
+  replacement: 'em' | 'rem',
+  baseFontSizeInPixels = getComputedStyle(document.documentElement).fontSize,
+  multiplier = 14 / 16, // 15 for PDF is and 16 is rem for dom
+): string {
   if (!value.endsWith(replacement)) {
     return value;
   }
 
-  const pxValue = Number(value.replace(replacement, '')) * Number(baseFontSizeInPixels.replace('px', ''));
+  const pxValue = multiplier * Number(value.replace(replacement, '')) * Number(baseFontSizeInPixels.replace('px', ''));
   return pxValue.toString() + 'px';
 }
 
