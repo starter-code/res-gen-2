@@ -109,7 +109,12 @@ export default function BaseEditor({ type, json, style, macro, schema }: BaseEdi
           ></textarea>
         </form>
       </Collapse>
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && (
+        <p className="text-white bg-red-400 rounded p-2">
+          <span className="border-black border-2 rounded bg-white p-1 m-1">❗</span>
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 }
