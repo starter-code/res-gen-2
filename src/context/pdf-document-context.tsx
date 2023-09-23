@@ -9,7 +9,8 @@ type PdfDocumentContextType = {
   layouts: LayoutItem[];
   styles: ReactPDF.Styles;
   /**
-   * @example ```ts
+   *
+   * ```ts
    * computeStyle(className, 'div')
    * ```
    */

@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
@@ -31,6 +32,7 @@ export default function BaseEditor({ type, json, style, macro, schema }: BaseEdi
   const [{ isDragging }, ref] = useDrag({
     type,
     item: { contentType: type },
+    canDrag: !errorMessage,
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -80,20 +82,26 @@ export default function BaseEditor({ type, json, style, macro, schema }: BaseEdi
     textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
   };
 
+  const className = useMemo(() => {
+    return classnames('flex grow bg-gray-600 rounded text-white justify-between p-2', {
+      'cursor-pointer': !errorMessage,
+    });
+  }, [errorMessage]);
+
   return (
     <div className="p-1" style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <div className="flex justify-between px-2">
+      <div className={className}>
         <h3 ref={ref}>{macro} ☰</h3>
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-              <path d="M1 6.25l1.5-1.5 7.5 7.5 7.5-7.5 1.5 1.5-9 9-9-9z" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFF" width="20" height="20" viewBox="0 0 20 20">
+              <path d="M1 9.25l1.5-1.5 7.5 7.5 7.5-7.5 1.5 1.5-9 9-9-9z" />
               <path d="M1 1.75l1.5-1.5 7.5 7.5 7.5-7.5 1.5 1.5-9 9-9-9z" />
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-              <path d="M1 13.75l1.5 1.5 7.5-7.5 7.5 7.5 1.5-1.5-9-9-9 9z" />
-              <path d="M1 19.25l1.5 1.5 7.5-7.5 7.5 7.5 1.5-1.5-9-9-9 9z" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFF" width="20" height="20" viewBox="0 0 20 20">
+              <path d="M1 16.75l1.5 1.5 7.5-7.5 7.5 7.5 1.5-1.5-9-9-9 9z" />
+              <path d="M1 9.25l1.5 1.5 7.5-7.5 7.5 7.5 1.5-1.5-9-9-9 9z" />
             </svg>
           )}
         </button>
