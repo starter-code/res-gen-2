@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { useMemo } from 'react';
 import { object, string } from 'zod';
 
@@ -6,9 +7,9 @@ import { CONTENT_TYPES } from '@/constants';
 
 import BaseEditor from './base-editor';
 
-import type { SummaryJson } from '@/types/content-summary';
+import type { ContentSummary, SummaryJson } from '@/types/content-summary';
 
-type SummaryEditorProps = {
+type SummaryEditorProps = ContentSummary & {
   content?: SummaryJson;
 };
 
@@ -17,24 +18,17 @@ const schema = object({
   summary: string(),
 });
 
-export default function SummaryEditor({ content = EXAMPLE_SUMMARY }: SummaryEditorProps) {
-  const style = useMemo(
-    () => ({
-      backgroundColor: 'aliceblue',
-      color: 'black',
-      height: '20ch',
-      fontFamily: 'monospace',
-      maxWidth: '100%',
-      width: '60ch',
-    }),
-    [],
-  );
+export default function SummaryEditor(props: SummaryEditorProps) {
+  const { content = EXAMPLE_SUMMARY } = props;
+
+  const className = classnames('summary-editor');
 
   return (
-    <BaseEditor //
+    <BaseEditor
+      {...props}
+      className={className}
       contentType={CONTENT_TYPES.SUMMARY}
       macro="Summary"
-      style={style}
       content={content}
       schema={schema}
     />

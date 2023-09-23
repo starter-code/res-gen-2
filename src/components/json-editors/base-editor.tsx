@@ -8,29 +8,27 @@ import { ZodObject } from 'zod';
 import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
 
-import type { ChangeEvent, CSSProperties } from 'react';
+import type { ChangeEvent } from 'react';
 import type { DropResult } from '@/types/drop-result';
 import type { ContentAll } from '@/types/content-all';
 
-type BaseEditorProps = {
-  content: ContentAll['content'];
+type BaseEditorProps = ContentAll & {
   macro: string;
-  style: CSSProperties;
+  className: string;
   schema: ZodObject<any>;
   contentType: keyof typeof CONTENT_TYPES;
   mode?: keyof typeof EDITOR_MODES;
 };
 
 export default function BaseEditor(props: BaseEditorProps) {
-  const { contentType, content, style, macro, schema, mode = EDITOR_MODES['DRAG_AND_DROP'] } = props;
+  const { contentType, content, macro, schema, mode = EDITOR_MODES['DRAG_AND_DROP'] } = props;
 
-  const { onDrop } = useAppContext();
+  const { onDrop, onUpdate } = useAppContext();
   const [text, setText] = useState(JSON.stringify(content, null, 2));
   const [isOpen, setIsOpen] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
-  const [id, setId] = useState('');
+  const [contentId, setContentId] = useState(props.contentId || '');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
-  const editorStyle = useMemo(() => style, [style]);
 
   const [{ isDragging }, ref] = useDrag({
     type: contentType,
@@ -44,7 +42,7 @@ export default function BaseEditor(props: BaseEditorProps) {
 
       if (dropResult) {
         onDrop({
-          contentId: id,
+          contentId,
           content: { ...JSON.parse(text) },
           contentType: item.contentType,
           layoutId: dropResult.layoutId,
@@ -57,8 +55,8 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   useEffect(() => {
     adjustTextareaHeight();
-    setId(uuidv4());
-  }, [text]);
+    mode === EDITOR_MODES['DRAG_AND_DROP'] && setContentId(uuidv4());
+  }, [text, mode]);
 
   const validateJsonSchema = useCallback(
     (jsonString: string) => {
@@ -66,18 +64,41 @@ export default function BaseEditor(props: BaseEditorProps) {
         const jsonData = JSON.parse(jsonString);
         schema.parse(jsonData);
         setErrorMessage('');
+        return true;
       } catch (error) {
         const e = error as Error;
         console.error(e.message);
         setErrorMessage(e.message);
+        return false;
       }
     },
     [schema],
   );
 
-  const onHandleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
-    validateJsonSchema(event.target.value);
+  const onHandleChange = useCallback(
+    (event: ChangeEvent<HTMLTextAreaElement>) => {
+      const jsonValue = event.target.value;
+      setText(jsonValue);
+      validateJsonSchema(jsonValue);
+    },
+    [validateJsonSchema],
+  );
+
+  const onBlur = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    if (mode === EDITOR_MODES['DRAG_AND_DROP']) {
+      return;
+    }
+
+    if (validateJsonSchema(event.target.value)) {
+      onUpdate({
+        contentId,
+        content: { ...JSON.parse(text) },
+        contentType: props.contentType,
+        layoutId: props.layoutId,
+        layoutType: props.layoutType,
+        layoutParentId: props.layoutParentId || undefined,
+      });
+    }
   };
 
   const adjustTextareaHeight = () => {
@@ -85,15 +106,25 @@ export default function BaseEditor(props: BaseEditorProps) {
     textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
   };
 
-  const className = useMemo(() => {
+  const editorClassName = useMemo(() => {
     return classnames('flex grow bg-gray-600 rounded text-white justify-between p-2', {
       'cursor-pointer': !errorMessage,
     });
   }, [errorMessage]);
 
+  const textAreaClassName = useMemo(() => {
+    const defaultClassName = classnames('h-[20ch]', 'font-mono', 'bg-emerald-100');
+    const overrideClassName = classnames('grow', {
+      'w-auto': mode === EDITOR_MODES['POPOVER'],
+      'w-[60ch]': mode !== EDITOR_MODES['POPOVER'],
+    });
+
+    return classnames(defaultClassName, overrideClassName);
+  }, [mode]);
+
   return (
     <div className="p-1" style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <div className={className}>
+      <div className={editorClassName}>
         <h3 ref={ref}>{macro} ☰</h3>
         <button onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
@@ -110,14 +141,15 @@ export default function BaseEditor(props: BaseEditorProps) {
         </button>
       </div>
       <Collapse isOpened={isOpen}>
-        <form>
+        <form className="flex">
           <textarea
+            className={textAreaClassName}
             name={contentType}
             spellCheck="false"
+            onBlur={onBlur}
             onChange={onHandleChange}
             value={text}
             ref={textAreaRef}
-            style={editorStyle}
           ></textarea>
         </form>
       </Collapse>

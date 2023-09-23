@@ -6,9 +6,10 @@ import { CONTENT_TYPES } from '@/constants';
 
 import BaseEditor from './base-editor';
 
-import type { ExperienceJson } from '@/types/content-experience';
+import type { ContentExperience, ExperienceJson } from '@/types/content-experience';
+import classnames from 'classnames';
 
-type ExperienceEditorProps = {
+type ExperienceEditorProps = ContentExperience & {
   content?: ExperienceJson;
 };
 
@@ -21,24 +22,17 @@ const schema = object({
   descriptions: array(string()).optional(),
 });
 
-export default function ExperienceEditor({ content = EXAMPLE_EXPERIENCE }: ExperienceEditorProps) {
-  const style = useMemo(
-    () => ({
-      backgroundColor: 'aliceblue',
-      color: 'black',
-      height: '20ch',
-      fontFamily: 'monospace',
-      maxWidth: '100%',
-      width: '60ch',
-    }),
-    [],
-  );
+export default function ExperienceEditor(props: ExperienceEditorProps) {
+  const { content = EXAMPLE_EXPERIENCE } = props;
+
+  const className = classnames('experience-editor');
 
   return (
     <BaseEditor //
+      {...props}
+      className={className}
       contentType={CONTENT_TYPES.EXPERIENCE}
       macro="Experience"
-      style={style}
       content={content}
       schema={schema}
     />

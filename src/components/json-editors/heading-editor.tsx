@@ -6,9 +6,10 @@ import { CONTENT_TYPES } from '@/constants';
 
 import BaseEditor from './base-editor';
 
-import type { HeadingJson } from '@/types/content-heading';
+import type { ContentHeading, HeadingJson } from '@/types/content-heading';
+import classnames from 'classnames';
 
-type HeadingEditorProps = {
+type HeadingEditorProps = ContentHeading & {
   content?: HeadingJson;
 };
 
@@ -22,24 +23,17 @@ const schema = object({
   linkedin: union([string(), _undefined()]),
 });
 
-export default function HeadingEditor({ content = EXAMPLE_HEADING }: HeadingEditorProps) {
-  const style = useMemo(
-    () => ({
-      backgroundColor: 'aliceblue',
-      color: 'black',
-      height: '20ch',
-      fontFamily: 'monospace',
-      maxWidth: '100%',
-      width: '60ch',
-    }),
-    [],
-  );
+export default function HeadingEditor(props: HeadingEditorProps) {
+  const { content = EXAMPLE_HEADING } = props;
+
+  const className = classnames('heading-editor');
 
   return (
     <BaseEditor //
+      {...props}
+      className={className}
       contentType={CONTENT_TYPES.HEADING}
       macro="Heading"
-      style={style}
       content={content}
       schema={schema}
     />
