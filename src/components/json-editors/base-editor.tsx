@@ -106,8 +106,8 @@ export default function BaseEditor(props: BaseEditorProps) {
     textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
   };
 
-  const editorClassName = useMemo(() => {
-    return classnames('flex grow bg-gray-600 rounded text-white justify-between p-2', {
+  const editorDragContainerClassName = useMemo(() => {
+    return classnames('flex bg-gray-600 rounded text-white justify-between p-2', {
       'cursor-pointer': !errorMessage,
     });
   }, [errorMessage]);
@@ -124,9 +124,9 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   return (
     <div className="p-1" style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <div className={editorClassName}>
-        <h3 ref={ref}>{macro} ☰</h3>
-        <button onClick={() => setIsOpen(!isOpen)}>
+      <div className={editorDragContainerClassName} draggable="true" onClick={() => setIsOpen(!isOpen)} ref={ref}>
+        <h3 className={'grow'}>{macro} ☰</h3>
+        <button>
           {isOpen ? (
             <svg xmlns="http://www.w3.org/2000/svg" fill="#FFF" width="20" height="20" viewBox="0 0 20 20">
               <path d="M1 9.25l1.5-1.5 7.5 7.5 7.5-7.5 1.5 1.5-9 9-9-9z" />
@@ -140,6 +140,12 @@ export default function BaseEditor(props: BaseEditorProps) {
           )}
         </button>
       </div>
+      {errorMessage && (
+        <p className="text-white bg-red-400 rounded p-2">
+          <span className="border-black border-2 rounded bg-white p-1 m-1">❗</span>
+          {errorMessage}
+        </p>
+      )}
       <Collapse isOpened={isOpen}>
         <form className="flex">
           <textarea
@@ -153,12 +159,6 @@ export default function BaseEditor(props: BaseEditorProps) {
           ></textarea>
         </form>
       </Collapse>
-      {errorMessage && (
-        <p className="text-white bg-red-400 rounded p-2">
-          <span className="border-black border-2 rounded bg-white p-1 m-1">❗</span>
-          {errorMessage}
-        </p>
-      )}
     </div>
   );
 }
