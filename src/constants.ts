@@ -10,3 +10,5 @@ export const LAYOUTS = {
   DOUBLE_LEFT: 'DOUBLE_LEFT',
   DOUBLE_RIGHT: 'DOUBLE_RIGHT',
 } as const;
+
+export const noop = () => {};

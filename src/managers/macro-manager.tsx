@@ -3,12 +3,12 @@ import { useMemo } from 'react';
 import { CONTENT_TYPES } from '@/constants';
 import HeadingMacro from '@/components/json-macros/heading-macro';
 
-import type { ContentItem } from '@/types/content-item';
 import SummaryMacro from '@/components/json-macros/summary-macro';
 import ExperienceMacro from '@/components/json-macros/experience-macro';
+import type { ContentAll } from '@/types/content-all';
 
 type MacroManagerProps = {
-  items: ContentItem[];
+  items: ContentAll[];
 };
 
 export default function MacroManager({ items }: MacroManagerProps) {
@@ -16,13 +16,13 @@ export default function MacroManager({ items }: MacroManagerProps) {
     const components = items.map(item => {
       switch (item.contentType) {
         case CONTENT_TYPES.HEADING: {
-          return <HeadingMacro key={item.contentId} {...JSON.parse(item.content)} />;
+          return <HeadingMacro key={item.contentId} {...item} />;
         }
         case CONTENT_TYPES.SUMMARY: {
-          return <SummaryMacro key={item.contentId} {...JSON.parse(item.content)} />;
+          return <SummaryMacro key={item.contentId} {...item} />;
         }
         case CONTENT_TYPES.EXPERIENCE: {
-          return <ExperienceMacro key={item.contentId} {...JSON.parse(item.content)} />;
+          return <ExperienceMacro key={item.contentId} {...item} />;
         }
         default:
           throw new Error(`Invalid item. ${JSON.stringify(item)}`);

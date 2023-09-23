@@ -1,14 +1,18 @@
 import Image from 'next/image';
 
-import { HeadingJson } from '@/types/json-heading';
+import BaseMacro from './base-macro';
+import { CONTENT_TYPES } from '@/constants';
 
-type HeadingMacroProps = HeadingJson;
+import type { ContentHeading } from '@/types/content-heading';
+
+type HeadingMacroProps = ContentHeading;
 
 export default function HeadingMacro(props: HeadingMacroProps) {
-  const { name, title, phone, email, github, linkedin, website } = props;
+  const { content } = props;
+  const { name, title, phone, email, github, linkedin, website } = content;
 
   return (
-    <div>
+    <BaseMacro content={content} contentType={CONTENT_TYPES.HEADING}>
       <h1 className="text-3xl font-bold text-center">{name}</h1>
       {title && <h4 className="text-center">{title}</h4>}
       <div className="flex flex-row justify-center text-center mr-2">
@@ -75,6 +79,6 @@ export default function HeadingMacro(props: HeadingMacroProps) {
           </div>
         )}
       </div>
-    </div>
+    </BaseMacro>
   );
 }

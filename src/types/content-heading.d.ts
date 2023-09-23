@@ -1,3 +1,7 @@
+import type { CONTENT_TYPES, LAYOUTS } from '../constants';
+
+import type { ContentBaseItem } from './content-base-item';
+
 type HeadingJsonRequired = {
   name: string;
   email: string;
@@ -13,3 +17,5 @@ type HeadingJsonOptional = {
 };
 
 export type HeadingJson = HeadingJsonRequired & Partial<HeadingJsonOptional>;
+
+export type ContentHeading = ContentBaseItem<(typeof CONTENT_TYPES)['HEADING'], HeadingJson>;

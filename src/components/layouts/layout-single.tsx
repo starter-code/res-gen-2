@@ -6,10 +6,10 @@ import MacroManager from '@/managers/macro-manager';
 import { CONTENT_TYPES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
 
-import type { ContentItem } from '@/types/content-item';
+import type { LAYOUTS } from '@/constants';
 
 interface LayoutSingleProps {
-  layoutType: ContentItem['layoutType'];
+  layoutType: keyof typeof LAYOUTS;
   className?: string;
   layoutId?: string;
   layoutParentId?: string;

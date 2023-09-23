@@ -35,7 +35,7 @@ export default function HeadingEditor({}: HeadingEditorProps) {
 
   return (
     <BaseEditor //
-      type={CONTENT_TYPES.HEADING}
+      contentType={CONTENT_TYPES.HEADING}
       macro="Heading"
       style={style}
       json={EXAMPLE_HEADING}

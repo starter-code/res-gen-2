@@ -34,7 +34,7 @@ export default function ExperienceEditor({}: ExperienceEditorProps) {
 
   return (
     <BaseEditor //
-      type={CONTENT_TYPES.EXPERIENCE}
+      contentType={CONTENT_TYPES.EXPERIENCE}
       macro="Experience"
       style={style}
       json={EXAMPLE_EXPERIENCE}

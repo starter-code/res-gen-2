@@ -8,19 +8,22 @@ import { Collapse } from 'react-collapse';
 import type { ChangeEvent, CSSProperties } from 'react';
 
 import { CONTENT_TYPES } from '@/constants';
-
-import type { DropResult } from '@/types/drop-result';
 import { useAppContext } from '@/context/app-context';
 
+import type { DropResult } from '@/types/drop-result';
+import type { ContentAll } from '@/types/content-all';
+
 type BaseEditorProps = {
+  json: ContentAll['content'];
   macro: string;
-  type: (typeof CONTENT_TYPES)[keyof typeof CONTENT_TYPES];
-  json: {};
   style: CSSProperties;
   schema: ZodObject<any>;
+  contentType: keyof typeof CONTENT_TYPES;
 };
 
-export default function BaseEditor({ type, json, style, macro, schema }: BaseEditorProps) {
+export default function BaseEditor(props: BaseEditorProps) {
+  const { contentType, json, style, macro, schema } = props;
+
   const { onDrop } = useAppContext();
   const [text, setText] = useState(JSON.stringify(json, null, 2));
   const [isOpen, setIsOpen] = useState(true);
@@ -30,8 +33,8 @@ export default function BaseEditor({ type, json, style, macro, schema }: BaseEdi
   const editorStyle = useMemo(() => style, [style]);
 
   const [{ isDragging }, ref] = useDrag({
-    type,
-    item: { contentType: type },
+    type: contentType,
+    item: { contentType },
     canDrag: !errorMessage,
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
@@ -42,11 +45,11 @@ export default function BaseEditor({ type, json, style, macro, schema }: BaseEdi
       if (dropResult) {
         onDrop({
           contentId: id,
-          content: text,
+          content: { ...JSON.parse(text) },
           contentType: item.contentType,
           layoutId: dropResult.layoutId,
           layoutType: dropResult.layoutType,
-          layoutParentId: dropResult.layoutParentId,
+          layoutParentId: dropResult.layoutParentId || undefined,
         });
       }
     },
@@ -109,6 +112,7 @@ export default function BaseEditor({ type, json, style, macro, schema }: BaseEdi
       <Collapse isOpened={isOpen}>
         <form>
           <textarea
+            name={contentType}
             spellCheck="false"
             onChange={onHandleChange}
             value={text}

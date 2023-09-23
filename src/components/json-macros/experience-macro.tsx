@@ -1,11 +1,17 @@
 import { useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ExperienceJson } from '@/types/json-experience';
+import { CONTENT_TYPES } from '@/constants';
 
-type ExperienceMacroProps = ExperienceJson;
+import BaseMacro from './base-macro';
+
+import type { ContentExperience } from '@/types/content-experience';
+
+type ExperienceMacroProps = ContentExperience;
 
 export default function ExperienceMacro(props: ExperienceMacroProps) {
+  const { content } = props;
+
   const {
     company, //
     location,
@@ -13,13 +19,13 @@ export default function ExperienceMacro(props: ExperienceMacroProps) {
     dates,
     tags: rawTags,
     descriptions: rawDescriptions,
-  } = props;
+  } = content;
 
   const tags = useMemo(() => rawTags?.map(tag => ({ id: uuidv4(), text: tag })), [rawTags]);
   const descriptions = useMemo(() => rawDescriptions?.map(tag => ({ id: uuidv4(), text: tag })), [rawDescriptions]);
 
   return (
-    <div>
+    <BaseMacro content={content} contentType={CONTENT_TYPES.EXPERIENCE}>
       <div className="flex flex-row">
         <p className="font-bold">{company}</p>
         <span className="px-1">|</span>
@@ -49,6 +55,6 @@ export default function ExperienceMacro(props: ExperienceMacroProps) {
           })}
         </ul>
       )}
-    </div>
+    </BaseMacro>
   );
 }

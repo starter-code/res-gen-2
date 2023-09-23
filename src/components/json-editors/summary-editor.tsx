@@ -30,7 +30,7 @@ export default function SummaryEditor({}: SummaryEditorProps) {
 
   return (
     <BaseEditor //
-      type={CONTENT_TYPES.SUMMARY}
+      contentType={CONTENT_TYPES.SUMMARY}
       macro="Summary"
       style={style}
       json={EXAMPLE_SUMMARY}

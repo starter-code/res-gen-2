@@ -1,3 +1,7 @@
+import type { CONTENT_TYPES, LAYOUTS } from '../constants';
+
+import type { ContentBaseItem } from './content-base-item';
+
 type ExperienceJsonRequired = {
   company: string;
   title: string;
@@ -11,3 +15,5 @@ type ExperienceJsonOptional = {
 };
 
 export type ExperienceJson = ExperienceJsonRequired & Partial<ExperienceJsonOptional>;
+
+export type ContentExperience = ContentBaseItem<(typeof CONTENT_TYPES)['EXPERIENCE'], ExperienceJson>;
