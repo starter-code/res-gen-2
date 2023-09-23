@@ -1,5 +1,4 @@
 import BaseMacro from './base-macro';
-import { CONTENT_TYPES } from '@/constants';
 
 import type { ContentSummary } from '@/types/content-summary';
 
@@ -10,7 +9,7 @@ export default function SummaryMacro(props: SummaryMacroProps) {
   const { heading, summary } = content;
 
   return (
-    <BaseMacro content={content} contentType={CONTENT_TYPES.SUMMARY}>
+    <BaseMacro {...props}>
       <h3 className="text-xl text-center border-b border-black">{heading}</h3>
       <p className="mt-1">{summary}</p>
     </BaseMacro>

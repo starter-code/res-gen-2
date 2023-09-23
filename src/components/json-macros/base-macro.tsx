@@ -1,13 +1,13 @@
-import { ReactNode, useEffect, useRef, useState } from 'react';
-
-import { CONTENT_TYPES } from '@/constants';
 import classnames from 'classnames';
-import MacroManager from '@/managers/macro-manager';
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
-type BaseMacroProps = {
+import EditorItem from '../content/editor-item';
+
+import type { ContentAll } from '@/types/content-all';
+import { EDITOR_MODES } from '@/constants';
+
+type BaseMacroProps = ContentAll & {
   children: ReactNode;
-  content: Record<string, string | string[]>;
-  contentType: keyof typeof CONTENT_TYPES;
 };
 
 // .non-modal-dialog {
@@ -27,20 +27,20 @@ export default function BaseMacro(props: BaseMacroProps) {
   const divRef = useRef<HTMLDivElement>(null);
 
   // Function to handle clicks outside of the div
-  const handleClick = (event: MouseEvent) => {
+  const handleClick = useCallback((event: MouseEvent) => {
     if (!divRef.current) return;
 
     if (divRef.current?.contains(event.target as Node)) {
-      divRef.current.focus();
+      // divRef.current.focus();
       setIsFocused(true);
     }
 
     if (!divRef.current?.contains(event.target as Node)) {
       // Click occurred outside of the div, so remove focus
-      divRef.current.blur();
+      // divRef.current.blur();
       setIsFocused(false);
     }
-  };
+  }, []);
 
   // Attach the click event listener when the component mounts
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function BaseMacro(props: BaseMacroProps) {
       // Clean up the event listener when the component unmounts
       document.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [handleClick]);
 
   const className = classnames({
     'border-2': isFocused,
@@ -61,6 +61,7 @@ export default function BaseMacro(props: BaseMacroProps) {
   return (
     <div className={className} tabIndex={0} ref={divRef}>
       {children}
+      {isFocused && <EditorItem {...props} mode={EDITOR_MODES['POPOVER']} />}
     </div>
   );
 }

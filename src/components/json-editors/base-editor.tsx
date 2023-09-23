@@ -1,31 +1,31 @@
 import classnames from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag } from 'react-dnd';
+import { Collapse } from 'react-collapse';
 import { v4 as uuidv4 } from 'uuid';
 import { ZodObject } from 'zod';
-import { Collapse } from 'react-collapse';
 
-import type { ChangeEvent, CSSProperties } from 'react';
-
-import { CONTENT_TYPES } from '@/constants';
+import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
 
+import type { ChangeEvent, CSSProperties } from 'react';
 import type { DropResult } from '@/types/drop-result';
 import type { ContentAll } from '@/types/content-all';
 
 type BaseEditorProps = {
-  json: ContentAll['content'];
+  content: ContentAll['content'];
   macro: string;
   style: CSSProperties;
   schema: ZodObject<any>;
   contentType: keyof typeof CONTENT_TYPES;
+  mode?: keyof typeof EDITOR_MODES;
 };
 
 export default function BaseEditor(props: BaseEditorProps) {
-  const { contentType, json, style, macro, schema } = props;
+  const { contentType, content, style, macro, schema, mode = EDITOR_MODES['DRAG_AND_DROP'] } = props;
 
   const { onDrop } = useAppContext();
-  const [text, setText] = useState(JSON.stringify(json, null, 2));
+  const [text, setText] = useState(JSON.stringify(content, null, 2));
   const [isOpen, setIsOpen] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [id, setId] = useState('');
@@ -35,7 +35,7 @@ export default function BaseEditor(props: BaseEditorProps) {
   const [{ isDragging }, ref] = useDrag({
     type: contentType,
     item: { contentType },
-    canDrag: !errorMessage,
+    canDrag: !errorMessage && mode === EDITOR_MODES['DRAG_AND_DROP'],
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),

@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import BaseMacro from './base-macro';
-import { CONTENT_TYPES } from '@/constants';
 
 import type { ContentHeading } from '@/types/content-heading';
 
@@ -12,7 +11,7 @@ export default function HeadingMacro(props: HeadingMacroProps) {
   const { name, title, phone, email, github, linkedin, website } = content;
 
   return (
-    <BaseMacro content={content} contentType={CONTENT_TYPES.HEADING}>
+    <BaseMacro {...props}>
       <h1 className="text-3xl font-bold text-center">{name}</h1>
       {title && <h4 className="text-center">{title}</h4>}
       <div className="flex flex-row justify-center text-center mr-2">

@@ -6,8 +6,10 @@ import { CONTENT_TYPES } from '@/constants';
 
 import BaseEditor from './base-editor';
 
+import type { SummaryJson } from '@/types/content-summary';
+
 type SummaryEditorProps = {
-  //
+  content?: SummaryJson;
 };
 
 const schema = object({
@@ -15,7 +17,7 @@ const schema = object({
   summary: string(),
 });
 
-export default function SummaryEditor({}: SummaryEditorProps) {
+export default function SummaryEditor({ content = EXAMPLE_SUMMARY }: SummaryEditorProps) {
   const style = useMemo(
     () => ({
       backgroundColor: 'aliceblue',
@@ -33,7 +35,7 @@ export default function SummaryEditor({}: SummaryEditorProps) {
       contentType={CONTENT_TYPES.SUMMARY}
       macro="Summary"
       style={style}
-      json={EXAMPLE_SUMMARY}
+      content={content}
       schema={schema}
     />
   );

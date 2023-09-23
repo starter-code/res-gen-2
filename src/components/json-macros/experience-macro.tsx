@@ -1,8 +1,6 @@
 import { useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { CONTENT_TYPES } from '@/constants';
-
 import BaseMacro from './base-macro';
 
 import type { ContentExperience } from '@/types/content-experience';
@@ -25,7 +23,7 @@ export default function ExperienceMacro(props: ExperienceMacroProps) {
   const descriptions = useMemo(() => rawDescriptions?.map(tag => ({ id: uuidv4(), text: tag })), [rawDescriptions]);
 
   return (
-    <BaseMacro content={content} contentType={CONTENT_TYPES.EXPERIENCE}>
+    <BaseMacro {...props}>
       <div className="flex flex-row">
         <p className="font-bold">{company}</p>
         <span className="px-1">|</span>
