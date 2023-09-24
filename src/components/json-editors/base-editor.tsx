@@ -109,6 +109,7 @@ export default function BaseEditor(props: BaseEditorProps) {
   const editorDragContainerClassName = useMemo(() => {
     return classnames('flex bg-gray-600 rounded text-white justify-between p-2', {
       'cursor-pointer': !errorMessage,
+      'opacity-50': !!errorMessage,
     });
   }, [errorMessage]);
 
