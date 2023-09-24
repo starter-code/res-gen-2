@@ -5,12 +5,14 @@ import { useMemo, ElementType } from 'react';
 type BaseElementRequiredProps = {
   Element: ElementType;
   element: string;
-  style: {};
+  debug?: boolean;
+  style?: {};
 };
 
 type BaseElementProps = PdfComponentProps & BaseElementRequiredProps;
 
-export default function BaseElement({ children, className, element, Element, style = {} }: BaseElementProps) {
+export default function BaseElement(props: BaseElementProps) {
+  const { children, className, element, Element, debug = false, style = {} } = props;
   const { computeStyle, styles: styleSheet } = usePdfDocumentContext();
 
   const styles = useMemo(
@@ -18,7 +20,7 @@ export default function BaseElement({ children, className, element, Element, sty
     [computeStyle, className, element, style], //
   );
 
-  const debug = useMemo(() => className?.includes('debug'), [className]);
+  const useDebug = useMemo(() => className?.includes('debug') || debug, [className, debug]);
 
   if (debug) {
     console.info('^^^ styleSheet', styleSheet);
@@ -27,7 +29,7 @@ export default function BaseElement({ children, className, element, Element, sty
   }
 
   return (
-    <Element style={styles} debug={debug}>
+    <Element style={styles} debug={useDebug}>
       {children}
     </Element>
   );
