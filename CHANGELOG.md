@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/starter-code/res-gen-2/compare/v1.1.0...v1.1.1) (2023-09-24)
+
+
+### Bug Fixes
+
+* **control-panel:** update css, add version to top ([98e6d75](https://github.com/starter-code/res-gen-2/commit/98e6d75841854cebd66b15c95ff8de84b6e0b574))
+
 # [1.1.0](https://github.com/starter-code/res-gen-2/compare/v1.0.1...v1.1.0) (2023-09-24)
 
 
