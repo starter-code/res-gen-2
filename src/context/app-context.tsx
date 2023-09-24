@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { LAYOUTS } from '@/constants';
+import localStorageUtil from '@/utils/localstorage-util';
 
 import type { LayoutItem } from '@/types/layouts';
 import type { ContentAll } from '@/types/content-all';
@@ -12,6 +12,7 @@ export type AppContextType = {
   items: ContentAll[]; // rename to contentItems
   layouts: LayoutItem[];
   addLayout: (newLayout: LayoutItem) => void;
+  popLayout: () => void;
   onCreate: (item: ContentAll) => void;
   onUpdate: (item: ContentAll) => void;
   onDelete: (item: Pick<ContentAll, 'contentId'>) => void;
@@ -19,18 +20,19 @@ export type AppContextType = {
   togglePdfModal: (value?: boolean) => void;
 };
 
-const initialState: AppContextType = {
+const initialState: AppContextType = Object.freeze({
   isEditorVisible: true,
   isModalOpen: false,
   items: [],
-  layouts: [{ layoutId: uuidv4(), layoutType: LAYOUTS.SINGLE }],
+  layouts: [],
   addLayout: () => {},
+  popLayout: () => {},
   onCreate: () => {},
   onDelete: () => {},
   onUpdate: () => {},
   toggleEditor: () => {},
   togglePdfModal: () => {},
-};
+});
 
 const AppContext = createContext<AppContextType>(initialState);
 
@@ -39,27 +41,30 @@ type AppProviderProps = {
 };
 
 export function AppProvider({ children }: AppProviderProps) {
-  const [layouts, setLayouts] = useState<LayoutItem[]>(initialState.layouts);
-  const [items, setItems] = useState<ContentAll[]>([]);
+  const [layouts, setLayouts] = useState<LayoutItem[]>(localStorageUtil.layouts);
+  const [items, setItems] = useState<ContentAll[]>(localStorageUtil.items);
   const [isEditorVisible, setIsEditorVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Read data from local storage when the component mounts
   useEffect(() => {
-    const storedData = localStorage.getItem('res-gen-data');
-
-    if (storedData) {
-      const data = JSON.parse(storedData);
-      setLayouts(data.layouts);
-      setItems(data.items);
-      setIsEditorVisible(data.isEditorVisible);
-    }
+    setIsEditorVisible(localStorageUtil.isEditorVisible);
   }, []);
 
   // Store data in local storage whenever it changes
   useEffect(() => {
-    localStorage.setItem('res-gen-data', JSON.stringify({ items, layouts, isEditorVisible }));
+    localStorageUtil.data = { items, layouts, isEditorVisible };
   }, [items, layouts, isEditorVisible]);
+
+  useEffect(() => {
+    setItems(prevItems => {
+      return prevItems.filter(item => {
+        return layouts.some(layout => {
+          return layout.layoutId === item.layoutId;
+        });
+      });
+    });
+  }, [layouts]);
 
   /**
    * Add content items from JSON editors in left pane
@@ -91,7 +96,11 @@ export function AppProvider({ children }: AppProviderProps) {
   );
 
   const addLayout = useCallback((newLayout: LayoutItem) => {
-    setLayouts(prevLayout => [...prevLayout, newLayout]);
+    setLayouts(prevLayouts => [...prevLayouts, newLayout]);
+  }, []);
+
+  const popLayout = useCallback(() => {
+    setLayouts(prevLayouts => [...prevLayouts.slice(0, -1)]);
   }, []);
 
   const toggleEditor = useCallback(() => setIsEditorVisible(!isEditorVisible), [isEditorVisible]);
@@ -111,6 +120,7 @@ export function AppProvider({ children }: AppProviderProps) {
         items,
         layouts,
         addLayout,
+        popLayout,
         onDelete,
         onUpdate,
         onCreate,

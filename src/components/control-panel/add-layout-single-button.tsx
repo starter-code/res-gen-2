@@ -4,11 +4,15 @@ import { useAppContext } from '@/context/app-context';
 import { LAYOUTS } from '@/constants';
 
 export default function AddLayoutSingleButton() {
-  const { addLayout } = useAppContext();
+  const { addLayout, isEditorVisible } = useAppContext();
 
   const handleClick = () => {
     addLayout({ layoutId: uuidv4(), layoutType: LAYOUTS.SINGLE });
   };
+
+  if (isEditorVisible) {
+    return null;
+  }
 
   return (
     <button
@@ -16,7 +20,7 @@ export default function AddLayoutSingleButton() {
       type="button"
       onClick={handleClick}
     >
-      + Single Column
+      + Single Column Layout
     </button>
   );
 }

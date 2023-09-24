@@ -75,18 +75,18 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
           onClick={onClickTopBar}
           ref={ref} //
         >
-          {isDragAndDrop && <DragHandleIcon />}
-          <h3 className="grow">{macro}</h3>
+          {isDragAndDrop && <DragHandleIcon className="m-1 p-1" />}
+          <h3 className="grow p-1 font-bold">{macro}</h3>
           {isDragAndDrop && (
             <>
-              <button type="button" className="mx-1" onClick={onAdd}>
+              <button type="button" className="mx-4 p-1 bg-green-300 hover:bg-green-500 rounded" onClick={onAdd}>
                 <PlusIcon />
               </button>
               <button type="button">{isOpen ? <CollapseIcon /> : <UncollapseIcon />}</button>
             </>
           )}
           {!isDragAndDrop && (
-            <button type="button" className="mx-1" onClick={onDestroy}>
+            <button type="button" className="mx-1 p-1 bg-red-400 hover:bg-red-500 rounded" onClick={onDestroy}>
               <DeleteIcon />
             </button>
           )}
