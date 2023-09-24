@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 import { useAppContext } from '@/context/app-context';
 
-import ResumeTopBar from '../sub-components/resume-top-bar';
+import PdfModalTopBar from '../sub-components/pdf-modal-top-bar';
 
 const customStyles = {
   content: {
@@ -49,7 +49,7 @@ export default function ResumeModal({ children }: ResumeModalProps) {
       contentLabel="Resume PDF Preview Modal"
       ariaHideApp={false}
     >
-      <ResumeTopBar />
+      <PdfModalTopBar />
       {children}
     </Modal>
   );

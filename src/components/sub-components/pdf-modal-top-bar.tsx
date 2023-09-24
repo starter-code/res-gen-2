@@ -1,11 +1,15 @@
 import { useAppContext } from '@/context/app-context';
 
-export default function ResumeTopBar() {
+export default function PdfModalTopBar() {
   const { togglePdfModal } = useAppContext();
 
   return (
     <div className="bg-blue-500 p-4 flex justify-end items-center">
-      <button className="text-white hover:text-gray-300" onClick={() => togglePdfModal()}>
+      <button
+        className="text-white hover:text-gray-300"
+        aria-label="Exit PDF View Button"
+        onClick={() => togglePdfModal()}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"

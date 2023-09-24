@@ -1,6 +1,6 @@
 import c from 'classnames';
 import type { ChangeEvent } from 'react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Collapse } from 'react-collapse';
 import { useDrag } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
@@ -30,6 +30,7 @@ export default function BaseEditor(props: BaseEditorProps) {
   const [errorMessage, setErrorMessage] = useState('');
   const [contentId, setContentId] = useState(props.contentId || '');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const formId = useId();
 
   const [{ isDragging }, ref] = useDrag({
     type: contentType,
@@ -154,6 +155,7 @@ export default function BaseEditor(props: BaseEditorProps) {
   return (
     <div className={containerClassName}>
       <EditorTopBar
+        formId={formId}
         mode={mode}
         macro={macro}
         errorMessage={errorMessage}
@@ -165,8 +167,9 @@ export default function BaseEditor(props: BaseEditorProps) {
         setIsOpen={setIsOpen}
       />
       <Collapse isOpened={isOpen}>
-        <form className="flex">
+        <form id="base-editor-form" className="flex">
           <textarea
+            id={`editor-textarea-${formId}`}
             className={textAreaClassName}
             name={contentType}
             spellCheck="false"
@@ -174,7 +177,14 @@ export default function BaseEditor(props: BaseEditorProps) {
             onChange={onChange}
             value={text}
             ref={textAreaRef}
-          ></textarea>
+            tabIndex={0}
+            aria-describedby="error-message"
+          />
+          {errorMessage && (
+            <div id="error-message" role="alert" aria-live="assertive">
+              {errorMessage}
+            </div>
+          )}
         </form>
       </Collapse>
     </div>

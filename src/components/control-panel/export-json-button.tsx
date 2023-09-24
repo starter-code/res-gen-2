@@ -35,5 +35,9 @@ export default function ExportJsonButton(props: ExportJsonButtonProps) {
     URL.revokeObjectURL(url);
   };
 
-  return <button onClick={handleExport}>Export JSON</button>;
+  return (
+    <button aria-label="Export Json Button" onClick={handleExport}>
+      Export JSON
+    </button>
+  );
 }

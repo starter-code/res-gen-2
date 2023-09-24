@@ -14,6 +14,7 @@ type EditorTopBarProps = {
   contentId: string;
   contentType: keyof typeof CONTENT_TYPES;
   errorMessage: string;
+  formId: string;
   isOpen: boolean;
   macro: string;
   mode: keyof typeof EDITOR_MODES;
@@ -24,7 +25,7 @@ type EditorTopBarProps = {
 export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
   (props: EditorTopBarProps, ref: Ref<HTMLDivElement>) => {
     const { onCreate, onDelete, layouts } = useAppContext();
-    const { macro, errorMessage, text, contentType, contentId, isOpen, setIsOpen, mode } = props;
+    const { macro, errorMessage, text, formId, contentType, contentId, isOpen, setIsOpen, mode } = props;
 
     const isDragAndDrop = useMemo(() => mode === EDITOR_MODES['DRAG_AND_DROP'], [mode]);
 
@@ -75,17 +76,32 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
           ref={ref} //
         >
           {isDragAndDrop && <DragHandleIcon className="m-1 p-1" />}
-          <h3 className="grow p-1 font-bold">{macro}</h3>
+          <label className="grow p-1 font-bold" htmlFor={`editor-textarea-${formId}`}>
+            {macro}
+          </label>
+
           {isDragAndDrop && (
             <>
-              <button type="button" className="mx-4 p-1 bg-green-300 hover:bg-green-500 rounded" onClick={onAdd}>
+              <button
+                className="mx-4 p-1 bg-green-300 hover:bg-green-500 rounded"
+                aria-label="Add Macro Button"
+                type="button"
+                onClick={onAdd}
+              >
                 <PlusIcon />
               </button>
-              <button type="button">{isOpen ? <CollapseIcon /> : <UncollapseIcon />}</button>
+              <button aria-label="Toggle Editor Visibility Button" type="button">
+                {isOpen ? <CollapseIcon /> : <UncollapseIcon />}
+              </button>
             </>
           )}
           {!isDragAndDrop && (
-            <button type="button" className="mx-1 p-1 bg-red-400 hover:bg-red-500 rounded" onClick={onDestroy}>
+            <button
+              className="mx-1 p-1 bg-red-400 hover:bg-red-500 rounded"
+              aria-label="Delete Macro Button"
+              type="button"
+              onClick={onDestroy}
+            >
               <DeleteIcon />
             </button>
           )}
