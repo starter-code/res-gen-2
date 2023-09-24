@@ -7,14 +7,11 @@ import { ZodObject } from 'zod';
 
 import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
+import { EditorTopBar } from '../sub-components/editor-top-bar';
 
 import type { ChangeEvent } from 'react';
 import type { DropResult } from '@/types/drop-result';
 import type { ContentAll } from '@/types/content-all';
-import CollapseIcon from '../icons/collapse-icon';
-import UncollapseIcon from '../icons/uncollapse-icon';
-import PlusIcon from '../icons/plus-icon';
-import DragHandleIcon from '../icons/drag-handle-icon';
 
 type BaseEditorProps = ContentAll & {
   macro: string;
@@ -27,7 +24,7 @@ type BaseEditorProps = ContentAll & {
 export default function BaseEditor(props: BaseEditorProps) {
   const { contentType, content, macro, schema, mode = EDITOR_MODES['DRAG_AND_DROP'] } = props;
 
-  const { onDrop, onUpdate, layouts } = useAppContext();
+  const { onCreate, onUpdate, layouts } = useAppContext();
   const [text, setText] = useState(JSON.stringify(content, null, 2));
   const [isOpen, setIsOpen] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -45,7 +42,7 @@ export default function BaseEditor(props: BaseEditorProps) {
       const dropResult = monitor.getDropResult<DropResult>();
 
       if (dropResult) {
-        onDrop({
+        onCreate({
           contentId,
           content: { ...JSON.parse(text) },
           contentType: item.contentType,
@@ -111,7 +108,7 @@ export default function BaseEditor(props: BaseEditorProps) {
 
       const [layout] = layouts.slice(-1);
 
-      onDrop({
+      onCreate({
         contentId,
         content: { ...JSON.parse(text) },
         contentType: props.contentType,
@@ -123,7 +120,7 @@ export default function BaseEditor(props: BaseEditorProps) {
         layoutParentId: undefined,
       });
     },
-    [props, layouts, contentId, text, onDrop],
+    [props, layouts, contentId, text, onCreate],
   );
 
   const adjustTextareaHeight = () => {
@@ -150,20 +147,17 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   return (
     <div className="p-1" style={{ opacity: isDragging ? 0.5 : 1 }}>
-      <div className={editorDragContainerClassName} draggable="true" onClick={() => setIsOpen(!isOpen)} ref={ref}>
-        <DragHandleIcon />
-        <h3 className={'grow'}>{macro}</h3>
-        <button type="button" className="mx-1" onClick={onAddContentItem}>
-          <PlusIcon />
-        </button>
-        <button type="button">{isOpen ? <CollapseIcon /> : <UncollapseIcon />}</button>
-      </div>
-      {errorMessage && (
-        <p className="text-white bg-red-400 rounded p-2">
-          <span className="border-black border-2 rounded bg-white p-1 m-1">❗</span>
-          {errorMessage}
-        </p>
-      )}
+      <EditorTopBar
+        mode={mode}
+        macro={macro}
+        errorMessage={errorMessage}
+        text={text}
+        contentType={contentType}
+        contentId={contentId}
+        ref={ref}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
       <Collapse isOpened={isOpen}>
         <form className="flex">
           <textarea

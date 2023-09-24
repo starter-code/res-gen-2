@@ -11,8 +11,9 @@ export type AppContextType = {
   items: ContentAll[];
   layouts: LayoutItem[];
   addLayout: (newLayout: LayoutItem) => void;
+  onCreate: (item: ContentAll) => void;
   onUpdate: (item: ContentAll) => void;
-  onDrop: (item: ContentAll) => void;
+  onDelete: (item: Pick<ContentAll, 'contentId'>) => void;
   setIsModalOpen: (value: boolean) => void;
 };
 
@@ -21,7 +22,8 @@ const initialState: AppContextType = {
   items: [],
   layouts: [{ layoutId: uuidv4(), layoutType: LAYOUTS.SINGLE }],
   addLayout: () => {},
-  onDrop: () => {},
+  onCreate: () => {},
+  onDelete: () => {},
   onUpdate: () => {},
   setIsModalOpen: () => {},
 };
@@ -40,7 +42,7 @@ export function AppProvider({ children }: AppProviderProps) {
   /**
    * Add content items from JSON editors in left pane
    */
-  const onDrop = useCallback(
+  const onCreate = useCallback(
     (item: ContentAll) => {
       setItems([...items, { ...item, contentId: uuidv4() }]);
     },
@@ -58,6 +60,14 @@ export function AppProvider({ children }: AppProviderProps) {
     [items],
   );
 
+  const onDelete = useCallback(
+    (newItem: Pick<ContentAll, 'contentId'>) => {
+      const newItems = items.filter(oldItem => oldItem.contentId !== newItem.contentId);
+      setItems(newItems);
+    },
+    [items],
+  );
+
   const addLayout = (newLayout: LayoutItem) => {
     setLayouts(prevLayout => [...prevLayout, newLayout]);
   };
@@ -69,8 +79,9 @@ export function AppProvider({ children }: AppProviderProps) {
         items,
         layouts,
         addLayout,
+        onDelete,
         onUpdate,
-        onDrop,
+        onCreate,
         setIsModalOpen,
       }}
     >

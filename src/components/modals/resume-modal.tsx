@@ -1,7 +1,7 @@
 import { useAppContext } from '@/context/app-context';
 import { ReactNode, useEffect } from 'react';
 import Modal from 'react-modal';
-import TopBar from './top-bar';
+import ResumeTopBar from '../sub-components/resume-top-bar';
 
 const customStyles = {
   content: {
@@ -48,7 +48,7 @@ export default function ResumeModal({ children }: ResumeModalProps) {
       contentLabel="Resume PDF Preview Modal"
       ariaHideApp={false}
     >
-      <TopBar />
+      <ResumeTopBar />
       {children}
     </Modal>
   );

@@ -1,6 +1,6 @@
 import { useAppContext } from '@/context/app-context';
 
-export default function TopBar() {
+export default function ResumeTopBar() {
   const { setIsModalOpen } = useAppContext();
 
   return (
