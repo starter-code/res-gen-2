@@ -5,7 +5,7 @@ export default function ToggleEditorPanelButton() {
 
   return (
     <button
-      className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 mx-2 rounded"
+      className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 m-2 rounded"
       type="button"
       onClick={() => toggleEditor()}
     >
