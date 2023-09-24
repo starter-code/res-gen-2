@@ -130,7 +130,7 @@ export default function BaseEditor(props: BaseEditorProps) {
   };
 
   const textAreaClassName = useMemo(() => {
-    const defaultClassName = c('h-[20ch]', 'font-mono', 'resize-none');
+    const defaultClassName = c('h-[20ch]', 'p-2', 'font-mono', 'resize-none');
     const overrideClassName = c('grow', {
       'w-auto': mode === EDITOR_MODES['POPOVER'],
       'w-[60ch]': mode !== EDITOR_MODES['POPOVER'],

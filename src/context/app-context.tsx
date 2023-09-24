@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { LAYOUTS } from '@/constants';
@@ -43,6 +43,21 @@ export function AppProvider({ children }: AppProviderProps) {
   const [items, setItems] = useState<ContentAll[]>([]);
   const [isEditorVisible, setIsEditorVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Read data from local storage when the component mounts
+  useEffect(() => {
+    const storedData = localStorage.getItem('res-gen-data');
+    if (storedData) {
+      const data = JSON.parse(storedData);
+      setLayouts(data.layouts);
+      setItems(data.items);
+    }
+  }, []);
+
+  // Store data in local storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('res-gen-data', JSON.stringify({ items, layouts }));
+  }, [items, layouts]);
 
   /**
    * Add content items from JSON editors in left pane

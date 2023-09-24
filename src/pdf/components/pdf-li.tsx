@@ -17,7 +17,7 @@ export default function ListItem({ children, className, style = {} }: ListItemPr
         element="li"
         Element={Text}
         // this is a work around because li items extend past the width of the text bounding box
-        style={{ ...style, marginLeft: 0, paddingRight: 12 }}
+        style={{ ...style, marginLeft: 0, paddingRight: 10, whiteSpace: 'normal' }}
         className={className}
       >
         {children}
