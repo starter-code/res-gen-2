@@ -36,7 +36,7 @@ export default function LayoutSingle(props: LayoutSingleProps) {
     () =>
       c(props.className, {
         'layout-single': true,
-        'bg-neutral-200': isOver,
+        'bg-emerald-50': isOver,
         'min-h-[50px]': true,
         rounded: true,
         'border-2': true,
