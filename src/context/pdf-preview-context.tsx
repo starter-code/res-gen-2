@@ -52,6 +52,7 @@ export function PdfPreviewProvider({ children }: PdfPreviewProps) {
       },
       text: {
         fontFamily: 'Roboto',
+        noWrap: true, // Prevent text from wrapping
       },
       '': {},
     });

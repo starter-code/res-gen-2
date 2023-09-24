@@ -29,11 +29,11 @@ export default function Page() {
   }, []);
 
   if (!stylesLoaded || !styleSheets) {
-    return <p>Loading styles...</p>;
+    return <p>Loading...</p>;
   }
 
   return (
-    <div id="#res-gen">
+    <div id="res-gen">
       <AppProvider>
         <PdfPreviewProvider>
           <DndProvider backend={HTML5Backend}>

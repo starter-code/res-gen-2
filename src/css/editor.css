@@ -1,9 +1,9 @@
-.editor-page-container {
+#res-gen .editor-page-container {
   /* This is an estimation for px value so PDF view looks like a 1:1 comparison */
-  max-width: 743px;
+  max-width: 725px;
 }
 
-.editor-page-container > .layout-single {
+#res-gen .editor-page-container > .layout-single {
   /* This is an estimation for px value so PDF view looks like a 1:1 comparison */
   padding: 17px;
 }

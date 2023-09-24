@@ -30,3 +30,13 @@ export default function loadFonts() {
     ],
   });
 }
+
+/**
+ * @see https://react-pdf.org/fonts#disabling-hyphenation
+ *
+ * @param word
+ * @returns {string[]} word array
+ */
+const hyphenationCallback = (word: string) => [word];
+
+Font.registerHyphenationCallback(hyphenationCallback);

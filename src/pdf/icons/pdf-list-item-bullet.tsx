@@ -5,9 +5,14 @@ const svgStyle = {
   height: 12,
 };
 
-export default function ListItemBullet({ style = {} }) {
+type ListItemBulletProps = {
+  style: {};
+  debug?: boolean;
+};
+
+export default function ListItemBullet({ debug = false, style = {} }: ListItemBulletProps) {
   return (
-    <Svg viewBox="0 0 10 10" style={{ ...svgStyle, ...style }}>
+    <Svg debug={debug} viewBox="0 0 10 10" style={{ ...svgStyle, ...style }}>
       <Circle cx="5" cy="5" r="1.5" fill="black" />
     </Svg>
   );

@@ -47,17 +47,19 @@ export function AppProvider({ children }: AppProviderProps) {
   // Read data from local storage when the component mounts
   useEffect(() => {
     const storedData = localStorage.getItem('res-gen-data');
+
     if (storedData) {
       const data = JSON.parse(storedData);
       setLayouts(data.layouts);
       setItems(data.items);
+      setIsEditorVisible(data.isEditorVisible);
     }
   }, []);
 
   // Store data in local storage whenever it changes
   useEffect(() => {
-    localStorage.setItem('res-gen-data', JSON.stringify({ items, layouts }));
-  }, [items, layouts]);
+    localStorage.setItem('res-gen-data', JSON.stringify({ items, layouts, isEditorVisible }));
+  }, [items, layouts, isEditorVisible]);
 
   /**
    * Add content items from JSON editors in left pane
