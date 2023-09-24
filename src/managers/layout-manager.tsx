@@ -7,7 +7,7 @@ export default function LayoutManager() {
   const { layouts } = useAppContext();
 
   return (
-    <div id="layout-manager" className="editor-page-container flex grow" style={{ flexDirection: 'column' }}>
+    <div id="layout-manager" className="editor-page-container flex flex-col grow">
       {layouts.map(layout => {
         switch (layout.layoutType) {
           case LAYOUTS.SINGLE: {

@@ -14,7 +14,7 @@ export default function App() {
         <PdfPreview />
       </ResumeModal>
       <ControlPanel />
-      <div className="flex flew-column">
+      <div className="flex flex-column justify-center">
         <EditorManager />
         <LayoutManager />
       </div>
