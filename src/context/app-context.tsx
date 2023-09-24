@@ -68,7 +68,7 @@ export function AppProvider({ children }: AppProviderProps) {
         isModalOpen,
         items,
         layouts,
-        addLayout, //
+        addLayout,
         onUpdate,
         onDrop,
         setIsModalOpen,

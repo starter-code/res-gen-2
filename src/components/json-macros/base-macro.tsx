@@ -3,21 +3,12 @@ import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 import EditorItem from '../content/editor-item';
 
-import type { ContentAll } from '@/types/content-all';
 import { EDITOR_MODES } from '@/constants';
+import type { ContentAll } from '@/types/content-all';
 
 type BaseMacroProps = ContentAll & {
   children: ReactNode;
 };
-
-// .non-modal-dialog {
-//     position: absolute;
-//     background-color: white;
-//     border: 1px solid #ccc;
-//     padding: 16px;
-//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-//     z-index: 1; /* Ensure it appears above other content */
-//   }
 
 export default function BaseMacro(props: BaseMacroProps) {
   const { children } = props;
@@ -52,6 +43,7 @@ export default function BaseMacro(props: BaseMacroProps) {
   }, [handleClick]);
 
   const className = classnames({
+    'mb-2': true,
     'border-2': isFocused,
     rounded: isFocused,
     'border-blue-700': isFocused,

@@ -11,6 +11,10 @@ import { useAppContext } from '@/context/app-context';
 import type { ChangeEvent } from 'react';
 import type { DropResult } from '@/types/drop-result';
 import type { ContentAll } from '@/types/content-all';
+import CollapseIcon from '../icons/collapse-icon';
+import UncollapseIcon from '../icons/uncollapse-icon';
+import PlusIcon from '../icons/plus-icon';
+import DragHandleIcon from '../icons/drag-handle-icon';
 
 type BaseEditorProps = ContentAll & {
   macro: string;
@@ -23,7 +27,7 @@ type BaseEditorProps = ContentAll & {
 export default function BaseEditor(props: BaseEditorProps) {
   const { contentType, content, macro, schema, mode = EDITOR_MODES['DRAG_AND_DROP'] } = props;
 
-  const { onDrop, onUpdate } = useAppContext();
+  const { onDrop, onUpdate, layouts } = useAppContext();
   const [text, setText] = useState(JSON.stringify(content, null, 2));
   const [isOpen, setIsOpen] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -101,6 +105,27 @@ export default function BaseEditor(props: BaseEditorProps) {
     }
   };
 
+  const onAddContentItem = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.stopPropagation();
+
+      const [layout] = layouts.slice(-1);
+
+      onDrop({
+        contentId,
+        content: { ...JSON.parse(text) },
+        contentType: props.contentType,
+        layoutId: layout.layoutId,
+        layoutType: layout.layoutType,
+        // TODO: this could be a bug
+        // because if we click "+" button when last is a double layout
+        // it does have a parent
+        layoutParentId: undefined,
+      });
+    },
+    [props, layouts, contentId, text, onDrop],
+  );
+
   const adjustTextareaHeight = () => {
     if (!textAreaRef.current) return;
     textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
@@ -126,20 +151,12 @@ export default function BaseEditor(props: BaseEditorProps) {
   return (
     <div className="p-1" style={{ opacity: isDragging ? 0.5 : 1 }}>
       <div className={editorDragContainerClassName} draggable="true" onClick={() => setIsOpen(!isOpen)} ref={ref}>
-        <h3 className={'grow'}>{macro} ☰</h3>
-        <button>
-          {isOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFF" width="20" height="20" viewBox="0 0 20 20">
-              <path d="M1 9.25l1.5-1.5 7.5 7.5 7.5-7.5 1.5 1.5-9 9-9-9z" />
-              <path d="M1 1.75l1.5-1.5 7.5 7.5 7.5-7.5 1.5 1.5-9 9-9-9z" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFF" width="20" height="20" viewBox="0 0 20 20">
-              <path d="M1 16.75l1.5 1.5 7.5-7.5 7.5 7.5 1.5-1.5-9-9-9 9z" />
-              <path d="M1 9.25l1.5 1.5 7.5-7.5 7.5 7.5 1.5-1.5-9-9-9 9z" />
-            </svg>
-          )}
+        <DragHandleIcon />
+        <h3 className={'grow'}>{macro}</h3>
+        <button type="button" className="mx-1" onClick={onAddContentItem}>
+          <PlusIcon />
         </button>
+        <button type="button">{isOpen ? <CollapseIcon /> : <UncollapseIcon />}</button>
       </div>
       {errorMessage && (
         <p className="text-white bg-red-400 rounded p-2">
