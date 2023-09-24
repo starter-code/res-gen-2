@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint:fix": "lint-staged",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "release:dry": "sh scripts/dry-run.sh"
   },
   "lint-staged": {
     "*.{json,js,jsx,d.ts,ts,tsx,css}": [
@@ -19,6 +20,9 @@
     "hooks": {
       "pre-commit": "npm run lint:fix"
     }
+  },
+  "repository": {
+    "url": "https://github.com/starter-code/res-gen-2.git"
   },
   "dependencies": {
     "@react-pdf/renderer": "^3.1.12",
@@ -43,14 +47,19 @@
     "zod": "^3.22.2"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/npm": "^11.0.0",
     "@types/react-collapse": "^5.0.1",
     "@types/react-modal": "^3.16.0",
+    "dotenv": "^16.3.1",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "file-loader": "^6.2.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "semantic-release": "^22.0.5"
   }
 }
