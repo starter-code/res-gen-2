@@ -136,17 +136,29 @@ export default function BaseEditor(props: BaseEditorProps) {
   }, [errorMessage]);
 
   const textAreaClassName = useMemo(() => {
-    const defaultClassName = classnames('h-[20ch]', 'font-mono', 'bg-emerald-100');
+    const defaultClassName = classnames('h-[20ch]', 'font-mono', 'resize-none');
     const overrideClassName = classnames('grow', {
       'w-auto': mode === EDITOR_MODES['POPOVER'],
       'w-[60ch]': mode !== EDITOR_MODES['POPOVER'],
+      'bg-emerald-100': mode === EDITOR_MODES['POPOVER'],
+      'bg-sky-100': mode === EDITOR_MODES['DRAG_AND_DROP'],
     });
 
     return classnames(defaultClassName, overrideClassName);
   }, [mode]);
 
+  const containerClassName = useMemo(
+    () =>
+      classnames({
+        'cursor-text': mode === EDITOR_MODES['POPOVER'],
+        'opacity-50': isDragging,
+        'p-1': true,
+      }),
+    [isDragging, mode],
+  );
+
   return (
-    <div className="p-1" style={{ opacity: isDragging ? 0.5 : 1 }}>
+    <div className={containerClassName}>
       <EditorTopBar
         mode={mode}
         macro={macro}
