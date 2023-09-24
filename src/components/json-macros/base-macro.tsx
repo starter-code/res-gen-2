@@ -1,11 +1,11 @@
 import c from 'classnames';
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
-import EditorItem from '../content/editor-item';
-
 import { EDITOR_MODES } from '@/constants';
-import type { ContentAll } from '@/types/content-all';
 import { useAppContext } from '@/context/app-context';
+import type { ContentAll } from '@/types/content-all';
+
+import EditorItem from '../content/editor-item';
 
 type BaseMacroProps = ContentAll & {
   children: ReactNode;

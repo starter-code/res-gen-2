@@ -3,11 +3,10 @@ import { object, string } from 'zod';
 
 import EXAMPLE_SUMMARY from '@/__example-json/summary.json';
 import { CONTENT_TYPES } from '@/constants';
+import type { ContentSummary, SummaryJson } from '@/types/content-summary';
+import type { NeverProps } from '@/types/generics';
 
 import BaseEditor from './base-editor';
-
-import type { ContentSummary, SummaryJson } from '@/types/content-summary';
-import { NeverProps } from '@/types/generics';
 
 type SummaryEditorProps =
   | NeverProps

@@ -1,10 +1,9 @@
 import { renderToStaticMarkup } from 'react-dom/server';
 
+import type { ContentAll } from '@/types/content-all';
 import { toPdfComponents } from '@/utils/pdf-transform-util';
 
 import MacroItem from './macro-item';
-
-import type { ContentAll } from '@/types/content-all';
 
 type PdfItemProps = ContentAll;
 

@@ -1,7 +1,7 @@
-import { useAppContext } from '@/context/app-context';
-import LayoutSingle from '@/components/layouts/layout-single';
 import LayoutDouble from '@/components/layouts/layout-double';
+import LayoutSingle from '@/components/layouts/layout-single';
 import { LAYOUTS } from '@/constants';
+import { useAppContext } from '@/context/app-context';
 
 export default function LayoutManager() {
   const { layouts } = useAppContext();

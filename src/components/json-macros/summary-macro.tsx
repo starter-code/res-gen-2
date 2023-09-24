@@ -1,6 +1,6 @@
-import BaseMacro from './base-macro';
-
 import type { ContentSummary } from '@/types/content-summary';
+
+import BaseMacro from './base-macro';
 
 type SummaryMacroProps = ContentSummary;
 

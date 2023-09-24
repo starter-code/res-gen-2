@@ -1,6 +1,8 @@
-import { useAppContext } from '@/context/app-context';
 import { ReactNode, useEffect } from 'react';
 import Modal from 'react-modal';
+
+import { useAppContext } from '@/context/app-context';
+
 import ResumeTopBar from '../sub-components/resume-top-bar';
 
 const customStyles = {
@@ -22,8 +24,8 @@ export default function ResumeModal({ children }: ResumeModalProps) {
   };
 
   useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
         togglePdfModal(false);
       }
     };
@@ -42,7 +44,6 @@ export default function ResumeModal({ children }: ResumeModalProps) {
   return (
     <Modal
       isOpen={isModalOpen}
-      //   onAfterOpen={afterOpenModal}
       onRequestClose={onClose}
       style={customStyles}
       contentLabel="Resume PDF Preview Modal"

@@ -1,13 +1,12 @@
 import c from 'classnames';
-import { object, string, union, undefined as _undefined, null as _null } from 'zod';
+import { null as _null, object, string, undefined as _undefined, union } from 'zod';
 
 import EXAMPLE_HEADING from '@/__example-json/heading.json';
 import { CONTENT_TYPES } from '@/constants';
+import type { ContentHeading, HeadingJson } from '@/types/content-heading';
+import type { NeverProps } from '@/types/generics';
 
 import BaseEditor from './base-editor';
-
-import type { ContentHeading, HeadingJson } from '@/types/content-heading';
-import { NeverProps } from '@/types/generics';
 
 type HeadingEditorProps =
   | NeverProps

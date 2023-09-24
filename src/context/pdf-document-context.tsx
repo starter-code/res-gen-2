@@ -1,13 +1,14 @@
 import ReactPDF from '@react-pdf/renderer';
-import React, { createContext, useContext, ReactNode, useCallback } from 'react';
+import React, { createContext, ReactNode, useCallback, useContext } from 'react';
 
-import type { LayoutItem } from '@/types/layouts';
 import type { ContentAll } from '@/types/content-all';
+import type { LayoutItem } from '@/types/layouts';
 
 type PdfDocumentContextType = {
   items: ContentAll[];
   layouts: LayoutItem[];
   styles: ReactPDF.Styles;
+  title: string;
   /**
    *
    * ```ts
@@ -21,16 +22,14 @@ const initialState: PdfDocumentContextType = {
   items: [],
   layouts: [],
   styles: {},
+  title: '',
   computeStyle: () => ({}),
 };
 
 const PdfDocumentContext = createContext<PdfDocumentContextType>(initialState);
 
-type PdfDocumentProviderProps = {
+type PdfDocumentProviderProps = Omit<PdfDocumentContextType, 'computeStyle'> & {
   children: ReactNode;
-  items: ContentAll[];
-  layouts: LayoutItem[];
-  styles: ReactPDF.Styles;
 };
 
 /**
@@ -40,7 +39,7 @@ type PdfDocumentProviderProps = {
  * @returns
  */
 export function PdfDocumentProvider(props: PdfDocumentProviderProps) {
-  const { children, styles, items, layouts } = props;
+  const { children, styles, items, layouts, title } = props;
 
   const computeStyle = useCallback(
     (className?: string, ...elements: Array<string | {}>) => {
@@ -69,7 +68,15 @@ export function PdfDocumentProvider(props: PdfDocumentProviderProps) {
   );
 
   return (
-    <PdfDocumentContext.Provider value={{ styles, items, layouts, computeStyle }}>
+    <PdfDocumentContext.Provider
+      value={{
+        title,
+        styles,
+        items,
+        layouts,
+        computeStyle,
+      }}
+    >
       {children}
     </PdfDocumentContext.Provider>
   );

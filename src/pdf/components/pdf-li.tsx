@@ -1,11 +1,10 @@
 import { Text } from '@react-pdf/renderer';
 
-import BaseElement from './pdf-base-element';
-import Div from './pdf-div';
+import type { PdfComponentProps } from '@/types/pdf';
 
 import ListItemBullet from '../icons/pdf-list-item-bullet';
-
-import type { PdfComponentProps } from '@/types/pdf';
+import BaseElement from './pdf-base-element';
+import Div from './pdf-div';
 
 type ListItemProps = PdfComponentProps;
 

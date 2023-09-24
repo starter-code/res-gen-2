@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-import BaseMacro from './base-macro';
-
 import type { ContentHeading } from '@/types/content-heading';
+
+import BaseMacro from './base-macro';
 
 type HeadingMacroProps = ContentHeading;
 

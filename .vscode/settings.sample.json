@@ -1,7 +1,7 @@
 {
   "workbench.colorCustomizations": {
-    "activityBar.background": "#3F2917",
-    "titleBar.activeBackground": "#593920",
+    "activityBar.background": "#b14fd8",
+    "titleBar.activeBackground": "#b14fd8",
     "titleBar.activeForeground": "#FCFAF8"
   },
   "[json]": {
@@ -20,6 +20,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "css.lint.unknownAtRules": "ignore",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "editor.formatOnSave": true,
   "editor.wordWrapColumn": 120
 }

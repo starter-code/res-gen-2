@@ -1,7 +1,8 @@
 import React from 'react';
 
-import LayoutSingle from './layout-single';
 import { LAYOUTS } from '@/constants';
+
+import LayoutSingle from './layout-single';
 
 interface LayoutDoubleProps {
   layoutId: string;

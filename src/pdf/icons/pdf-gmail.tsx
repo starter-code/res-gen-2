@@ -1,8 +1,8 @@
 import { Path, Svg } from '@react-pdf/renderer';
+import { useMemo } from 'react';
 
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
 import type { PdfComponentProps } from '@/types/pdf';
-import { useMemo } from 'react';
 
 const svgStyle = {
   width: 12,

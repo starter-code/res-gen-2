@@ -1,10 +1,9 @@
 import { CONTENT_TYPES } from '@/constants';
+import type { ContentAll } from '@/types/content-all';
 
+import ExperienceMacro from '../json-macros/experience-macro';
 import HeadingMacro from '../json-macros/heading-macro';
 import SummaryMacro from '../json-macros/summary-macro';
-import ExperienceMacro from '../json-macros/experience-macro';
-
-import type { ContentAll } from '@/types/content-all';
 
 type MacroItemProps = ContentAll;
 

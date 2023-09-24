@@ -1,7 +1,7 @@
 import { Image } from '@react-pdf/renderer';
+import { useMemo } from 'react';
 
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
-import { useMemo } from 'react';
 
 type ImgProps = {
   className: string;

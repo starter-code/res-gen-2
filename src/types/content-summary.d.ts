@@ -1,5 +1,4 @@
 import type { CONTENT_TYPES, LAYOUTS } from '../constants';
-
 import type { ContentBaseItem } from './content-base-item';
 
 type SummaryJsonRequired = {

@@ -1,7 +1,6 @@
-import c from 'classnames';
-
 import '@/css/index.css';
 
+import c from 'classnames';
 import type { Metadata } from 'next';
 
 type RootLayoutProps = {

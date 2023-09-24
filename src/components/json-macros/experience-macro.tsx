@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import BaseMacro from './base-macro';
-
 import type { ContentExperience } from '@/types/content-experience';
+
+import BaseMacro from './base-macro';
 
 type ExperienceMacroProps = ContentExperience;
 

@@ -2,11 +2,10 @@ import c from 'classnames';
 import React, { useMemo } from 'react';
 import { useDrop } from 'react-dnd';
 
-import MacroManager from '@/managers/macro-manager';
+import type { LAYOUTS } from '@/constants';
 import { CONTENT_TYPES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
-
-import type { LAYOUTS } from '@/constants';
+import MacroManager from '@/managers/macro-manager';
 
 interface LayoutSingleProps {
   layoutType: keyof typeof LAYOUTS;

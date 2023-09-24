@@ -1,24 +1,17 @@
-import ReactPDF, { Document, Page, usePDF } from '@react-pdf/renderer';
+import { Document, Page } from '@react-pdf/renderer';
 
-import { formatDateToYYMMDD } from '@/utils/date-util';
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
-
 import PdfComponentManager from '@/managers/pdf-component-manager';
-
-import GithubSvg from './icons/pdf-github';
-import GmailSvg from './icons/pdf-gmail';
-import LinkedinSvg from './icons/pdf-linkedin';
-import WebsiteSvg from './icons/pdf-website';
 
 type PdfDocumentProps = {
   // styles: ReactPDF.Styles;
 };
 
 export default function PdfDocument({}: PdfDocumentProps) {
-  const { styles } = usePdfDocumentContext();
+  const { styles, title } = usePdfDocumentContext();
 
   return (
-    <Document title={`${formatDateToYYMMDD()}-your-resume.pdf`}>
+    <Document title={title}>
       <Page size="LETTER" style={styles.page}>
         <PdfComponentManager />
       </Page>

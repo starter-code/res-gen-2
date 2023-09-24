@@ -1,10 +1,9 @@
 import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
+import type { ContentAll } from '@/types/content-all';
 
+import ExperienceEditor from '../json-editors/experience-editor';
 import HeadingEditor from '../json-editors/heading-editor';
 import SummaryEditor from '../json-editors/summary-editor';
-import ExperienceEditor from '../json-editors/experience-editor';
-
-import type { ContentAll } from '@/types/content-all';
 
 type EditorItemProps = ContentAll & {
   mode: keyof typeof EDITOR_MODES;

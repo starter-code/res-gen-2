@@ -1,15 +1,14 @@
 import c from 'classnames';
-import { useCallback, useMemo, forwardRef, Ref } from 'react';
+import { forwardRef, Ref, useCallback, useMemo } from 'react';
 
 import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
 
+import CollapseIcon from '../icons/collapse-icon';
+import DeleteIcon from '../icons/delete-icon';
 import DragHandleIcon from '../icons/drag-handle-icon';
 import PlusIcon from '../icons/plus-icon';
-import CollapseIcon from '../icons/collapse-icon';
 import UncollapseIcon from '../icons/uncollapse-icon';
-
-import DeleteIcon from '../icons/delete-icon';
 
 type EditorTopBarProps = {
   contentId: string;

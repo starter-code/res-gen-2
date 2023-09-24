@@ -1,12 +1,17 @@
-import React, { createContext, useContext, useState, ReactNode, useCallback, useEffect } from 'react';
+import React, { createContext, ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import localStorageUtil from '@/utils/localstorage-util';
-
-import type { LayoutItem } from '@/types/layouts';
+import { CONTENT_TYPES } from '@/constants';
 import type { ContentAll } from '@/types/content-all';
+import type { LayoutItem } from '@/types/layouts';
+import localStorageUtil from '@/utils/localstorage-util';
+import { toSlugCase, toYearMonthDayFormat } from '@/utils/string-transform-util';
 
 export type AppContextType = {
+  /**
+   * title refers to the name of the PDF when a user downloads from browser
+   */
+  title: string;
   isEditorVisible: boolean;
   isModalOpen: boolean; // maybe move to pdf preview context
   items: ContentAll[]; // rename to contentItems
@@ -21,6 +26,7 @@ export type AppContextType = {
 };
 
 const initialState: AppContextType = Object.freeze({
+  title: '',
   isEditorVisible: true,
   isModalOpen: false,
   items: [],
@@ -112,9 +118,23 @@ export function AppProvider({ children }: AppProviderProps) {
     [isModalOpen],
   );
 
+  const title = useMemo(() => {
+    const date = toYearMonthDayFormat();
+    const heading = items.find(item => item.contentType === CONTENT_TYPES['HEADING']);
+
+    if (heading?.contentType === CONTENT_TYPES['HEADING']) {
+      const name = toSlugCase(heading.content.name);
+
+      return `${date}-${name}.pdf`;
+    }
+
+    return `${date}-your-name.pdf`;
+  }, [items]);
+
   return (
     <AppContext.Provider
       value={{
+        title,
         isModalOpen,
         isEditorVisible,
         items,

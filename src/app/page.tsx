@@ -6,7 +6,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { AppProvider } from '@/context/app-context';
 import { PdfPreviewProvider } from '@/context/pdf-preview-context';
-import loadFonts from '@/utils/pdf-font-loader';
+import loadFonts from '@/utils/pdf-font-loader-util';
 
 import App from './app';
 

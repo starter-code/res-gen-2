@@ -1,4 +1,4 @@
-import type { LAYOUTS, CONTENT_TYPES } from '@/constants';
+import type { CONTENT_TYPES, LAYOUTS } from '@/constants';
 
 export type ContentBaseItem<ContentType extends keyof typeof CONTENT_TYPES, ContentJson> = {
   content: ContentJson;

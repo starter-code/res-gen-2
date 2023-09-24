@@ -1,6 +1,7 @@
+import { ElementType, useMemo } from 'react';
+
 import { usePdfDocumentContext } from '@/context/pdf-document-context';
 import { PdfComponentProps } from '@/types/pdf';
-import { useMemo, ElementType } from 'react';
 
 type BaseElementRequiredProps = {
   Element: ElementType;

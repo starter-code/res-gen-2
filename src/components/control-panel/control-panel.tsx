@@ -1,11 +1,11 @@
-import { useMemo } from 'react';
 import c from 'classnames';
+import { useMemo } from 'react';
 
-import AddLayoutSingleButton from './add-layout-single-button';
 import AddLayoutDoubleButton from './add-layout-double-button';
+import AddLayoutSingleButton from './add-layout-single-button';
 import OpenPdfViewButton from './open-pdf-view-button';
-import ToggleEditorPanelButton from './toggle-editor-panel-button';
 import RemoveBottomLayoutButton from './remove-bottom-layout-button';
+import ToggleEditorPanelButton from './toggle-editor-panel-button';
 
 export default function ControlPanel() {
   const className = useMemo(

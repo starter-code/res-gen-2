@@ -1,17 +1,17 @@
 import c from 'classnames';
+import type { ChangeEvent } from 'react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useDrag } from 'react-dnd';
 import { Collapse } from 'react-collapse';
+import { useDrag } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import { ZodObject } from 'zod';
 
 import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
-import { EditorTopBar } from '../sub-components/editor-top-bar';
-
-import type { ChangeEvent } from 'react';
-import type { DropResult } from '@/types/drop-result';
 import type { ContentAll } from '@/types/content-all';
+import type { DropResult } from '@/types/drop-result';
+
+import { EditorTopBar } from '../sub-components/editor-top-bar';
 
 type BaseEditorProps = Partial<ContentAll> & {
   macro: string;

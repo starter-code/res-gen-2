@@ -1,23 +1,23 @@
 import React, { ReactNode } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import Div from '../pdf/components/pdf-div';
 import H1 from '@/pdf/components/pdf-h1';
 import H2 from '@/pdf/components/pdf-h2';
 import H3 from '@/pdf/components/pdf-h3';
 import H4 from '@/pdf/components/pdf-h4';
 import H5 from '@/pdf/components/pdf-h5';
-import P from '@/pdf/components/pdf-p';
 import Img from '@/pdf/components/pdf-img';
 import LI from '@/pdf/components/pdf-li';
+import P from '@/pdf/components/pdf-p';
 import Span from '@/pdf/components/pdf-span';
 import UL from '@/pdf/components/pdf-ul';
-
 import GithubSvg from '@/pdf/icons/pdf-github';
 import GmailSvg from '@/pdf/icons/pdf-gmail';
-import PhoneSvg from '@/pdf/icons/pdf-phone';
 import LinkedinSvg from '@/pdf/icons/pdf-linkedin';
+import PhoneSvg from '@/pdf/icons/pdf-phone';
 import WebsiteSvg from '@/pdf/icons/pdf-website';
+
+import Div from '../pdf/components/pdf-div';
 
 const COMPONENTS = {
   div: Div,
