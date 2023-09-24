@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import c from 'classnames';
 import { useCallback, useMemo, forwardRef, Ref } from 'react';
 
 import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
@@ -9,7 +9,6 @@ import PlusIcon from '../icons/plus-icon';
 import CollapseIcon from '../icons/collapse-icon';
 import UncollapseIcon from '../icons/uncollapse-icon';
 
-import type { ConnectDragSource } from 'react-dnd';
 import DeleteIcon from '../icons/delete-icon';
 
 type EditorTopBarProps = {
@@ -62,7 +61,7 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
     }, [contentId, onDelete]);
 
     const editorDragContainerClassName = useMemo(() => {
-      return classnames('flex bg-gray-600 rounded text-white justify-between p-2', {
+      return c('flex bg-gray-600 rounded text-white justify-between p-2', {
         'cursor-pointer': !errorMessage && isDragAndDrop,
         'opacity-50': !!errorMessage,
       });

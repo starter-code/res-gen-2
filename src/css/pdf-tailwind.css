@@ -2,5 +2,5 @@
 
 /* Add this class to an element to see the element in debug mode in PDF view */
 .debug {
-  width: auto;
+  /* empty */
 }

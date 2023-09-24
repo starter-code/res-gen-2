@@ -1,11 +1,11 @@
 import { useAppContext } from '@/context/app-context';
 
 export default function ResumeTopBar() {
-  const { setIsModalOpen } = useAppContext();
+  const { togglePdfModal } = useAppContext();
 
   return (
     <div className="bg-blue-500 p-4 flex justify-end items-center">
-      <button className="text-white hover:text-gray-300" onClick={() => setIsModalOpen(false)}>
+      <button className="text-white hover:text-gray-300" onClick={() => togglePdfModal()}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-6 w-6"

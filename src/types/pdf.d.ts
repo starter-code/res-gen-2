@@ -1,9 +1,10 @@
 export type PdfComponentProps = {
-  style?: {};
+  alt?: string;
   children?: ReactNode;
   className?: string;
-  src?: string;
+  debug?: boolean;
   height?: string;
+  src?: string;
+  style?: {};
   width?: string;
-  alt?: string;
 };

@@ -16,7 +16,7 @@ export default function BaseElement(props: BaseElementProps) {
   const { computeStyle, styles: styleSheet } = usePdfDocumentContext();
 
   const styles = useMemo(
-    () => computeStyle(className, element, style),
+    () => computeStyle(className, element, { ...style }),
     [computeStyle, className, element, style], //
   );
 

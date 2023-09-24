@@ -4,8 +4,9 @@ export type ContentBaseItem<ContentType extends keyof typeof CONTENT_TYPES, Cont
   content: ContentJson;
   contentId: string;
   contentType: ContentType;
-  layoutId: string;
-  layoutType: keyof typeof LAYOUTS;
+  // layoutId and layoutType are not available for base editors
+  layoutId?: string;
+  layoutType?: keyof typeof LAYOUTS;
   /**
    * `layoutParentId` is only available for non-single layouts
    */

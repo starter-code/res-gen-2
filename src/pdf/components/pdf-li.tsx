@@ -12,8 +12,14 @@ type ListItemProps = PdfComponentProps;
 export default function ListItem({ children, className, style = {} }: ListItemProps) {
   return (
     <Div className="flex flex-row align-center">
-      <ListItemBullet style={{ marginLeft: 0, marginRight: 2 }} />
-      <BaseElement element="li" Element={Text} style={{ style, margin: 0 }} className={className}>
+      <ListItemBullet />
+      <BaseElement
+        element="li"
+        Element={Text}
+        // this is a work around because li items extend past the width of the text bounding box
+        style={{ ...style, marginLeft: 0, paddingRight: 12 }}
+        className={className}
+      >
         {children}
       </BaseElement>
     </Div>

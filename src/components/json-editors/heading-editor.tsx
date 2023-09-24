@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import c from 'classnames';
 import { object, string, union, undefined as _undefined, null as _null } from 'zod';
 
 import EXAMPLE_HEADING from '@/__example-json/heading.json';
@@ -7,11 +7,13 @@ import { CONTENT_TYPES } from '@/constants';
 import BaseEditor from './base-editor';
 
 import type { ContentHeading, HeadingJson } from '@/types/content-heading';
-import classnames from 'classnames';
+import { NeverProps } from '@/types/generics';
 
-type HeadingEditorProps = ContentHeading & {
-  content?: HeadingJson;
-};
+type HeadingEditorProps =
+  | NeverProps
+  | (ContentHeading & {
+      content?: HeadingJson;
+    });
 
 const schema = object({
   name: string(),
@@ -26,7 +28,7 @@ const schema = object({
 export default function HeadingEditor(props: HeadingEditorProps) {
   const { content = EXAMPLE_HEADING } = props;
 
-  const className = classnames('heading-editor');
+  const className = c('heading-editor');
 
   return (
     <BaseEditor //

@@ -15,16 +15,16 @@ type ResumeModalProps = {
 };
 
 export default function ResumeModal({ children }: ResumeModalProps) {
-  const { isModalOpen, setIsModalOpen } = useAppContext();
+  const { isModalOpen, togglePdfModal } = useAppContext();
 
   const onClose = () => {
-    setIsModalOpen(false);
+    togglePdfModal(false);
   };
 
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        setIsModalOpen(false);
+        togglePdfModal(false);
       }
     };
 
@@ -37,7 +37,7 @@ export default function ResumeModal({ children }: ResumeModalProps) {
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [isModalOpen, setIsModalOpen]);
+  }, [isModalOpen, togglePdfModal]);
 
   return (
     <Modal

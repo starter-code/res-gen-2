@@ -7,17 +7,20 @@ import type { LayoutItem } from '@/types/layouts';
 import type { ContentAll } from '@/types/content-all';
 
 export type AppContextType = {
+  isEditorVisible: boolean;
   isModalOpen: boolean; // maybe move to pdf preview context
-  items: ContentAll[];
+  items: ContentAll[]; // rename to contentItems
   layouts: LayoutItem[];
   addLayout: (newLayout: LayoutItem) => void;
   onCreate: (item: ContentAll) => void;
   onUpdate: (item: ContentAll) => void;
   onDelete: (item: Pick<ContentAll, 'contentId'>) => void;
-  setIsModalOpen: (value: boolean) => void;
+  toggleEditor: () => void;
+  togglePdfModal: (value?: boolean) => void;
 };
 
 const initialState: AppContextType = {
+  isEditorVisible: true,
   isModalOpen: false,
   items: [],
   layouts: [{ layoutId: uuidv4(), layoutType: LAYOUTS.SINGLE }],
@@ -25,7 +28,8 @@ const initialState: AppContextType = {
   onCreate: () => {},
   onDelete: () => {},
   onUpdate: () => {},
-  setIsModalOpen: () => {},
+  toggleEditor: () => {},
+  togglePdfModal: () => {},
 };
 
 const AppContext = createContext<AppContextType>(initialState);
@@ -37,6 +41,7 @@ type AppProviderProps = {
 export function AppProvider({ children }: AppProviderProps) {
   const [layouts, setLayouts] = useState<LayoutItem[]>(initialState.layouts);
   const [items, setItems] = useState<ContentAll[]>([]);
+  const [isEditorVisible, setIsEditorVisible] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   /**
@@ -68,21 +73,32 @@ export function AppProvider({ children }: AppProviderProps) {
     [items],
   );
 
-  const addLayout = (newLayout: LayoutItem) => {
+  const addLayout = useCallback((newLayout: LayoutItem) => {
     setLayouts(prevLayout => [...prevLayout, newLayout]);
-  };
+  }, []);
+
+  const toggleEditor = useCallback(() => setIsEditorVisible(!isEditorVisible), [isEditorVisible]);
+
+  const togglePdfModal = useCallback(
+    (value?: boolean) => {
+      setIsModalOpen(value === undefined ? !isModalOpen : value);
+    },
+    [isModalOpen],
+  );
 
   return (
     <AppContext.Provider
       value={{
         isModalOpen,
+        isEditorVisible,
         items,
         layouts,
         addLayout,
         onDelete,
         onUpdate,
         onCreate,
-        setIsModalOpen,
+        toggleEditor,
+        togglePdfModal,
       }}
     >
       {children}

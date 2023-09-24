@@ -1,5 +1,4 @@
-import classnames from 'classnames';
-import { useMemo } from 'react';
+import c from 'classnames';
 import { object, string } from 'zod';
 
 import EXAMPLE_SUMMARY from '@/__example-json/summary.json';
@@ -8,10 +7,13 @@ import { CONTENT_TYPES } from '@/constants';
 import BaseEditor from './base-editor';
 
 import type { ContentSummary, SummaryJson } from '@/types/content-summary';
+import { NeverProps } from '@/types/generics';
 
-type SummaryEditorProps = ContentSummary & {
-  content?: SummaryJson;
-};
+type SummaryEditorProps =
+  | NeverProps
+  | (ContentSummary & {
+      content?: SummaryJson;
+    });
 
 const schema = object({
   heading: string(),
@@ -21,7 +23,7 @@ const schema = object({
 export default function SummaryEditor(props: SummaryEditorProps) {
   const { content = EXAMPLE_SUMMARY } = props;
 
-  const className = classnames('summary-editor');
+  const className = c('summary-editor');
 
   return (
     <BaseEditor

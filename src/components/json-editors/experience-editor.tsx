@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import { object, string, array, undefined as _undefined, null as _null } from 'zod';
+import c from 'classnames';
+import { object, string, array } from 'zod';
 
 import EXAMPLE_EXPERIENCE from '@/__example-json/experience.json';
 import { CONTENT_TYPES } from '@/constants';
@@ -7,11 +7,13 @@ import { CONTENT_TYPES } from '@/constants';
 import BaseEditor from './base-editor';
 
 import type { ContentExperience, ExperienceJson } from '@/types/content-experience';
-import classnames from 'classnames';
+import { NeverProps } from '@/types/generics';
 
-type ExperienceEditorProps = ContentExperience & {
-  content?: ExperienceJson;
-};
+type ExperienceEditorProps =
+  | NeverProps
+  | (ContentExperience & {
+      content?: ExperienceJson;
+    });
 
 const schema = object({
   title: string(),
@@ -25,7 +27,7 @@ const schema = object({
 export default function ExperienceEditor(props: ExperienceEditorProps) {
   const { content = EXAMPLE_EXPERIENCE } = props;
 
-  const className = classnames('experience-editor');
+  const className = c('experience-editor');
 
   return (
     <BaseEditor //

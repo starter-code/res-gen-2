@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import c from 'classnames';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDrag } from 'react-dnd';
 import { Collapse } from 'react-collapse';
@@ -13,7 +13,7 @@ import type { ChangeEvent } from 'react';
 import type { DropResult } from '@/types/drop-result';
 import type { ContentAll } from '@/types/content-all';
 
-type BaseEditorProps = ContentAll & {
+type BaseEditorProps = Partial<ContentAll> & {
   macro: string;
   className: string;
   schema: ZodObject<any>;
@@ -130,19 +130,19 @@ export default function BaseEditor(props: BaseEditorProps) {
   };
 
   const textAreaClassName = useMemo(() => {
-    const defaultClassName = classnames('h-[20ch]', 'font-mono', 'resize-none');
-    const overrideClassName = classnames('grow', {
+    const defaultClassName = c('h-[20ch]', 'font-mono', 'resize-none');
+    const overrideClassName = c('grow', {
       'w-auto': mode === EDITOR_MODES['POPOVER'],
       'w-[60ch]': mode !== EDITOR_MODES['POPOVER'],
       'bg-emerald-100': mode === EDITOR_MODES['POPOVER'],
       'bg-sky-100': mode === EDITOR_MODES['DRAG_AND_DROP'],
     });
 
-    return classnames(defaultClassName, overrideClassName);
+    return c(defaultClassName, overrideClassName);
   }, [mode]);
 
   const containerClassName = useMemo(() => {
-    const className = classnames(props.className, {
+    const className = c(props.className, {
       'cursor-text': mode === EDITOR_MODES['POPOVER'],
       'opacity-50': isDragging,
       'p-1': true,

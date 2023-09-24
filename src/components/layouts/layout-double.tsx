@@ -11,7 +11,7 @@ interface LayoutDoubleProps {
 
 export default function LayoutDouble({ layoutLeftId, layoutRightId, layoutId }: LayoutDoubleProps) {
   return (
-    <div className="flex" data-layout-id={layoutId}>
+    <div className="flex layout-double" data-layout-id={layoutId}>
       <LayoutSingle
         className="grow w-[50%]"
         layoutParentId={layoutId}

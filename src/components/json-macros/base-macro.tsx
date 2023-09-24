@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import c from 'classnames';
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 import EditorItem from '../content/editor-item';
@@ -60,7 +60,7 @@ export default function BaseMacro(props: BaseMacroProps) {
     };
   }, [contentId, isFocused, onDelete]);
 
-  const className = classnames({
+  const className = c({
     'mb-2': true,
     'border-2': isFocused,
     rounded: isFocused,

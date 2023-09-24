@@ -1,3 +1,9 @@
-textarea {
-  resize: none;
+.editor-page-container {
+  /* This is an estimation for px value so PDF view looks like a 1:1 comparison */
+  max-width: 730px;
+}
+
+.editor-page-container > .layout-single {
+  /* This is an estimation for px value so PDF view looks like a 1:1 comparison */
+  padding: 16px;
 }

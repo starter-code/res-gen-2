@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import c from 'classnames';
 import React, { useMemo } from 'react';
 import { useDrop } from 'react-dnd';
 
@@ -16,7 +16,7 @@ interface LayoutSingleProps {
 }
 
 export default function LayoutSingle(props: LayoutSingleProps) {
-  const { className, layoutType, layoutId, layoutParentId = null } = props;
+  const { layoutType, layoutId, layoutParentId = null } = props;
 
   const { items: allItems } = useAppContext();
   const [{ isOver }, drop] = useDrop({
@@ -33,19 +33,22 @@ export default function LayoutSingle(props: LayoutSingleProps) {
     return filteredItems;
   }, [allItems, layoutType, layoutId]);
 
-  const backgroundColor = isOver ? '#e0e0e0' : 'transparent';
+  const className = useMemo(
+    () =>
+      c(props.className, {
+        'layout-single': true,
+        'bg-neutral-200': isOver,
+        'min-h-[50px]': true,
+        rounded: true,
+        'border-2': true,
+        'border-stone-700': true,
+        'border-dashed': true,
+      }),
+    [props.className, isOver],
+  );
 
   return (
-    <div
-      className={classNames('min-h-3', className)}
-      ref={drop}
-      style={{
-        border: '2px dashed #ccc',
-        borderRadius: '5px',
-        padding: '16px',
-        backgroundColor,
-      }}
-    >
+    <div className={className} ref={drop}>
       <MacroManager items={items} />
     </div>
   );
