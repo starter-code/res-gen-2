@@ -24,7 +24,7 @@ type BaseEditorProps = ContentAll & {
 export default function BaseEditor(props: BaseEditorProps) {
   const { contentType, content, macro, schema, mode = EDITOR_MODES['DRAG_AND_DROP'] } = props;
 
-  const { onCreate, onUpdate, layouts } = useAppContext();
+  const { onCreate, onUpdate } = useAppContext();
   const [text, setText] = useState(JSON.stringify(content, null, 2));
   const [isOpen, setIsOpen] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -76,8 +76,11 @@ export default function BaseEditor(props: BaseEditorProps) {
     [schema],
   );
 
-  const onHandleChange = useCallback(
+  const onChange = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) => {
+      // prevent backspace from bubbling up to remove the macro
+      event.stopPropagation();
+
       const jsonValue = event.target.value;
       setText(jsonValue);
       validateJsonSchema(jsonValue);
@@ -85,55 +88,46 @@ export default function BaseEditor(props: BaseEditorProps) {
     [validateJsonSchema],
   );
 
-  const onBlur = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    if (mode === EDITOR_MODES['DRAG_AND_DROP']) {
-      return;
-    }
-
-    if (validateJsonSchema(event.target.value)) {
-      onUpdate({
-        contentId,
-        content: { ...JSON.parse(text) },
-        contentType: props.contentType,
-        layoutId: props.layoutId,
-        layoutType: props.layoutType,
-        layoutParentId: props.layoutParentId || undefined,
-      });
-    }
-  };
-
-  const onAddContentItem = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>) => {
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // prevent Delete or Backspace key from deleting the ContentItem
+      // in WYSIWYG editor when editting textarea element text
       event.stopPropagation();
+    };
 
-      const [layout] = layouts.slice(-1);
+    const element = textAreaRef.current;
 
-      onCreate({
-        contentId,
-        content: { ...JSON.parse(text) },
-        contentType: props.contentType,
-        layoutId: layout.layoutId,
-        layoutType: layout.layoutType,
-        // TODO: this could be a bug
-        // because if we click "+" button when last is a double layout
-        // it does have a parent
-        layoutParentId: undefined,
-      });
+    element?.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      element?.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const onBlur = useCallback(
+    (event: ChangeEvent<HTMLTextAreaElement>) => {
+      if (mode === EDITOR_MODES['DRAG_AND_DROP']) {
+        return;
+      }
+
+      if (validateJsonSchema(event.target.value)) {
+        onUpdate({
+          contentId,
+          content: { ...JSON.parse(text) },
+          contentType: props.contentType,
+          layoutId: props.layoutId,
+          layoutType: props.layoutType,
+          layoutParentId: props.layoutParentId || undefined,
+        });
+      }
     },
-    [props, layouts, contentId, text, onCreate],
+    [contentId, mode, onUpdate, props, text, validateJsonSchema],
   );
 
   const adjustTextareaHeight = () => {
     if (!textAreaRef.current) return;
     textAreaRef.current.style.height = `${textAreaRef.current.scrollHeight}px`;
   };
-
-  const editorDragContainerClassName = useMemo(() => {
-    return classnames('flex bg-gray-600 rounded text-white justify-between p-2', {
-      'cursor-pointer': !errorMessage,
-      'opacity-50': !!errorMessage,
-    });
-  }, [errorMessage]);
 
   const textAreaClassName = useMemo(() => {
     const defaultClassName = classnames('h-[20ch]', 'font-mono', 'resize-none');
@@ -147,15 +141,15 @@ export default function BaseEditor(props: BaseEditorProps) {
     return classnames(defaultClassName, overrideClassName);
   }, [mode]);
 
-  const containerClassName = useMemo(
-    () =>
-      classnames({
-        'cursor-text': mode === EDITOR_MODES['POPOVER'],
-        'opacity-50': isDragging,
-        'p-1': true,
-      }),
-    [isDragging, mode],
-  );
+  const containerClassName = useMemo(() => {
+    const className = classnames(props.className, {
+      'cursor-text': mode === EDITOR_MODES['POPOVER'],
+      'opacity-50': isDragging,
+      'p-1': true,
+    });
+
+    return className;
+  }, [isDragging, mode, props.className]);
 
   return (
     <div className={containerClassName}>
@@ -177,7 +171,7 @@ export default function BaseEditor(props: BaseEditorProps) {
             name={contentType}
             spellCheck="false"
             onBlur={onBlur}
-            onChange={onHandleChange}
+            onChange={onChange}
             value={text}
             ref={textAreaRef}
           ></textarea>

@@ -5,13 +5,16 @@ import EditorItem from '../content/editor-item';
 
 import { EDITOR_MODES } from '@/constants';
 import type { ContentAll } from '@/types/content-all';
+import { useAppContext } from '@/context/app-context';
 
 type BaseMacroProps = ContentAll & {
   children: ReactNode;
 };
 
 export default function BaseMacro(props: BaseMacroProps) {
-  const { children } = props;
+  const { children, contentId } = props;
+
+  const { onDelete } = useAppContext();
 
   const [isFocused, setIsFocused] = useState(false);
 
@@ -22,13 +25,10 @@ export default function BaseMacro(props: BaseMacroProps) {
     if (!divRef.current) return;
 
     if (divRef.current?.contains(event.target as Node)) {
-      // divRef.current.focus();
       setIsFocused(true);
     }
 
     if (!divRef.current?.contains(event.target as Node)) {
-      // Click occurred outside of the div, so remove focus
-      // divRef.current.blur();
       setIsFocused(false);
     }
   }, []);
@@ -36,11 +36,29 @@ export default function BaseMacro(props: BaseMacroProps) {
   // Attach the click event listener when the component mounts
   useEffect(() => {
     document.addEventListener('click', handleClick);
+
     return () => {
       // Clean up the event listener when the component unmounts
       document.removeEventListener('click', handleClick);
     };
   }, [handleClick]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // event.stopImmediatePropagation();
+      // event.stopPropagation();
+
+      if (event.key === 'Backspace' || event.key === 'Delete') {
+        isFocused && onDelete({ contentId });
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [contentId, isFocused, onDelete]);
 
   const className = classnames({
     'mb-2': true,
