@@ -71,6 +71,8 @@ export function toPdfComponents(htmlString: string): ReactNode {
 
       let Component = COMPONENTS[tag];
 
+      // currently expects the img src to be like "./github.svg"
+      // if we change the string pattern, we will need to update regex
       const regex = /\.\/(.*?)\.svg/;
       const match = regex.exec(props.src);
 
