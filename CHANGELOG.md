@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/starter-code/res-gen-2/compare/v1.1.1...v1.2.0) (2023-09-30)
+
+
+### Features
+
+* **hydration:** add prepopulation, move icons ([aa3dee4](https://github.com/starter-code/res-gen-2/commit/aa3dee4d4773b205586cd613a9d336200d02d974))
+
 ## [1.1.1](https://github.com/starter-code/res-gen-2/compare/v1.1.0...v1.1.1) (2023-09-24)
 
 
