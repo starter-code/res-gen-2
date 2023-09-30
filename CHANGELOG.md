@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/starter-code/res-gen-2/compare/v1.2.0...v1.2.1) (2023-09-30)
+
+
+### Bug Fixes
+
+* **pdf:** revert svg locations, disable pdf button conditionally ([1c138ff](https://github.com/starter-code/res-gen-2/commit/1c138ff4678abd24b378f18a2d8e26555a5e686e))
+
 # [1.2.0](https://github.com/starter-code/res-gen-2/compare/v1.1.1...v1.2.0) (2023-09-30)
 
 
