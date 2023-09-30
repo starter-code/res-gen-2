@@ -1,7 +1,7 @@
 import c from 'classnames';
 import { array, object, string } from 'zod';
 
-import EXAMPLE_EXPERIENCE from '@/__example-json/experience.json';
+import EXAMPLE_EXPERIENCE from '@/__example-json/experience-1.json';
 import { CONTENT_TYPES } from '@/constants';
 import type { ContentExperience, ExperienceJson } from '@/types/content-experience';
 import { NeverProps } from '@/types/generics';

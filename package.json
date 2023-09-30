@@ -11,8 +11,11 @@
     "release:dry": "sh scripts/dry-run.sh"
   },
   "lint-staged": {
-    "*.{json,js,jsx,d.ts,ts,tsx,css}": [
+    "*.{js,jsx,d.ts,ts,tsx,css}": [
       "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json}": [
       "prettier --write"
     ]
   },

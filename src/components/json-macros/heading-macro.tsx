@@ -18,7 +18,7 @@ export default function HeadingMacro(props: HeadingMacroProps) {
         {phone && (
           <div className="flex flex-row items-center mr-2">
             <Image //
-              src="./phone.svg"
+              src="./icons/phone.svg"
               className="phone-icon icon inline mr-1"
               height="16"
               width="16"
@@ -30,7 +30,7 @@ export default function HeadingMacro(props: HeadingMacroProps) {
         {email && (
           <div className="flex flex-row items-center mr-2">
             <Image //
-              src="./gmail.svg"
+              src="./icons/gmail.svg"
               className="gmail-icon pdf-debug icon inline mr-1"
               height="16"
               width="16"
@@ -42,7 +42,7 @@ export default function HeadingMacro(props: HeadingMacroProps) {
         {linkedin && (
           <div className="flex flex-row items-center mr-2">
             <Image
-              src="./linkedin.svg"
+              src="./icons/linkedin.svg"
               className="linkedin-icon icon inline mr-1"
               height="16"
               width="16"
@@ -56,7 +56,7 @@ export default function HeadingMacro(props: HeadingMacroProps) {
         {github && (
           <div className="flex flex-row items-center mr-2">
             <Image //
-              src="./github.svg"
+              src="./icons/github.svg"
               className="github-icon icon inline mr-1"
               height="16"
               width="16"
@@ -68,7 +68,7 @@ export default function HeadingMacro(props: HeadingMacroProps) {
         {website && (
           <div className="flex flex-row items-center mr-2">
             <Image //
-              src="./website.svg"
+              src="./icons/website.svg"
               className="website-icon icon inline mr-1"
               height="16"
               width="16"
