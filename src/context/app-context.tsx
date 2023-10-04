@@ -120,10 +120,10 @@ export function AppProvider({ children }: AppProviderProps) {
 
   const title = useMemo(() => {
     const date = toYearMonthDayFormat();
-    const heading = items.find(item => item.contentType === CONTENT_TYPES['HEADING']);
+    const contact = items.find(item => item.contentType === CONTENT_TYPES['CONTACT']);
 
-    if (heading?.contentType === CONTENT_TYPES['HEADING']) {
-      const name = toSlugCase(heading.content.name);
+    if (contact?.contentType === CONTENT_TYPES['CONTACT']) {
+      const name = toSlugCase(contact.content.name);
 
       return `${date}-${name}.pdf`;
     }

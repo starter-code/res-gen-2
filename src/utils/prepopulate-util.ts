@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
+import CONTACT from '@/__example-json/contact.json';
 import EXPERIENCE_1 from '@/__example-json/experience-1.json';
 import EXPERIENCE_2 from '@/__example-json/experience-2.json';
-import HEADING from '@/__example-json/heading.json';
 import SUMMARY from '@/__example-json/summary.json';
 import { CONTENT_TYPES, LAYOUTS } from '@/constants';
 import { ContentAll } from '@/types/content-all';
@@ -14,9 +14,9 @@ export class PrepopulateUtil {
   get items(): ContentAll[] {
     return [
       {
-        content: HEADING,
+        content: CONTACT,
         contentId: uuidv4(),
-        contentType: CONTENT_TYPES.HEADING,
+        contentType: CONTENT_TYPES.CONTACT,
         layoutId: LAYOUT_ID,
         layoutType: LAYOUTS.SINGLE,
       },

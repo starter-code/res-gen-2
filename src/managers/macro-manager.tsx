@@ -1,8 +1,8 @@
 import c from 'classnames';
 import { useMemo } from 'react';
 
+import ContactMacro from '@/components/json-macros/contact-macro';
 import ExperienceMacro from '@/components/json-macros/experience-macro';
-import HeadingMacro from '@/components/json-macros/heading-macro';
 import SummaryMacro from '@/components/json-macros/summary-macro';
 import { CONTENT_TYPES } from '@/constants';
 import type { ContentAll } from '@/types/content-all';
@@ -15,8 +15,8 @@ export default function MacroManager({ items }: MacroManagerProps) {
   const elements = useMemo(() => {
     const components = items.map(item => {
       switch (item.contentType) {
-        case CONTENT_TYPES.HEADING: {
-          return <HeadingMacro key={item.contentId} {...item} />;
+        case CONTENT_TYPES.CONTACT: {
+          return <ContactMacro key={item.contentId} {...item} />;
         }
         case CONTENT_TYPES.SUMMARY: {
           return <SummaryMacro key={item.contentId} {...item} />;

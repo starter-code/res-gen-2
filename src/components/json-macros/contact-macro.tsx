@@ -1,12 +1,12 @@
 import Image from 'next/image';
 
-import type { ContentHeading } from '@/types/content-heading';
+import type { ContentContact } from '@/types/content-contact';
 
 import BaseMacro from './base-macro';
 
-type HeadingMacroProps = ContentHeading;
+type ContactMacroProps = ContentContact;
 
-export default function HeadingMacro(props: HeadingMacroProps) {
+export default function ContactMacro(props: ContactMacroProps) {
   const { content } = props;
   const { name, title, phone, email, github, linkedin, website } = content;
 

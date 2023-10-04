@@ -1,5 +1,5 @@
 export const CONTENT_TYPES = {
-  HEADING: 'HEADING',
+  CONTACT: 'CONTACT',
   SUMMARY: 'SUMMARY',
   EXPERIENCE: 'EXPERIENCE',
 } as const;

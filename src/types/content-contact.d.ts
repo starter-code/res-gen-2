@@ -1,12 +1,12 @@
 import type { CONTENT_TYPES, LAYOUTS } from '../constants';
 import type { ContentBaseItem } from './content-base-item';
 
-type HeadingJsonRequired = {
+type ContactJsonRequired = {
   name: string;
   email: string;
 };
 
-type HeadingJsonOptional = {
+type ContactJsonOptional = {
   title: string;
   phone: string;
   location: string;
@@ -15,6 +15,6 @@ type HeadingJsonOptional = {
   website: string;
 };
 
-export type HeadingJson = HeadingJsonRequired & Partial<HeadingJsonOptional>;
+export type ContactJson = ContactJsonRequired & Partial<ContactJsonOptional>;
 
-export type ContentHeading = ContentBaseItem<(typeof CONTENT_TYPES)['HEADING'], HeadingJson>;
+export type ContentContact = ContentBaseItem<(typeof CONTENT_TYPES)['CONTACT'], ContactJson>;
