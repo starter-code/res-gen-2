@@ -3,7 +3,8 @@ import { useMemo } from 'react';
 
 import ContactMacro from '@/components/json-macros/contact-macro';
 import ExperienceMacro from '@/components/json-macros/experience-macro';
-import SummaryMacro from '@/components/json-macros/summary-macro';
+import HeaderMacro from '@/components/json-macros/header-macro';
+import ParagraphMacro from '@/components/json-macros/paragraph-macro';
 import { CONTENT_TYPES } from '@/constants';
 import type { ContentAll } from '@/types/content-all';
 
@@ -18,11 +19,14 @@ export default function MacroManager({ items }: MacroManagerProps) {
         case CONTENT_TYPES.CONTACT: {
           return <ContactMacro key={item.contentId} {...item} />;
         }
-        case CONTENT_TYPES.SUMMARY: {
-          return <SummaryMacro key={item.contentId} {...item} />;
+        case CONTENT_TYPES.HEADER: {
+          return <HeaderMacro key={item.contentId} {...item} />;
         }
         case CONTENT_TYPES.EXPERIENCE: {
           return <ExperienceMacro key={item.contentId} {...item} />;
+        }
+        case CONTENT_TYPES.PARAGRAPH: {
+          return <ParagraphMacro key={item.contentId} {...item} />;
         }
         default:
           throw new Error(`Invalid item. ${JSON.stringify(item)}`);

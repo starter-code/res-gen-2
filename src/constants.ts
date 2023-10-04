@@ -1,7 +1,8 @@
 export const CONTENT_TYPES = {
   CONTACT: 'CONTACT',
-  SUMMARY: 'SUMMARY',
+  HEADER: 'HEADER',
   EXPERIENCE: 'EXPERIENCE',
+  PARAGRAPH: 'PARAGRAPH',
 } as const;
 
 export const LAYOUTS = {

@@ -3,7 +3,7 @@ import type { ContentAll } from '@/types/content-all';
 
 import ContactEditor from '../json-editors/contact-editor';
 import ExperienceEditor from '../json-editors/experience-editor';
-import SummaryEditor from '../json-editors/summary-editor';
+import HeaderEditor from '../json-editors/header-editor';
 
 type EditorItemProps = ContentAll & {
   mode: keyof typeof EDITOR_MODES;
@@ -16,8 +16,8 @@ export default function EditorItem(props: EditorItemProps) {
     case CONTENT_TYPES.CONTACT: {
       return <ContactEditor key={contentId} {...props} />;
     }
-    case CONTENT_TYPES.SUMMARY: {
-      return <SummaryEditor key={contentId} {...props} />;
+    case CONTENT_TYPES.HEADER: {
+      return <HeaderEditor key={contentId} {...props} />;
     }
     case CONTENT_TYPES.EXPERIENCE: {
       return <ExperienceEditor key={contentId} {...props} />;

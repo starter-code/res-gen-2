@@ -1,5 +1,6 @@
 import { ContentContact } from './content-contact';
 import { ContentExperience } from './content-experience';
-import { ContentSummary } from './content-summary';
+import { ContentHeader } from './content-header';
+import { ContentParagraph } from './content-paragraph';
 
-export type ContentAll = ContentExperience | ContentContact | ContentSummary;
+export type ContentAll = ContentExperience | ContentContact | ContentHeader | ContentParagraph;

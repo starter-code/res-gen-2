@@ -3,7 +3,8 @@ import { useMemo } from 'react';
 
 import ContactEditor from '@/components/json-editors/contact-editor';
 import ExperienceEditor from '@/components/json-editors/experience-editor';
-import SummaryEditor from '@/components/json-editors/summary-editor';
+import HeaderEditor from '@/components/json-editors/header-editor';
+import ParagraphEditor from '@/components/json-editors/paragraph-editor';
 import { useAppContext } from '@/context/app-context';
 
 export default function EditorManager() {
@@ -14,7 +15,8 @@ export default function EditorManager() {
   return (
     <div id="editor-manager" className={className}>
       <ContactEditor />
-      <SummaryEditor />
+      <HeaderEditor />
+      <ParagraphEditor />
       <ExperienceEditor />
     </div>
   );
