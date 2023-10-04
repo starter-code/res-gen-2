@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/starter-code/res-gen-2/compare/v1.2.1...v1.2.2) (2023-10-04)
+
+
+### Bug Fixes
+
+* **content:** rename heading to contact ([c2c8ed1](https://github.com/starter-code/res-gen-2/commit/c2c8ed1fd304080025968011f55f092d23d707a9))
+
 ## [1.2.1](https://github.com/starter-code/res-gen-2/compare/v1.2.0...v1.2.1) (2023-09-30)
 
 
