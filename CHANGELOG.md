@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/starter-code/res-gen-2/compare/v1.2.2...v1.3.0) (2023-10-04)
+
+
+### Features
+
+* **app:** add header and paragraph macros ([343e60e](https://github.com/starter-code/res-gen-2/commit/343e60e2ec9cef2841315d5d58a8e0dd6895e239))
+
 ## [1.2.2](https://github.com/starter-code/res-gen-2/compare/v1.2.1...v1.2.2) (2023-10-04)
 
 
