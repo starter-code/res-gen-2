@@ -167,7 +167,7 @@ export default function BaseEditor(props: BaseEditorProps) {
         setIsOpen={setIsOpen}
       />
       <Collapse isOpened={isOpen}>
-        <form id="base-editor-form" className="flex">
+        <form className="flex">
           <textarea
             id={`editor-textarea-${formId}`}
             className={textAreaClassName}

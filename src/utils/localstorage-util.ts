@@ -1,6 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
-import { LAYOUTS } from '@/constants';
 import type { ContentAll } from '@/types/content-all';
 import type { LayoutItem } from '@/types/layouts';
 
