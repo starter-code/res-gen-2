@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/starter-code/res-gen-2/compare/v1.3.0...v1.3.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* **editor:** remove dupe id for textarea ([902d3d0](https://github.com/starter-code/res-gen-2/commit/902d3d0ce0bd17ee1b14c724effb9d7beba8a6b3))
+
 # [1.3.0](https://github.com/starter-code/res-gen-2/compare/v1.2.2...v1.3.0) (2023-10-04)
 
 
