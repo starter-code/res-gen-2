@@ -22,11 +22,11 @@ type BaseEditorProps = Partial<ContentAll> & {
 };
 
 export default function BaseEditor(props: BaseEditorProps) {
-  const { contentType, content, macro, schema, mode = EDITOR_MODES['DRAG_AND_DROP'] } = props;
+  const { contentType, content, macro, schema, mode = EDITOR_MODES.DRAG_AND_DROP } = props;
 
   const { onCreate, onUpdate } = useAppContext();
   const [text, setText] = useState(JSON.stringify(content, null, 2));
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(mode === EDITOR_MODES.POPOVER);
   const [errorMessage, setErrorMessage] = useState('');
   const [contentId, setContentId] = useState(props.contentId || '');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
