@@ -26,7 +26,7 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   const { onCreate, onUpdate } = useAppContext();
   const [text, setText] = useState(JSON.stringify(content, null, 2));
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [contentId, setContentId] = useState(props.contentId || '');
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
