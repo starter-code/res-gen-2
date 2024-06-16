@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/starter-code/res-gen-2/compare/v1.3.4...v1.3.5) (2024-06-16)
+
+
+### Bug Fixes
+
+* **css:** small css fixes for drag and drop, app view ([43b458c](https://github.com/starter-code/res-gen-2/commit/43b458cd5111f4be8236f26d4c1cc85dc46dd5f3))
+
 ## [1.3.4](https://github.com/starter-code/res-gen-2/compare/v1.3.3...v1.3.4) (2024-06-16)
 
 
