@@ -4,6 +4,7 @@ import type { ContentAll } from '@/types/content-all';
 import ContactEditor from '../json-editors/contact-editor';
 import ExperienceEditor from '../json-editors/experience-editor';
 import HeaderEditor from '../json-editors/header-editor';
+import ParagraphEditor from '../json-editors/paragraph-editor';
 
 type EditorItemProps = ContentAll & {
   mode: keyof typeof EDITOR_MODES;
@@ -22,8 +23,11 @@ export default function EditorItem(props: EditorItemProps) {
     case CONTENT_TYPES.EXPERIENCE: {
       return <ExperienceEditor key={contentId} {...props} />;
     }
+    case CONTENT_TYPES.PARAGRAPH: {
+      return <ParagraphEditor key={contentId} {...props} />;
+    }
     default: {
-      throw new Error(`Unsupported contentType ${contentType}`);
+      throw new Error(`[EditorItem] Unsupported contentType ${contentType}`);
     }
   }
 }
