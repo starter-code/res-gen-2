@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/starter-code/res-gen-2/compare/v1.3.1...v1.3.2) (2024-06-16)
+
+
+### Bug Fixes
+
+* **editor:** add paragraph editor macro ([054e70b](https://github.com/starter-code/res-gen-2/commit/054e70bb37862f4f0f5b6c08dd36e8cfb1794241))
+
 ## [1.3.1](https://github.com/starter-code/res-gen-2/compare/v1.3.0...v1.3.1) (2024-02-05)
 
 
