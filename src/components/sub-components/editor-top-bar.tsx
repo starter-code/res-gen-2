@@ -62,10 +62,16 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
 
     const editorDragContainerClassName = useMemo(() => {
       return c('flex bg-gray-600 rounded text-white justify-between p-2', {
-        'cursor-pointer': !errorMessage && isDragAndDrop,
+        'cursor-grab': !errorMessage && isDragAndDrop,
         'opacity-50': !!errorMessage,
       });
     }, [errorMessage, isDragAndDrop]);
+
+    const labelClassName = useMemo(() => {
+      return c('grow p-1 font-bold', {
+        'cursor-grab': isDragAndDrop,
+      });
+    }, [isDragAndDrop]);
 
     return (
       <>
@@ -76,7 +82,7 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
           ref={ref} //
         >
           {isDragAndDrop && <DragHandleIcon className="m-1 p-1" />}
-          <label className="grow p-1 font-bold" htmlFor={`editor-textarea-${formId}`}>
+          <label className={labelClassName} htmlFor={`editor-textarea-${formId}`}>
             {macro}
           </label>
 

@@ -13,7 +13,7 @@ export default function App() {
         <PdfPreview />
       </ResumeModal>
       <ControlPanel />
-      <div className="flex flex-column justify-center">
+      <div className="flex flex-column justify-center flex-wrap">
         <EditorManager />
         <LayoutManager />
       </div>
