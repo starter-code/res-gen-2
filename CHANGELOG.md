@@ -1,3 +1,10 @@
+## [1.3.4](https://github.com/starter-code/res-gen-2/compare/v1.3.3...v1.3.4) (2024-06-16)
+
+
+### Bug Fixes
+
+* **editor:** editor is the layout should be uncollapsible ([f74775e](https://github.com/starter-code/res-gen-2/commit/f74775ea7e8dbc3813bedf1f84793135ff636487))
+
 ## [1.3.3](https://github.com/starter-code/res-gen-2/compare/v1.3.2...v1.3.3) (2024-06-16)
 
 
