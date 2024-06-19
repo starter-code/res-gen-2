@@ -181,11 +181,6 @@ export default function BaseEditor(props: BaseEditorProps) {
             aria-describedby="error-message"
           />
         </form>
-        {errorMessage && (
-          <div id="error-message" role="alert" aria-live="assertive">
-            {errorMessage}
-          </div>
-        )}
       </Collapse>
     </div>
   );

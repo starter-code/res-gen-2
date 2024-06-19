@@ -27,7 +27,7 @@ export default function EditorItem(props: EditorItemProps) {
       return <ParagraphEditor key={contentId} {...props} />;
     }
     default: {
-      throw new Error(`[EditorItem] Unsupported contentType ${contentType}`);
+      throw new Error(`[editor-item] Unsupported contentType ${contentType}`);
     }
   }
 }

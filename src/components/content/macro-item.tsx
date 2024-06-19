@@ -25,7 +25,7 @@ export default function MacroItem(props: MacroItemProps) {
       return <ParagraphMacro key={contentId} {...props} />;
     }
     default: {
-      throw new Error(`[Macroitem] Unsupported contentType ${contentType}`);
+      throw new Error(`[macro-item] Unsupported contentType ${contentType}`);
     }
   }
 }

@@ -69,9 +69,9 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
 
     const labelClassName = useMemo(() => {
       return c('grow p-1 font-bold', {
-        'cursor-grab': isDragAndDrop,
+        'cursor-grab': !errorMessage && isDragAndDrop,
       });
-    }, [isDragAndDrop]);
+    }, [errorMessage, isDragAndDrop]);
 
     return (
       <>
@@ -93,6 +93,7 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
                 aria-label="Add Macro Button"
                 type="button"
                 onClick={onAdd}
+                disabled={!!errorMessage}
               >
                 <PlusIcon />
               </button>
