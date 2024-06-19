@@ -1,3 +1,10 @@
+## [1.3.6](https://github.com/starter-code/res-gen-2/compare/v1.3.5...v1.3.6) (2024-06-19)
+
+
+### Bug Fixes
+
+* **css:** reduce min height of editors ([759a06f](https://github.com/starter-code/res-gen-2/commit/759a06fcbe5a4e393285baa1017c2d739e9d8dc9))
+
 ## [1.3.5](https://github.com/starter-code/res-gen-2/compare/v1.3.4...v1.3.5) (2024-06-16)
 
 
