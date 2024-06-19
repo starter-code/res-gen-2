@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/starter-code/res-gen-2/compare/v1.3.7...v1.4.0) (2024-06-19)
+
+
+### Features
+
+* **download:** add a download button ([7a5dd5a](https://github.com/starter-code/res-gen-2/commit/7a5dd5a0c9127f960dbc1339f77a76dbf3b5a9d6))
+
 ## [1.3.7](https://github.com/starter-code/res-gen-2/compare/v1.3.6...v1.3.7) (2024-06-19)
 
 
