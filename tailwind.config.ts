@@ -17,12 +17,12 @@ const config: Config = {
       },
       extend: {
         width: {
-          '20ch': '20ch',
+          '9ch': '9ch',
           '40ch': '40ch',
           '60ch': '60ch',
         },
         height: {
-          '20ch': '20ch',
+          '9ch': '9ch',
           '40ch': '40ch',
           '60ch': '60ch',
         },
