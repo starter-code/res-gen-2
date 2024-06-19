@@ -27,7 +27,7 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
     const { onCreate, onDelete, layouts } = useAppContext();
     const { macro, errorMessage, text, formId, contentType, contentId, isOpen, setIsOpen, mode } = props;
 
-    const isDragAndDrop = useMemo(() => mode === EDITOR_MODES['DRAG_AND_DROP'], [mode]);
+    const isDragAndDrop = useMemo(() => mode === EDITOR_MODES.DRAG_AND_DROP, [mode]);
 
     const onAdd = useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {

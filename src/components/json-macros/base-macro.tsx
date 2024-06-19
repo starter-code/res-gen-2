@@ -71,7 +71,7 @@ export default function BaseMacro(props: BaseMacroProps) {
   return (
     <div className={className} tabIndex={0} ref={divRef}>
       {children}
-      {isFocused && <EditorItem {...props} mode={EDITOR_MODES['POPOVER']} />}
+      {isFocused && <EditorItem {...props} mode={EDITOR_MODES.POPOVER} />}
     </div>
   );
 }

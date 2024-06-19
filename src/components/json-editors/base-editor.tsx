@@ -35,7 +35,7 @@ export default function BaseEditor(props: BaseEditorProps) {
   const [{ isDragging }, ref] = useDrag({
     type: contentType,
     item: { contentType },
-    canDrag: !errorMessage && mode === EDITOR_MODES['DRAG_AND_DROP'],
+    canDrag: !errorMessage && mode === EDITOR_MODES.DRAG_AND_DROP,
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -57,7 +57,7 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   useEffect(() => {
     adjustTextareaHeight();
-    mode === EDITOR_MODES['DRAG_AND_DROP'] && setContentId(uuidv4());
+    mode === EDITOR_MODES.DRAG_AND_DROP && setContentId(uuidv4());
   }, [text, mode]);
 
   const validateJsonSchema = useCallback(
@@ -107,7 +107,7 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   const onBlur = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) => {
-      if (mode === EDITOR_MODES['DRAG_AND_DROP']) {
+      if (mode === EDITOR_MODES.DRAG_AND_DROP) {
         return;
       }
 
@@ -133,10 +133,10 @@ export default function BaseEditor(props: BaseEditorProps) {
   const textAreaClassName = useMemo(() => {
     const defaultClassName = c('h-[9ch]', 'p-2', 'font-mono', 'resize-none');
     const overrideClassName = c('grow', {
-      'w-auto': mode === EDITOR_MODES['POPOVER'],
-      'w-[60ch]': mode !== EDITOR_MODES['POPOVER'],
-      'bg-emerald-100': mode === EDITOR_MODES['POPOVER'],
-      'bg-sky-100': mode === EDITOR_MODES['DRAG_AND_DROP'],
+      'w-auto': mode === EDITOR_MODES.POPOVER,
+      'w-[60ch]': mode !== EDITOR_MODES.POPOVER,
+      'bg-emerald-100': mode === EDITOR_MODES.POPOVER,
+      'bg-sky-100': mode === EDITOR_MODES.DRAG_AND_DROP,
     });
 
     return c(defaultClassName, overrideClassName);
@@ -144,7 +144,7 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   const containerClassName = useMemo(() => {
     const className = c(props.className, {
-      'cursor-text': mode === EDITOR_MODES['POPOVER'],
+      'cursor-text': mode === EDITOR_MODES.POPOVER,
       'opacity-50': isDragging,
       'p-1': true,
     });
