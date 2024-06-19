@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/starter-code/res-gen-2/compare/v1.3.6...v1.3.7) (2024-06-19)
+
+
+### Bug Fixes
+
+* **editor:** adjust css so error bar fits in editor ([503b1b3](https://github.com/starter-code/res-gen-2/commit/503b1b3145d5caf42193e7536d0f015dfec2ee5d))
+
 ## [1.3.6](https://github.com/starter-code/res-gen-2/compare/v1.3.5...v1.3.6) (2024-06-19)
 
 
