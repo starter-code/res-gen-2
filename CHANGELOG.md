@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/starter-code/res-gen-2/compare/v1.4.0...v1.4.1) (2024-06-19)
+
+
+### Bug Fixes
+
+* **typescript:** use object dot notation ([f052021](https://github.com/starter-code/res-gen-2/commit/f052021aa223aa645e62c14e6ceaf6fbfd90c9ee))
+
 # [1.4.0](https://github.com/starter-code/res-gen-2/compare/v1.3.7...v1.4.0) (2024-06-19)
 
 
