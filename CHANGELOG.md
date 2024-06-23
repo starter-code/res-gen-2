@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/starter-code/res-gen-2/compare/v1.5.0...v1.5.1) (2024-06-23)
+
+
+### Bug Fixes
+
+* **lint:** fix lint staged warning about json wildcard ([d38c0ff](https://github.com/starter-code/res-gen-2/commit/d38c0ffd3fb94a6775577a6f896169a9cad194ee))
+
 # [1.5.0](https://github.com/starter-code/res-gen-2/compare/v1.4.1...v1.5.0) (2024-06-23)
 
 
