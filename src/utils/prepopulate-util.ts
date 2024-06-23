@@ -8,51 +8,52 @@ import HEADER_2 from '@/__example-json/header-2.json';
 import PARAGRAPH from '@/__example-json/paragraph.json';
 import { CONTENT_TYPES, LAYOUTS } from '@/constants';
 import { ContentAll } from '@/types/content-all';
+import { ContentId, LayoutId } from '@/types/content-base-item';
 import { LayoutItem } from '@/types/layouts';
 
-const LAYOUT_ID = uuidv4();
+const LAYOUT_ID = uuidv4() as LayoutId;
 
 export class PrepopulateUtil {
   get items(): ContentAll[] {
     return [
       {
         content: CONTACT,
-        contentId: uuidv4(),
+        contentId: uuidv4() as ContentId,
         contentType: CONTENT_TYPES.CONTACT,
         layoutId: LAYOUT_ID,
         layoutType: LAYOUTS.SINGLE,
       },
       {
         content: HEADER_1,
-        contentId: uuidv4(),
+        contentId: uuidv4() as ContentId,
         contentType: CONTENT_TYPES.HEADER,
         layoutId: LAYOUT_ID,
         layoutType: LAYOUTS.SINGLE,
       },
       {
         content: PARAGRAPH,
-        contentId: uuidv4(),
+        contentId: uuidv4() as ContentId,
         contentType: CONTENT_TYPES.PARAGRAPH,
         layoutId: LAYOUT_ID,
         layoutType: LAYOUTS.SINGLE,
       },
       {
         content: HEADER_2,
-        contentId: uuidv4(),
+        contentId: uuidv4() as ContentId,
         contentType: CONTENT_TYPES.HEADER,
         layoutId: LAYOUT_ID,
         layoutType: LAYOUTS.SINGLE,
       },
       {
         content: EXPERIENCE_1,
-        contentId: uuidv4(),
+        contentId: uuidv4() as ContentId,
         contentType: CONTENT_TYPES.EXPERIENCE,
         layoutId: LAYOUT_ID,
         layoutType: LAYOUTS.SINGLE,
       },
       {
         content: EXPERIENCE_2,
-        contentId: uuidv4(),
+        contentId: uuidv4() as ContentId,
         contentType: CONTENT_TYPES.EXPERIENCE,
         layoutId: LAYOUT_ID,
         layoutType: LAYOUTS.SINGLE,

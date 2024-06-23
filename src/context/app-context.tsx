@@ -3,9 +3,17 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { CONTENT_TYPES } from '@/constants';
 import type { ContentAll } from '@/types/content-all';
+import { ContentId } from '@/types/content-base-item';
 import type { LayoutItem } from '@/types/layouts';
 import localStorageUtil from '@/utils/localstorage-util';
 import { toSlugCase, toYearMonthDayFormat } from '@/utils/string-transform-util';
+
+export enum MOVE_ACTION {
+  MACRO_UP = 'MACRO_UP',
+  MACRO_DOWN = 'MACRO_DOWN',
+  LAYOUT_NEXT = 'LAYOUT_NEXT',
+  LAYOUT_PREV = 'LAYOUT_PREV',
+}
 
 export type AppContextType = {
   /**
@@ -21,6 +29,7 @@ export type AppContextType = {
   onCreate: (item: ContentAll) => void;
   onUpdate: (item: ContentAll) => void;
   onDelete: (item: Pick<ContentAll, 'contentId'>) => void;
+  onMove: (action: MOVE_ACTION, contentId: ContentId) => void;
   toggleEditor: () => void;
   togglePdfModal: (value?: boolean) => void;
 };
@@ -36,6 +45,7 @@ const initialState: AppContextType = Object.freeze({
   onCreate: () => {},
   onDelete: () => {},
   onUpdate: () => {},
+  onMove: () => {},
   toggleEditor: () => {},
   togglePdfModal: () => {},
 });
@@ -72,12 +82,39 @@ export function AppProvider({ children }: AppProviderProps) {
     });
   }, [layouts]);
 
+  const onMove = useCallback(
+    (action: MOVE_ACTION, contentId: ContentId) => {
+      switch (action) {
+        case MOVE_ACTION.MACRO_UP: {
+          const newItems = [...items];
+          const foundIndex = newItems.findIndex(i => i.contentId === contentId);
+          const [item] = newItems.splice(foundIndex, 1);
+          newItems.splice(foundIndex - 1, 0, item);
+          setItems(newItems);
+          break;
+        }
+        case MOVE_ACTION.MACRO_DOWN: {
+          const newItems = [...items];
+          const foundIndex = newItems.findIndex(i => i.contentId === contentId);
+          const [item] = newItems.splice(foundIndex, 1);
+          newItems.splice(foundIndex + 1, 0, item);
+          setItems(newItems);
+          break;
+        }
+        default:
+          throw new Error(`Unsupported move action ${action}`);
+      }
+    },
+    [items],
+  );
+
   /**
    * Add content items from JSON editors in left pane
    */
   const onCreate = useCallback(
     (item: ContentAll) => {
-      setItems([...items, { ...item, contentId: uuidv4() }]);
+      const contentId = uuidv4() as ContentId;
+      setItems([...items, { ...item, contentId }]);
     },
     [items],
   );
@@ -144,6 +181,7 @@ export function AppProvider({ children }: AppProviderProps) {
         onDelete,
         onUpdate,
         onCreate,
+        onMove,
         toggleEditor,
         togglePdfModal,
       }}

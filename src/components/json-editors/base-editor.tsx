@@ -9,6 +9,7 @@ import { ZodObject } from 'zod';
 import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
 import type { ContentAll } from '@/types/content-all';
+import { ContentId } from '@/types/content-base-item';
 import type { DropResult } from '@/types/drop-result';
 
 import { EditorTopBar } from '../sub-components/editor-top-bar';
@@ -21,21 +22,23 @@ type BaseEditorProps = Partial<ContentAll> & {
   mode?: keyof typeof EDITOR_MODES;
 };
 
+const DEFAULT_CONTENT_ID = '' as ContentId;
+
 export default function BaseEditor(props: BaseEditorProps) {
-  const { contentType, content, macro, schema, mode = EDITOR_MODES.DRAG_AND_DROP } = props;
+  const { contentType, content, macro, schema, mode = EDITOR_MODES.IN_EDITOR_MANAGER } = props;
 
   const { onCreate, onUpdate } = useAppContext();
   const [text, setText] = useState(JSON.stringify(content, null, 2));
-  const [isOpen, setIsOpen] = useState(mode === EDITOR_MODES.POPOVER);
+  const [isOpen, setIsOpen] = useState(mode === EDITOR_MODES.IN_LAYOUT_MANAGER);
   const [errorMessage, setErrorMessage] = useState('');
-  const [contentId, setContentId] = useState(props.contentId || '');
+  const [contentId, setContentId] = useState<ContentId>(props.contentId || DEFAULT_CONTENT_ID);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const formId = useId();
 
   const [{ isDragging }, ref] = useDrag({
     type: contentType,
-    item: { contentType },
-    canDrag: !errorMessage && mode === EDITOR_MODES.DRAG_AND_DROP,
+    item: { contentType, contentId },
+    canDrag: !errorMessage && mode === EDITOR_MODES.IN_EDITOR_MANAGER,
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
@@ -57,7 +60,8 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   useEffect(() => {
     adjustTextareaHeight();
-    mode === EDITOR_MODES.DRAG_AND_DROP && setContentId(uuidv4());
+    const contentId = uuidv4() as ContentId;
+    mode === EDITOR_MODES.IN_EDITOR_MANAGER && setContentId(contentId);
   }, [text, mode]);
 
   const validateJsonSchema = useCallback(
@@ -107,7 +111,7 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   const onBlur = useCallback(
     (event: ChangeEvent<HTMLTextAreaElement>) => {
-      if (mode === EDITOR_MODES.DRAG_AND_DROP) {
+      if (mode === EDITOR_MODES.IN_EDITOR_MANAGER) {
         return;
       }
 
@@ -133,10 +137,10 @@ export default function BaseEditor(props: BaseEditorProps) {
   const textAreaClassName = useMemo(() => {
     const defaultClassName = c('h-[9ch]', 'p-2', 'font-mono', 'resize-none');
     const overrideClassName = c('grow', {
-      'w-auto': mode === EDITOR_MODES.POPOVER,
-      'w-[60ch]': mode !== EDITOR_MODES.POPOVER,
-      'bg-emerald-100': mode === EDITOR_MODES.POPOVER,
-      'bg-sky-100': mode === EDITOR_MODES.DRAG_AND_DROP,
+      'w-auto': mode === EDITOR_MODES.IN_LAYOUT_MANAGER,
+      'w-[60ch]': mode !== EDITOR_MODES.IN_LAYOUT_MANAGER,
+      'bg-emerald-100': mode === EDITOR_MODES.IN_LAYOUT_MANAGER,
+      'bg-sky-100': mode === EDITOR_MODES.IN_EDITOR_MANAGER,
     });
 
     return c(defaultClassName, overrideClassName);
@@ -144,7 +148,7 @@ export default function BaseEditor(props: BaseEditorProps) {
 
   const containerClassName = useMemo(() => {
     const className = c(props.className, {
-      'cursor-text': mode === EDITOR_MODES.POPOVER,
+      'cursor-text': mode === EDITOR_MODES.IN_LAYOUT_MANAGER,
       'opacity-50': isDragging,
       'p-1': true,
     });

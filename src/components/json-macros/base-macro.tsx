@@ -6,6 +6,7 @@ import { useAppContext } from '@/context/app-context';
 import type { ContentAll } from '@/types/content-all';
 
 import EditorItem from '../content/editor-item';
+import { MacroTopBar } from '../sub-components/macro-top-bar';
 
 type BaseMacroProps = ContentAll & {
   children: ReactNode;
@@ -70,8 +71,9 @@ export default function BaseMacro(props: BaseMacroProps) {
 
   return (
     <div className={className} tabIndex={0} ref={divRef}>
+      {isFocused && <MacroTopBar contentId={contentId} />}
       {children}
-      {isFocused && <EditorItem {...props} mode={EDITOR_MODES.POPOVER} />}
+      {isFocused && <EditorItem {...props} mode={EDITOR_MODES.IN_LAYOUT_MANAGER} />}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { forwardRef, Ref, useCallback, useMemo } from 'react';
 
 import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
+import { ContentId } from '@/types/content-base-item';
 
 import CollapseIcon from '../icons/collapse-icon';
 import DeleteIcon from '../icons/delete-icon';
@@ -11,7 +12,7 @@ import PlusIcon from '../icons/plus-icon';
 import UncollapseIcon from '../icons/uncollapse-icon';
 
 type EditorTopBarProps = {
-  contentId: string;
+  contentId: ContentId;
   contentType: keyof typeof CONTENT_TYPES;
   errorMessage: string;
   formId: string;
@@ -27,7 +28,7 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
     const { onCreate, onDelete, layouts } = useAppContext();
     const { macro, errorMessage, text, formId, contentType, contentId, isOpen, setIsOpen, mode } = props;
 
-    const isDragAndDrop = useMemo(() => mode === EDITOR_MODES.DRAG_AND_DROP, [mode]);
+    const isInEditor = useMemo(() => mode === EDITOR_MODES.IN_EDITOR_MANAGER, [mode]);
 
     const onAdd = useCallback(
       (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -51,27 +52,23 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
     );
 
     const onClickTopBar = useCallback(() => {
-      if (isDragAndDrop) {
+      if (isInEditor) {
         setIsOpen(!isOpen);
       }
-    }, [setIsOpen, isOpen, isDragAndDrop]);
-
-    const onDestroy = useCallback(() => {
-      onDelete({ contentId });
-    }, [contentId, onDelete]);
+    }, [setIsOpen, isOpen, isInEditor]);
 
     const editorDragContainerClassName = useMemo(() => {
       return c('flex bg-gray-600 rounded text-white justify-between p-2', {
-        'cursor-grab': !errorMessage && isDragAndDrop,
+        'cursor-grab': !errorMessage && isInEditor,
         'opacity-50': !!errorMessage,
       });
-    }, [errorMessage, isDragAndDrop]);
+    }, [errorMessage, isInEditor]);
 
     const labelClassName = useMemo(() => {
       return c('grow p-1 font-bold', {
-        'cursor-grab': !errorMessage && isDragAndDrop,
+        'cursor-grab': !errorMessage && isInEditor,
       });
-    }, [errorMessage, isDragAndDrop]);
+    }, [errorMessage, isInEditor]);
 
     return (
       <>
@@ -81,12 +78,12 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
           onClick={onClickTopBar}
           ref={ref} //
         >
-          {isDragAndDrop && <DragHandleIcon className="m-1 p-1" />}
+          {isInEditor && <DragHandleIcon className="m-1 p-1" />}
           <label className={labelClassName} htmlFor={`editor-textarea-${formId}`}>
-            {macro}
+            {macro} {!isInEditor && '(Edit Mode)'}
           </label>
 
-          {isDragAndDrop && (
+          {isInEditor && (
             <>
               <button
                 className="mx-4 p-1 bg-green-300 hover:bg-green-500 rounded"
@@ -101,16 +98,6 @@ export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
                 {isOpen ? <CollapseIcon /> : <UncollapseIcon />}
               </button>
             </>
-          )}
-          {!isDragAndDrop && (
-            <button
-              className="mx-1 p-1 bg-red-400 hover:bg-red-500 rounded"
-              aria-label="Delete Macro Button"
-              type="button"
-              onClick={onDestroy}
-            >
-              <DeleteIcon />
-            </button>
           )}
         </div>
         {errorMessage && (

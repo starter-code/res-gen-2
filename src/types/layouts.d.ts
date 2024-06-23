@@ -1,14 +1,14 @@
 import type { LAYOUTS } from '@/constants';
 
 export type LayoutSingle = {
-  layoutId: string;
+  layoutId: LayoutId;
   layoutLeftId?: never;
   layoutRightId?: never;
   layoutType: keyof typeof LAYOUTS;
 };
 
 export type LayoutDouble = {
-  layoutId: string;
+  layoutId: LayoutId;
   layoutLeftId: string;
   layoutRightId: string;
   layoutType: keyof typeof LAYOUTS;
