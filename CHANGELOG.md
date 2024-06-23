@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/starter-code/res-gen-2/compare/v1.4.1...v1.5.0) (2024-06-23)
+
+
+### Features
+
+* **editor:** users can move macros up and down in html preview ([2917733](https://github.com/starter-code/res-gen-2/commit/2917733c43b1f0ac63d10f1d40ceb8c67b0e8d48))
+
 ## [1.4.1](https://github.com/starter-code/res-gen-2/compare/v1.4.0...v1.4.1) (2024-06-19)
 
 
