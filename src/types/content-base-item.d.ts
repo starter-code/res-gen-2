@@ -10,7 +10,7 @@ export type ContentBaseItem<ContentType extends keyof typeof CONTENT_TYPES, Cont
   contentId: ContentId;
   contentType: ContentType;
   /**
-   *    layoutId and layoutType are not available for base editors
+   * `layoutId` and `layoutType` are not available for base editors
    */
   layoutId?: LayoutId;
   layoutType?: keyof typeof LAYOUTS;
