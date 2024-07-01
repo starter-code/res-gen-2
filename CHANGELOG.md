@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/starter-code/res-gen-2/compare/v1.6.0...v1.6.1) (2024-07-01)
+
+
+### Bug Fixes
+
+* **editor-manager:** add any-list editor to the page ([465f1e5](https://github.com/starter-code/res-gen-2/commit/465f1e59e2c62bcc6c66fab7ea58e489ffe3ced6))
+
 # [1.6.0](https://github.com/starter-code/res-gen-2/compare/v1.5.2...v1.6.0) (2024-07-01)
 
 
