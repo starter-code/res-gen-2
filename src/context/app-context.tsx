@@ -8,6 +8,8 @@ import type { LayoutItem } from '@/types/layouts';
 import localStorageUtil from '@/utils/localstorage-util';
 import { toSlugCase, toYearMonthDayFormat } from '@/utils/string-transform-util';
 
+type FileDropValue = { items: ContentAll[]; layouts: LayoutItem[] };
+
 export enum MOVE_ACTION {
   MACRO_UP = 'MACRO_UP',
   MACRO_DOWN = 'MACRO_DOWN',
@@ -26,6 +28,7 @@ export type AppContextType = {
   layouts: LayoutItem[];
   addLayout: (newLayout: LayoutItem) => void;
   popLayout: () => void;
+  onImportFile: ({ items, layouts }: FileDropValue) => void;
   onCreate: (item: ContentAll) => void;
   onUpdate: (item: ContentAll) => void;
   onDelete: (item: Pick<ContentAll, 'contentId'>) => void;
@@ -42,6 +45,7 @@ const initialState: AppContextType = Object.freeze({
   layouts: [],
   addLayout: () => {},
   popLayout: () => {},
+  onImportFile: () => {},
   onCreate: () => {},
   onDelete: () => {},
   onUpdate: () => {},
@@ -168,6 +172,11 @@ export function AppProvider({ children }: AppProviderProps) {
     return `${date}-your-name.pdf`;
   }, [items]);
 
+  const onImportFile = useCallback((value: FileDropValue) => {
+    setItems(value.items);
+    setLayouts(value.layouts);
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
@@ -178,6 +187,7 @@ export function AppProvider({ children }: AppProviderProps) {
         layouts,
         addLayout,
         popLayout,
+        onImportFile,
         onDelete,
         onUpdate,
         onCreate,
