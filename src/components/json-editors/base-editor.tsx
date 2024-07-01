@@ -4,7 +4,7 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import { Collapse } from 'react-collapse';
 import { useDrag } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
-import { ZodObject } from 'zod';
+import { ZodObject, ZodRecord } from 'zod';
 
 import { CONTENT_TYPES, EDITOR_MODES } from '@/constants';
 import { useAppContext } from '@/context/app-context';
@@ -17,7 +17,7 @@ import { EditorTopBar } from '../sub-components/editor-top-bar';
 type BaseEditorProps = Partial<ContentAll> & {
   macro: string;
   className: string;
-  schema: ZodObject<any>;
+  schema: ZodObject<NonNullable<unknown>> | ZodRecord<any>;
   contentType: keyof typeof CONTENT_TYPES;
   mode?: keyof typeof EDITOR_MODES;
 };

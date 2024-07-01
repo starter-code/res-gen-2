@@ -6,7 +6,6 @@ import { useAppContext } from '@/context/app-context';
 import { ContentId } from '@/types/content-base-item';
 
 import CollapseIcon from '../icons/collapse-icon';
-import DeleteIcon from '../icons/delete-icon';
 import DragHandleIcon from '../icons/drag-handle-icon';
 import PlusIcon from '../icons/plus-icon';
 import UncollapseIcon from '../icons/uncollapse-icon';
@@ -25,7 +24,7 @@ type EditorTopBarProps = {
 
 export const EditorTopBar = forwardRef<HTMLDivElement, EditorTopBarProps>(
   (props: EditorTopBarProps, ref: Ref<HTMLDivElement>) => {
-    const { onCreate, onDelete, layouts } = useAppContext();
+    const { onCreate, layouts } = useAppContext();
     const { macro, errorMessage, text, formId, contentType, contentId, isOpen, setIsOpen, mode } = props;
 
     const isInEditor = useMemo(() => mode === EDITOR_MODES.IN_EDITOR_MANAGER, [mode]);

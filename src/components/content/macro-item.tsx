@@ -1,6 +1,7 @@
 import { CONTENT_TYPES } from '@/constants';
 import type { ContentAll } from '@/types/content-all';
 
+import AnyListMacro from '../json-macros/any-list-macro';
 import ContactMacro from '../json-macros/contact-macro';
 import ExperienceMacro from '../json-macros/experience-macro';
 import HeaderMacro from '../json-macros/header-macro';
@@ -23,6 +24,9 @@ export default function MacroItem(props: MacroItemProps) {
     }
     case CONTENT_TYPES.PARAGRAPH: {
       return <ParagraphMacro key={contentId} {...props} />;
+    }
+    case CONTENT_TYPES.ANY_LIST: {
+      return <AnyListMacro key={contentId} {...props} />;
     }
     default: {
       throw new Error(`[macro-item] Unsupported contentType ${contentType}`);

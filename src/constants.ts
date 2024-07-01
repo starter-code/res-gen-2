@@ -3,6 +3,7 @@ export const CONTENT_TYPES = {
   HEADER: 'HEADER',
   EXPERIENCE: 'EXPERIENCE',
   PARAGRAPH: 'PARAGRAPH',
+  ANY_LIST: 'ANY_LIST',
 } as const;
 
 export const LAYOUTS = {

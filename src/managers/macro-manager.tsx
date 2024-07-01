@@ -1,6 +1,7 @@
 import c from 'classnames';
 import { useMemo } from 'react';
 
+import AnyListMacro from '@/components/json-macros/any-list-macro';
 import ContactMacro from '@/components/json-macros/contact-macro';
 import ExperienceMacro from '@/components/json-macros/experience-macro';
 import HeaderMacro from '@/components/json-macros/header-macro';
@@ -27,6 +28,9 @@ export default function MacroManager({ items }: MacroManagerProps) {
         }
         case CONTENT_TYPES.PARAGRAPH: {
           return <ParagraphMacro key={item.contentId} {...item} />;
+        }
+        case CONTENT_TYPES.ANY_LIST: {
+          return <AnyListMacro key={item.contentId} {...item} />;
         }
         default:
           throw new Error(`Invalid item. ${JSON.stringify(item)}`);
