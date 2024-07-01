@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/starter-code/res-gen-2/compare/v1.6.1...v1.6.2) (2024-07-01)
+
+
+### Bug Fixes
+
+* **pdf:** pdf text wraps correctly in li elements ([433e2c1](https://github.com/starter-code/res-gen-2/commit/433e2c1ef1f5cca6555b2eb81f1539a43f8c6b9d))
+
 ## [1.6.1](https://github.com/starter-code/res-gen-2/compare/v1.6.0...v1.6.1) (2024-07-01)
 
 
