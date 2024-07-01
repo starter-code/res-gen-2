@@ -1,6 +1,7 @@
 import c from 'classnames';
 import { useMemo } from 'react';
 
+import AnyListEditor from '@/components/json-editors/any-list-editor';
 import ContactEditor from '@/components/json-editors/contact-editor';
 import ExperienceEditor from '@/components/json-editors/experience-editor';
 import HeaderEditor from '@/components/json-editors/header-editor';
@@ -18,6 +19,7 @@ export default function EditorManager() {
       <HeaderEditor />
       <ParagraphEditor />
       <ExperienceEditor />
+      <AnyListEditor />
     </div>
   );
 }
