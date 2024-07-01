@@ -50,9 +50,27 @@ export function PdfPreviewProvider({ children }: PdfPreviewProps) {
         padding: '24px',
         fontFamily: 'Roboto',
       },
+      h2: {
+        fontWeight: 'normal',
+      },
+      h3: {
+        fontWeight: 'normal',
+      },
+      h4: {
+        fontWeight: 'normal',
+      },
+      h5: {
+        fontWeight: 'normal',
+      },
+      p: {
+        paddingTop: '1px',
+      },
+      li: {
+        whiteSpace: 'pre-wrap', // Ensure text wraps within the container
+        maxWidth: '525px',
+      },
       text: {
         fontFamily: 'Roboto',
-        noWrap: true, // Prevent text from wrapping
       },
       '': {},
     });
