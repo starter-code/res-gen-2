@@ -66,6 +66,7 @@ export function PdfPreviewProvider({ children }: PdfPreviewProps) {
         paddingTop: '1px',
       },
       li: {
+        padding: '1px',
         whiteSpace: 'pre-wrap', // Ensure text wraps within the container
         maxWidth: '525px',
       },
