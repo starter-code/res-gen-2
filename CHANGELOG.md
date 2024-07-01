@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/starter-code/res-gen-2/compare/v1.6.2...v1.7.0) (2024-07-01)
+
+
+### Features
+
+* **preview:** add more content to prepopulate util ([ea8e6c4](https://github.com/starter-code/res-gen-2/commit/ea8e6c4fabf90e901f7e075af4639c91a4b3cbf5))
+
 ## [1.6.2](https://github.com/starter-code/res-gen-2/compare/v1.6.1...v1.6.2) (2024-07-01)
 
 
