@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/starter-code/res-gen-2/compare/v1.7.0...v1.8.0) (2024-07-01)
+
+
+### Features
+
+* **files:** user can upload/download json files ([481a77e](https://github.com/starter-code/res-gen-2/commit/481a77ef291eba9f73419353883bc42ec281adeb))
+
 # [1.7.0](https://github.com/starter-code/res-gen-2/compare/v1.6.2...v1.7.0) (2024-07-01)
 
 
