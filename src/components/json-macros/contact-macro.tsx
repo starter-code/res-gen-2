@@ -14,7 +14,7 @@ export default function ContactMacro(props: ContactMacroProps) {
     <BaseMacro {...props}>
       <h1 className="text-3xl font-bold text-center">{name}</h1>
       {title && <h4 className="text-center">{title}</h4>}
-      <div className="flex flex-row justify-center text-center mr-2">
+      <div className="flex flex-row justify-center text-center mr-2 flex-wrap">
         {phone && (
           <div className="flex flex-row items-center mr-2">
             <Image //
@@ -51,8 +51,6 @@ export default function ContactMacro(props: ContactMacroProps) {
             <span className="">{linkedin}</span>
           </div>
         )}
-      </div>
-      <div className="flex flex-row justify-center text-center mr-2">
         {github && (
           <div className="flex flex-row items-center mr-2">
             <Image //
