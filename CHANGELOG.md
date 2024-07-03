@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/starter-code/res-gen-2/compare/v1.8.0...v1.8.1) (2024-07-03)
+
+
+### Bug Fixes
+
+* **contact:** fix spacing on contact macro for variable items ([b8a434b](https://github.com/starter-code/res-gen-2/commit/b8a434b6e860a0d0467bbc2f1f6feac4bc68bf55))
+
 # [1.8.0](https://github.com/starter-code/res-gen-2/compare/v1.7.0...v1.8.0) (2024-07-01)
 
 
