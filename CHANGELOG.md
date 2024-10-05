@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/starter-code/res-gen-2/compare/v1.9.0...v1.9.1) (2024-10-05)
+
+
+### Bug Fixes
+
+* **control-panel:** add more a11y, move files ([a37a0e2](https://github.com/starter-code/res-gen-2/commit/a37a0e29aa2a59cffc2f0e3a75247c9754d7f3f7))
+
 # [1.9.0](https://github.com/starter-code/res-gen-2/compare/v1.8.1...v1.9.0) (2024-10-05)
 
 
