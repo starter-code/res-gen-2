@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/starter-code/res-gen-2/compare/v1.8.1...v1.9.0) (2024-10-05)
+
+
+### Features
+
+* **control-panel:** revamp control panel UI/UX ([ab9bbe6](https://github.com/starter-code/res-gen-2/commit/ab9bbe657bad1096fe718a3c66e82591b53d5aaa))
+
 ## [1.8.1](https://github.com/starter-code/res-gen-2/compare/v1.8.0...v1.8.1) (2024-07-03)
 
 
