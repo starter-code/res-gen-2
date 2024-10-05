@@ -1,9 +1,9 @@
 import React from 'react';
 
-import AddLayoutDoubleButton from './add-layout-double-button';
-import AddLayoutSingleButton from './add-layout-single-button';
 import BaseMenu from './control-panel-base-menu';
-import RemoveBottomLayoutButton from './remove-bottom-layout-button';
+import AddLayoutDoubleButton from './edit/add-layout-double-button';
+import AddLayoutSingleButton from './edit/add-layout-single-button';
+import RemoveBottomLayoutButton from './edit/remove-bottom-layout-button';
 
 export default function EditMenu() {
   return (

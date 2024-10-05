@@ -73,13 +73,7 @@ export default function DownloadJsonButton({ className, role, tabIndex }: Downlo
 
   return (
     <button className={classNames} type="button" onClick={handleClick} role={role} tabIndex={tabIndex}>
-      Download
+      Download JSON
     </button>
   );
-}
-
-{
-  /* <div className="flex items-center">
-        <input id="res-gen-file-input" type="file" accept=".json" onChange={handleChange} />
-      </div> */
 }

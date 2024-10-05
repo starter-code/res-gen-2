@@ -57,7 +57,7 @@ export default function BaseMenu({ children, name }: BaseMenuProps) {
     if (React.isValidElement(child)) {
       return React.cloneElement(child, {
         // @ts-expect-error 'className on child'
-        className: 'hover:bg-cyan-200 text-left p-2 cursor-auto',
+        className: 'dropdown-item hover:bg-cyan-200 text-left p-2 cursor-auto',
         role: 'menuitem',
         tabIndex: 0,
       });
@@ -68,18 +68,18 @@ export default function BaseMenu({ children, name }: BaseMenuProps) {
 
   return (
     <div
-      className=""
+      className="base-menu"
       tabIndex={0}
       onClick={toggleFileMenu}
       onKeyDown={e => e.key === 'Enter' && toggleFileMenu()}
       aria-haspopup="true"
       aria-expanded={isMenuOpen}
-      aria-controls="file-menu"
+      aria-controls={`${name.toLocaleLowerCase()}-menu`}
     >
       {name}
       {isMenuOpen && (
         <div
-          id="file-menu"
+          id={`${name.toLocaleLowerCase()}-menu`}
           className="flex flex-col absolute bg-cyan-300 min-w-[100px] gap-1 mt-2 p-2 rounded"
           role="menu"
           ref={menuRef}

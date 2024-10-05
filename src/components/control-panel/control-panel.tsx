@@ -1,17 +1,10 @@
 import c from 'classnames';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import pkg from '../../../package.json';
-import AddLayoutDoubleButton from './add-layout-double-button';
-import AddLayoutSingleButton from './add-layout-single-button';
-import BaseMenu from './control-panel-base-menu';
 import EditMenu from './control-panel-edit-menu';
 import FileMenu from './control-panel-file-menu';
-import ViewMenu from './control-panel-view';
-import DownloadJsonButton from './download-json.button';
-import OpenPdfViewButton from './open-pdf-view-button';
-import RemoveBottomLayoutButton from './remove-bottom-layout-button';
-import ToggleEditorPanelButton from './toggle-editor-panel-button';
+import ViewMenu from './control-panel-view-menu';
 
 export default function ControlPanel() {
   const className = useMemo(

@@ -2,7 +2,6 @@ import c from 'classnames';
 import { useCallback, useRef } from 'react';
 
 import { useAppContext } from '@/context/app-context';
-import localStorageUtil from '@/utils/localstorage-util';
 
 type UploadJsonButtonProps = {
   className?: string;
@@ -52,9 +51,16 @@ export default function UploadJsonButton({ className, role, tabIndex }: UploadJs
   const classNames = c('unstyled', className);
 
   return (
-    <div className={classNames}>
-      <label id="custom-label" htmlFor="res-gen-file-input" onClick={handleClick}>
-        Upload
+    <>
+      <label
+        id="custom-label"
+        className={classNames}
+        role={role}
+        tabIndex={tabIndex}
+        htmlFor="res-gen-file-input"
+        onClick={handleClick}
+      >
+        Upload JSON
       </label>
       <input
         id="res-gen-file-input"
@@ -63,7 +69,8 @@ export default function UploadJsonButton({ className, role, tabIndex }: UploadJs
         accept=".json"
         onChange={handleChange}
         ref={inputRef}
+        aria-hidden={true}
       />
-    </div>
+    </>
   );
 }
