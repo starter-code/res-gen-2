@@ -1,14 +1,20 @@
+import c from 'classnames';
+
 import { useAppContext } from '@/context/app-context';
 
-export default function ToggleEditorPanelButton() {
+type ToggleEditorPanelButtonProps = {
+  className?: string;
+  role?: string;
+  tabIndex?: 0 | -1;
+};
+
+export default function ToggleEditorPanelButton({ className, role, tabIndex }: ToggleEditorPanelButtonProps) {
   const { toggleEditor } = useAppContext();
 
+  const classNames = c('unstyled', className);
+
   return (
-    <button
-      className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 m-2 rounded"
-      type="button"
-      onClick={() => toggleEditor()}
-    >
+    <button className={classNames} type="button" onClick={() => toggleEditor()} role={role} tabIndex={tabIndex}>
       Toggle Editor
     </button>
   );

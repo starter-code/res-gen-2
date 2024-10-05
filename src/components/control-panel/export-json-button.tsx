@@ -1,18 +1,20 @@
+import c from 'classnames';
 import React from 'react';
 
 import type { ContentAll } from '@/types/content-all';
 import type { LayoutItem } from '@/types/layouts';
 
 type ExportJsonButtonProps = {
+  className?: string;
+  role?: string;
+  tabIndex?: 0 | -1;
   data: {
     items: ContentAll[];
     layouts: LayoutItem[];
   };
 };
 
-export default function ExportJsonButton(props: ExportJsonButtonProps) {
-  const { data } = props;
-
+export default function ExportJsonButton({ data, className, role, tabIndex }: ExportJsonButtonProps) {
   const handleExport = () => {
     // Convert the data to a JSON string
     const json = JSON.stringify(data, null, 2);
@@ -35,8 +37,16 @@ export default function ExportJsonButton(props: ExportJsonButtonProps) {
     URL.revokeObjectURL(url);
   };
 
+  const classNames = c('unstyled', className);
+
   return (
-    <button aria-label="Export Json Button" onClick={handleExport}>
+    <button
+      className={classNames}
+      aria-label="Export Json Button"
+      onClick={handleExport}
+      role={role}
+      tabIndex={tabIndex}
+    >
       Export JSON
     </button>
   );

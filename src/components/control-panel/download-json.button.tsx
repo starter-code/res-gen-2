@@ -1,9 +1,16 @@
+import c from 'classnames';
 import { useCallback } from 'react';
 
 import { useAppContext } from '@/context/app-context';
 import localStorageUtil from '@/utils/localstorage-util';
 
-export default function DownloadJsonButton() {
+type DownloadJsonButtonProps = {
+  className?: string;
+  role?: string;
+  tabIndex?: 0 | -1;
+};
+
+export default function DownloadJsonButton({ className, role, tabIndex }: DownloadJsonButtonProps) {
   const { onImportFile } = useAppContext();
 
   const handleClick = () => {
@@ -62,18 +69,17 @@ export default function DownloadJsonButton() {
     [onImportFile],
   );
 
+  const classNames = c('unstyled', className);
+
   return (
-    <>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
-        type="button"
-        onClick={handleClick}
-      >
-        Download Json
-      </button>
-      <div className="flex items-center">
-        <input id="res-gen-file-input" type="file" accept=".json" onChange={handleChange} />
-      </div>
-    </>
+    <button className={classNames} type="button" onClick={handleClick} role={role} tabIndex={tabIndex}>
+      Download
+    </button>
   );
+}
+
+{
+  /* <div className="flex items-center">
+        <input id="res-gen-file-input" type="file" accept=".json" onChange={handleChange} />
+      </div> */
 }

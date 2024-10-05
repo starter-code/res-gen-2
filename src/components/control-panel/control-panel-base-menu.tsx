@@ -1,0 +1,93 @@
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
+type BaseMenuProps = {
+  children: React.ReactNode;
+  name: string;
+};
+
+export default function BaseMenu({ children, name }: BaseMenuProps) {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const toggleFileMenu = useCallback(() => {
+    setIsMenuOpen(prevState => !prevState);
+  }, []);
+
+  const closeFileMenu = useCallback(() => {
+    setIsMenuOpen(false);
+  }, []);
+
+  // Close the menu if clicked outside or on Escape key
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent): void => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        closeFileMenu();
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent): void => {
+      if (event.key === 'Escape') {
+        closeFileMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('keydown', handleEscape);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [closeFileMenu]);
+
+  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
+    const items = Array.from(menuRef.current?.querySelectorAll('.dropdown-item') || []);
+    const currentIndex = items.indexOf(document.activeElement as Element);
+
+    if (event.key === 'ArrowDown') {
+      const nextIndex = (currentIndex + 1) % items.length;
+      (items[nextIndex] as HTMLElement).focus();
+    } else if (event.key === 'ArrowUp') {
+      const prevIndex = (currentIndex - 1 + items.length) % items.length;
+      (items[prevIndex] as HTMLElement).focus();
+    }
+  }, []);
+
+  const ChildMenuItems = React.Children.map(children, (child: React.ReactNode) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        // @ts-expect-error 'className on child'
+        className: 'hover:bg-cyan-200 text-left p-2 cursor-auto',
+        role: 'menuitem',
+        tabIndex: 0,
+      });
+    }
+
+    return child;
+  });
+
+  return (
+    <div
+      className=""
+      tabIndex={0}
+      onClick={toggleFileMenu}
+      onKeyDown={e => e.key === 'Enter' && toggleFileMenu()}
+      aria-haspopup="true"
+      aria-expanded={isMenuOpen}
+      aria-controls="file-menu"
+    >
+      {name}
+      {isMenuOpen && (
+        <div
+          id="file-menu"
+          className="flex flex-col absolute bg-cyan-300 min-w-[100px] gap-1 mt-2 p-2 rounded"
+          role="menu"
+          ref={menuRef}
+          onKeyDown={handleKeyDown}
+        >
+          {ChildMenuItems}
+        </div>
+      )}
+    </div>
+  );
+}

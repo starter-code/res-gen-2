@@ -29,7 +29,18 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function customStyles({ addUtilities }: { addUtilities: (any: any) => void }) {
+      addUtilities({
+        '.unstyled': {
+          margin: '0',
+          border: 'none',
+          background: 'transparent',
+          'box-sizing': 'border-box',
+        },
+      });
+    },
+  ],
 };
 
 export default config;

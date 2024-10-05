@@ -1,9 +1,16 @@
+import c from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
 
 import { LAYOUTS } from '@/constants';
 import { useAppContext } from '@/context/app-context';
 
-export default function AddLayoutSingleButton() {
+type AddLayoutSingleButtonProps = {
+  className?: string;
+  role?: string;
+  tabIndex?: 0 | -1;
+};
+
+export default function AddLayoutSingleButton({ className, role, tabIndex }: AddLayoutSingleButtonProps) {
   const { addLayout, isEditorVisible } = useAppContext();
 
   const handleClick = () => {
@@ -14,13 +21,11 @@ export default function AddLayoutSingleButton() {
     return null;
   }
 
+  const classNames = c('unstyled', className);
+
   return (
-    <button
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-2 rounded"
-      type="button"
-      onClick={handleClick}
-    >
-      + Single Column Layout
+    <button className={classNames} type="button" onClick={handleClick} role={role} tabIndex={tabIndex}>
+      Add Single Column Layout
     </button>
   );
 }
