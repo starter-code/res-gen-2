@@ -4,6 +4,9 @@
 /node_modules
 /.pnp
 .pnp.js
+.claude/skills/run-app/node_modules
+.claude/skills/run-app/package-lock.json
+.claude/skills/run-app/screenshot-*.png
 
 # testing
 /coverage

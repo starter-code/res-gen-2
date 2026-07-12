@@ -1,0 +1,9 @@
+{
+  "name": "run-app-skill",
+  "private": true,
+  "type": "module",
+  "description": "CDP driver tooling for the run-app skill. Not part of the res-gen-2 app itself.",
+  "dependencies": {
+    "puppeteer-core": "^25.0.0"
+  }
+}

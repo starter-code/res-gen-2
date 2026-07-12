@@ -1,0 +1,80 @@
+{
+  "isEditorVisible": true,
+  "layouts": [{ "layoutId": "layout-1", "layoutType": "SINGLE" }],
+  "items": [
+    {
+      "contentId": "contact-1",
+      "contentType": "CONTACT",
+      "layoutId": "layout-1",
+      "layoutType": "SINGLE",
+      "content": {
+        "name": "Jane Doe",
+        "title": "Senior Software Engineer",
+        "phone": "555-123-4567",
+        "location": "Remote",
+        "email": "jane.doe@example.com",
+        "github": "janedoe",
+        "linkedin": "janedoe",
+        "website": "janedoe.dev"
+      }
+    },
+    {
+      "contentId": "header-1",
+      "contentType": "HEADER",
+      "layoutId": "layout-1",
+      "layoutType": "SINGLE",
+      "content": { "header": "Summary" }
+    },
+    {
+      "contentId": "paragraph-1",
+      "contentType": "PARAGRAPH",
+      "layoutId": "layout-1",
+      "layoutType": "SINGLE",
+      "content": {
+        "paragraph": "Software engineer with a decade of experience building web applications, developer tools, and distributed systems."
+      }
+    },
+    {
+      "contentId": "header-2",
+      "contentType": "HEADER",
+      "layoutId": "layout-1",
+      "layoutType": "SINGLE",
+      "content": { "header": "Experience" }
+    },
+    {
+      "contentId": "experience-1",
+      "contentType": "EXPERIENCE",
+      "layoutId": "layout-1",
+      "layoutType": "SINGLE",
+      "content": {
+        "company": "Acme Corp",
+        "location": "Remote",
+        "title": "Senior Software Engineer",
+        "dates": "2021 - Present",
+        "tags": ["TypeScript", "React", "Node.js"],
+        "descriptions": [
+          "Led migration of the core platform to a modular architecture.",
+          "Mentored a team of four engineers.",
+          "Reduced build times by 60% through pipeline optimization."
+        ]
+      }
+    },
+    {
+      "contentId": "header-3",
+      "contentType": "HEADER",
+      "layoutId": "layout-1",
+      "layoutType": "SINGLE",
+      "content": { "header": "Skills" }
+    },
+    {
+      "contentId": "any-list-1",
+      "contentType": "ANY_LIST",
+      "layoutId": "layout-1",
+      "layoutType": "SINGLE",
+      "content": {
+        "Languages": ["TypeScript", "Python", "Go"],
+        "Tools": ["React", "Next.js", "Docker"]
+      }
+    }
+  ]
+}
